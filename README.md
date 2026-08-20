@@ -267,7 +267,7 @@ OPENAI_API_KEY=your_key_here
 ## 👤 Author
 **Sourasis Karak**  
 * GitHub: [@thekarak](https://github.com/thekarak)  
-* Email: `sforsourasis@gmail.com`
+* Email: `devxkarak@gmail.com`
 
 ---
 
