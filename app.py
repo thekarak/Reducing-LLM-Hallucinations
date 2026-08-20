@@ -91,34 +91,46 @@ raw_docs, questions_list, vector_store = get_system_components()
 st.sidebar.title("⚙️ Experiment Controls")
 provider = st.sidebar.selectbox(
     "LLM Provider",
-    ["Local Mock (Deterministic)", "OpenCode Zen", "Groq Cloud", "Google Gemini", "OpenAI"],
+    ["OpenCode Zen", "Local Mock (Deterministic)", "Groq Cloud", "Google Gemini", "OpenAI"],
     index=0
 )
 
 provider_map = {
-    "Local Mock (Deterministic)": "local_mock",
     "OpenCode Zen": "opencode_zen",
+    "Local Mock (Deterministic)": "local_mock",
     "Groq Cloud": "groq",
     "Google Gemini": "gemini",
     "OpenAI": "openai"
 }
 
-# Optional API Key input
+# Provider Specific Configurations
 api_key_input = None
 if provider == "OpenCode Zen":
-    api_key_input = st.sidebar.text_input("OpenCode Zen API Key", type="password", help="Enter your OpenCode Zen key")
+    api_key_input = st.sidebar.text_input(
+        "OpenCode Zen API Key",
+        value=os.getenv("OPENCODE_ZEN_API_KEY", ""),
+        type="password",
+        help="Enter your OpenCode Zen API key"
+    )
+    base_url_input = st.sidebar.text_input(
+        "OpenCode Zen Base URL",
+        value=os.getenv("OPENCODE_ZEN_BASE_URL", "https://api.opencodezen.com/v1"),
+        help="API Base URL for OpenCode Zen endpoint"
+    )
     if api_key_input:
         os.environ["OPENCODE_ZEN_API_KEY"] = api_key_input
+    if base_url_input:
+        os.environ["OPENCODE_ZEN_BASE_URL"] = base_url_input
 elif provider == "Groq Cloud":
-    api_key_input = st.sidebar.text_input("Groq API Key", type="password", help="Enter your free Groq API key")
+    api_key_input = st.sidebar.text_input("Groq API Key", value=os.getenv("GROQ_API_KEY", ""), type="password", help="Enter your free Groq API key")
     if api_key_input:
         os.environ["GROQ_API_KEY"] = api_key_input
 elif provider == "Google Gemini":
-    api_key_input = st.sidebar.text_input("Gemini API Key", type="password")
+    api_key_input = st.sidebar.text_input("Gemini API Key", value=os.getenv("GEMINI_API_KEY", ""), type="password")
     if api_key_input:
         os.environ["GEMINI_API_KEY"] = api_key_input
 elif provider == "OpenAI":
-    api_key_input = st.sidebar.text_input("OpenAI API Key", type="password")
+    api_key_input = st.sidebar.text_input("OpenAI API Key", value=os.getenv("OPENAI_API_KEY", ""), type="password")
     if api_key_input:
         os.environ["OPENAI_API_KEY"] = api_key_input
 
