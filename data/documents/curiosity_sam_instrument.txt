@@ -1,0 +1,4 @@
+# Sample Analysis at Mars (SAM) Instrument
+The Sample Analysis at Mars (SAM) instrument suite is the heaviest and most sophisticated laboratory payload on NASA's Curiosity rover, occupying roughly half of the rover's main body.
+SAM comprises three analytical instruments: a Quadrupole Mass Spectrometer (QMS), a Gas Chromatograph (GC), and a Tunable Laser Spectrometer (TLS).
+SAM can heat powdered rock and soil samples up to 1,100 degrees Celsius inside tiny pyrolysis ovens to release trapped volatile compounds for chemical and isotopic analysis. SAM confirmed the presence of ancient organic molecules (such as thiophenes, benzene, and alkyl chains) preserved in 3.5-billion-year-old lacustrine mudstones at Yellowknife Bay in Gale Crater.

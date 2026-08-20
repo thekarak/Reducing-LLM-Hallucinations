@@ -1,0 +1,4 @@
+# International Space Station (ISS)
+The International Space Station is a modular space station in low Earth orbit. It is a multinational collaborative project involving five participating space agencies: NASA (United States), Roscosmos (Russia), JAXA (Japan), ESA (Europe), and CSA (Canada).
+The first module, Zarya, was launched by a Russian Proton rocket on November 20, 1998. The station has been continuously occupied since November 2, 2000, starting with Expedition 1 (William Shepherd, Sergei Krikalev, and Yuri Gidzenko).
+The ISS orbits at an average altitude of approximately 420 kilometers (260 mi) with an orbital inclination of 51.6 degrees, completing approximately 15.5 orbits per day at a speed of 7.66 km/s (27,600 km/h). The station spans 109 meters from end to end, equivalent to an American football field, and has a pressurized volume of 916 cubic meters.

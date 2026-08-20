@@ -1,0 +1,4 @@
+# Pioneer 10 and Pioneer 11 Missions
+Pioneer 10 and Pioneer 11 were NASA space probes launched in March 1972 and April 1973, respectively, to conduct initial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+Pioneer 11 flew by Jupiter in December 1974, using a gravitational assist to become the first spacecraft to visit Saturn in September 1979, discovering Saturn's narrow F-ring. Both probes carried the Pioneer Plaque, an engraved gold-anodized aluminum plate designed by Carl Sagan and Frank Drake featuring line drawings of a human male and female, the Sun's position relative to 14 pulsars, and the Solar System.

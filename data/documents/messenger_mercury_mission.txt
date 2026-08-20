@@ -1,0 +1,4 @@
+# MESSENGER Mission to Mercury
+MESSENGER (MErcury Surface, Space ENvironment, GEochemistry, and Ranging) was a NASA robotic spacecraft launched on August 3, 2004. On March 18, 2011, it became the first spacecraft to orbit Mercury.
+During its four-year orbital mission, MESSENGER mapped 100% of Mercury's surface. Among its key scientific achievements, MESSENGER confirmed the presence of abundant water ice and organic compounds trapped in permanently shadowed craters at Mercury's poles.
+It also discovered that Mercury possesses an unusually large metallic iron core (comprising 85% of the planet's radius) and surface volcanic plains that flooded vast regions. On April 30, 2015, MESSENGER ran out of propellant and was deorbited into Mercury's surface at 14,000 km/h.

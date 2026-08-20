@@ -1,0 +1,4 @@
+# Voyager 1 Deep Space Mission
+Voyager 1 is a space probe launched by NASA on September 5, 1977, as part of the Voyager program to study the outer Solar System and interstellar space. Launched 16 days after its twin, Voyager 2, Voyager 1 communicated through NASA's Deep Space Network to transmit scientific data.
+At a distance of 162.7 AU (24.3 billion km) from Earth as of 2024, it is the most distant human-made object from Earth. The probe made flybys of Jupiter in March 1979 and Saturn in November 1980, discovering active volcanoes on Jupiter's moon Io and intricate structures in Saturn's rings.
+Voyager 1 crossed the heliopause and entered interstellar space on August 25, 2012. It carries the Golden Record, a 12-inch gold-plated copper disk containing sounds and images selected to portray the diversity of life and culture on Earth. Its primary electrical power is supplied by three radioisotope thermoelectric generators (RTGs) fueled by plutonium-238.

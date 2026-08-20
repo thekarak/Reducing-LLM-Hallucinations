@@ -1,0 +1,4 @@
+# JAXA Hayabusa2 Asteroid Mission
+Hayabusa2 was an asteroid sample-return mission operated by the Japanese space agency JAXA. Launched on December 3, 2014, aboard an H-IIA rocket, the spacecraft rendezvoused with near-Earth asteroid 162173 Ryugu in June 2018.
+Hayabusa2 deployed multiple rovers (MINERVA-II1A, MINERVA-II1B, and MASCOT) and executed two touchdown sampling maneuvers, including one using a kinetic tantalum projectile to expose sub-surface material.
+On December 5, 2020, Hayabusa2 returned a capsule containing 5.4 grams of Ryugu samples to Woomera, Australia. Laboratory examination revealed uracil (one of the four nucleobases in RNA), vitamin B3 (niacin), and 20 different amino acids, supporting the hypothesis that prebiotic compounds were delivered to early Earth via carbonaceous asteroids.

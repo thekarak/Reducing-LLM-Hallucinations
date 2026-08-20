@@ -1,0 +1,4 @@
+# Mars Orbiter Mission (Mangalyaan)
+The Mars Orbiter Mission (MOM), unofficially known as Mangalyaan, was India's first interplanetary mission. Launched on November 5, 2013, by ISRO using a PSLV-XL rocket (C25), the probe successfully entered Mars orbit on September 24, 2014.
+This made ISRO the fourth space agency to reach Mars orbit (after Roscosmos, NASA, and ESA) and the first space agency in the world to reach Mars on its maiden attempt.
+The spacecraft cost approximately $74 million USD (Rs 450 crore), making it one of the most cost-effective interplanetary missions ever executed. It carried five scientific payloads: Mars Colour Camera (MCC), Thermal Infrared Imaging Spectrometer (TIS), Methane Sensor for Mars (MSM), Lyman Alpha Photometer (LAP), and Mars Exospheric Neutral Composition Analyser (MENCA). Communications were lost in April 2022 after more than 7.5 years in orbit.

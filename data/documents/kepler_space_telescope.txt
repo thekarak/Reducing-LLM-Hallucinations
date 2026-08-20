@@ -1,0 +1,4 @@
+# Kepler Space Telescope and Exoplanet Discovery
+The Kepler Space Telescope was a NASA space observatory launched on March 7, 2009, to survey a portion of the Milky Way galaxy for Earth-sized exoplanets in or near habitable zones.
+Kepler utilized the transit method, monitoring the brightness of more than 150,000 main-sequence stars simultaneously to detect periodic dips caused by transiting planets.
+Over its primary and extended K2 mission, Kepler discovered over 2,600 confirmed exoplanets, proving that planets are more numerous than stars in our galaxy. Key discoveries included Kepler-22b (first planet confirmed in a habitable zone around a Sun-like star) and Kepler-186f (first Earth-sized planet discovered in the habitable zone of an M-dwarf star). The telescope was officially retired on October 30, 2018, after running out of onboard attitude-control fuel.

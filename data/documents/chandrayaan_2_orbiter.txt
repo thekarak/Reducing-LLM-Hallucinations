@@ -1,0 +1,4 @@
+# Chandrayaan-2 Mission and Orbiter
+Chandrayaan-2 was India's second lunar exploration mission, launched on July 22, 2019, aboard a GSLV Mk III rocket from Sriharikota. The mission included an orbiter, the Vikram lander, and the Pragyan rover.
+During the landing attempt on September 6, 2019, the Vikram lander deviated from its planned trajectory and crashed onto the lunar surface due to a software glitch during fine braking.
+However, the Chandrayaan-2 orbiter successfully entered lunar orbit and remains fully operational. It carries eight state-of-the-art scientific payloads, including the Orbiter High Resolution Camera (OHRC), which produces the highest-resolution images (0.25 m/pixel) of the Moon from lunar orbit, and the CLASS X-ray spectrometer, which maps elemental abundance.

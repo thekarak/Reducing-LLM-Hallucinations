@@ -1,0 +1,4 @@
+# Tianwen-1 and Zhurong Mars Mission
+Tianwen-1 was China's first independent interplanetary mission to Mars, developed by the China National Space Administration (CNSA). Launched on July 23, 2020, aboard a Long March 5 rocket, the mission consisted of an orbiter, lander, and the Zhurong rover.
+The spacecraft entered Mars orbit on February 10, 2021. On May 14, 2021, the lander touched down at Utopia Planitia. The Zhurong rover was deployed on May 22, 2021.
+This made China the second nation (after the United States) to successfully land and operate a robotic rover on Mars. Zhurong traveled 1,921 meters across the Martian surface before entering planned hibernation in May 2022 due to winter sandstorms.

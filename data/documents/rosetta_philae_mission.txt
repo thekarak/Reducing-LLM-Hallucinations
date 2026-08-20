@@ -1,0 +1,4 @@
+# Rosetta and Philae Comet 67P Mission
+Rosetta was an ESA space probe launched on March 2, 2004, to rendezvous with and orbit comet 67P/Churyumov-Gerasimenko. After a 10-year cruise through the Solar System, Rosetta entered orbit around comet 67P in August 2014.
+On November 12, 2014, Rosetta deployed the Philae lander, which achieved the first soft touchdown on a comet nucleus. Philae's anchoring harpoons failed to fire, causing it to bounce twice before coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.

@@ -1,0 +1,4 @@
+# James Webb Space Telescope (JWST)
+The James Webb Space Telescope is a space telescope designed primarily to conduct infrared astronomy. High-resolution and high-sensitivity instruments allow it to view objects too old, distant, or faint for the Hubble Space Telescope.
+JWST was launched on December 25, 2021, on an Ariane 5 rocket from Kourou, French Guiana, and arrived at the Sun-Earth L2 Lagrange point in January 2022, approximately 1.5 million kilometers (930,000 miles) from Earth.
+The telescope features a 6.5-meter-diameter primary mirror consisting of 18 hexagonal beryllium segments coated with gold. Its primary instruments include the Near-Infrared Camera (NIRCam), Near-Infrared Spectrograph (NIRSpec), Mid-Infrared Instrument (MIRI), and the Fine Guidance Sensor/Near InfraRed Imager and Slitless Spectrograph (FGS/NIRISS). JWST operates at cryogenic temperatures below 50 Kelvin (-223 degrees Celsius).

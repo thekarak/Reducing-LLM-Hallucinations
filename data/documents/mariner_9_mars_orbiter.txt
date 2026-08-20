@@ -1,0 +1,4 @@
+# Mariner 9: First Mars Orbiter
+Mariner 9 was a robotic NASA space probe launched on May 30, 1971, aboard an Atlas-Centaur rocket. When it entered orbit around Mars on November 14, 1971, it became the first spacecraft to orbit another planet.
+Upon arrival, a massive planet-encircling dust storm obscured the Martian surface. Mission controllers waited until the storm cleared in early 1972 before initiating systematic photography.
+Mariner 9 mapped 85% of Mars's surface with 7,329 images. Its major discoveries included the massive 4,000-km-long canyon system named Valles Marineris (in honor of the spacecraft), the enormous volcano Olympus Mons (the tallest known volcano in the Solar System at 21.9 km height), and dried-up river channels indicating past liquid water.

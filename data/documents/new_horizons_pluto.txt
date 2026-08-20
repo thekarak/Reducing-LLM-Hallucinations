@@ -1,0 +1,4 @@
+# New Horizons Pluto and Kuiper Belt Mission
+New Horizons is an interplanetary space probe launched on January 19, 2006, by NASA aboard an Atlas V rocket. It reached the highest launch speed of any human-made object at the time, leaving Earth at 16.26 km/s (58,536 km/h).
+On July 14, 2015, New Horizons flew 12,500 km (7,800 mi) above the surface of Pluto, making it the first spacecraft to explore the dwarf planet and its moons (Charon, Styx, Nix, Kerberos, and Hydra).
+It revealed Pluto's prominent heart-shaped nitrogen-ice plain, Tombaugh Regio, and towering water-ice mountains. On January 1, 2019, New Horizons flew past the Kuiper Belt object 486958 Arrokoth (initially nicknamed Ultima Thule), providing the first close-up images of a pristine contact binary planetesimal.

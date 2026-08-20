@@ -1,0 +1,4 @@
+# NASA Psyche Asteroid Mission
+Psyche is a NASA robotic orbiter mission launched on October 13, 2023, on a SpaceX Falcon Heavy rocket. The mission's target is 16 Psyche, a unique metal-rich M-type asteroid orbiting in the main asteroid belt between Mars and Jupiter.
+Scientists hypothesize that 16 Psyche may be the exposed iron-nickel core of an early protoplanet that lost its rocky mantle through violent collisions during the formation of the Solar System.
+The spacecraft is powered by Hall-effect electric propulsion thrusters utilizing xenon gas. It is equipped with a multispectral imager, gamma-ray and neutron spectrometer, and a magnetometer. Psyche will arrive at asteroid 16 Psyche in August 2029 and spend 26 months orbiting at decreasing altitudes.

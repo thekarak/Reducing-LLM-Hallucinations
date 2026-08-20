@@ -1,0 +1,4 @@
+# DART Planetary Defense Mission
+The Double Asteroid Redirection Test (DART) was a NASA planetary defense mission designed to test the kinetic impactor technique for deflecting a hazardous asteroid.
+Launched on November 24, 2021, DART targeted Dimorphos, a 160-meter-wide asteroid moonlet orbiting the larger asteroid Didymos. On September 26, 2022, the 570-kg DART spacecraft intentionally impacted Dimorphos at a speed of approximately 6.6 km/s (24,000 km/h).
+Telescope observations confirmed that the impact shortened Dimorphos's 11-hour and 55-minute orbital period by 32 minutes—far exceeding NASA's minimum benchmark of 73 seconds. This was humanity's first successful demonstration of asteroid deflection technology. The Italian LICIACube cubesat trailed DART to photograph the impact plume.

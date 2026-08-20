@@ -1,0 +1,4 @@
+# Spitzer Space Telescope
+The Spitzer Space Telescope was an infrared space observatory launched by NASA on August 25, 2003, aboard a Delta II rocket. It was the final mission of NASA's Great Observatories program (alongside Hubble, Compton Gamma Ray Observatory, and Chandra).
+Spitzer operated in an Earth-trailing heliocentric orbit, which reduced heat contamination from Earth. Its primary cryogenic phase lasted until May 15, 2009, when its liquid helium coolant was exhausted. The 'Spitzer Warm Mission' continued using two short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.

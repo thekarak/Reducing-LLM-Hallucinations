@@ -1,0 +1,4 @@
+# Dawn Mission: Vesta and Ceres
+NASA's Dawn mission was a robotic space probe launched on September 27, 2007, to study two of the three protoplanets of the asteroid belt: Vesta and Ceres.
+Dawn used efficient xenon ion propulsion thrusters, which allowed it to become the first spacecraft to orbit two different extraterrestrial bodies.
+Dawn orbited the rocky asteroid Vesta from July 2011 to September 2012, discovering a massive impact basin (Rheasilvia) with a central peak twice the height of Mount Everest. Dawn then traveled to dwarf planet Ceres, orbiting it from March 2015 until October 2018. At Ceres, Dawn discovered prominent bright sodium carbonate salt deposits in Occator Crater (Cerealia Facula) and found that Ceres is a water-rich dwarf planet with an ice-rich crust.

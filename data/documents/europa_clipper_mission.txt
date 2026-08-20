@@ -1,0 +1,4 @@
+# Europa Clipper Mission
+Europa Clipper is a NASA planetary science mission designed to study Jupiter's icy moon Europa through a series of close flybys. Europa is of high astrobiological interest because evidence strongly indicates a saltwater ocean beneath its icy crust with more than twice the volume of all Earth's oceans combined.
+Europa Clipper launched on October 14, 2024, on a SpaceX Falcon Heavy rocket. It is scheduled to arrive in the Jupiter system in April 2030 after gravitational assists from Mars (February 2025) and Earth (December 2026).
+The spacecraft carries nine scientific instruments, including the REASON ice-penetrating radar, the MASPEX gas spectrometer, and the Europa Imaging System (EIS). With an unfolded solar array wingspan of over 30.5 meters (100 ft), Europa Clipper is the largest spacecraft NASA has ever developed for a planetary mission.

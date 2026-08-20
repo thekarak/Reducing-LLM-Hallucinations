@@ -1,0 +1,4 @@
+# Chandra X-ray Observatory
+The Chandra X-ray Observatory is a NASA flagship space telescope launched on July 23, 1999, by Space Shuttle Columbia (STS-93). Named after Indian-American Nobel laureate Subrahmanyan Chandrasekhar, the observatory is designed to detect X-ray emissions from extremely hot and energetic regions of the Universe.
+Chandra operates in a highly elliptical geocentric orbit, extending more than 130,000 kilometers away from Earth at apogee to avoid Earth's radiation belts.
+Its high-resolution mirror assembly consists of four pairs of nested, grazing-incidence paraboloid and hyperboloid mirrors coated with iridium. Chandra's observations have provided fundamental evidence for dark matter in colliding galaxy clusters (such as the Bullet Cluster) and detailed studies of supermassive black holes.

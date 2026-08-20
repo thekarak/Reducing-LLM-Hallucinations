@@ -1,0 +1,4 @@
+# Mars Exploration Rovers: Spirit and Opportunity
+The Mars Exploration Rover (MER) mission was a twin robotic rover program launched by NASA in June and July 2003. Spirit (MER-A) landed in Gusev Crater on January 4, 2004, and Opportunity (MER-B) landed in Meridiani Planum on January 25, 2004.
+Both rovers were designed for a 90-sol primary mission but vastly exceeded their design lifespans. Spirit operated for 6 years until getting stuck in soft sand in 2010.
+Opportunity operated for over 14 years until a catastrophic global dust storm cut off its solar power in June 2018. Opportunity drove a total distance of 45.16 km (28.06 miles), setting the record for the longest distance driven by any off-Earth vehicle. Opportunity discovered hematite spherules ('blueberries'), proving that acidic liquid water once soaked the Martian surface.

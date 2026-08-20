@@ -1,0 +1,4 @@
+# NASA Artemis Program
+The Artemis program is a NASA-led robotic and human exploration initiative aiming to return humans to the Moon, specifically the lunar south pole region, by the mid-2020s.
+The program utilizes the Space Launch System (SLS) super heavy-lift rocket and the Orion spacecraft, alongside commercial Human Landing Systems (such as SpaceX Starship HLS) and the planned lunar orbital Gateway station.
+Artemis 1 was an uncrewed flight test launched on November 16, 2022, sending Orion on a 25.5-day journey around the Moon. Artemis 2 is a planned crewed lunar flyby with four astronauts (Reid Wiseman, Victor Glover, Christina Koch, and Jeremy Hansen). Artemis 3 aims to land the first woman and first person of color on the lunar surface.

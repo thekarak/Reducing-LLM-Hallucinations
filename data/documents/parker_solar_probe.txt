@@ -1,0 +1,4 @@
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+The spacecraft is designed to plunge through the Sun's corona, coming within 6.2 million kilometers (3.83 million miles) of the solar surface at speeds reaching 690,000 km/h (430,000 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.

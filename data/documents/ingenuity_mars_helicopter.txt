@@ -1,0 +1,4 @@
+# Ingenuity Mars Helicopter
+Ingenuity was a coaxial robotic helicopter that operated on Mars between February 2021 and January 2024. Delivered to Mars attached to the belly of the Perseverance rover, Ingenuity demonstrated the first powered, controlled aerodynamic flight on another planet.
+Due to Mars's thin atmosphere (less than 1% of Earth's atmospheric pressure), Ingenuity used counter-rotating carbon-fiber blades spinning at approximately 2,400 to 2,700 RPM. The helicopter weighed 1.8 kg (4.0 lb) and was powered by six lithium-ion batteries charged by a small solar panel.
+Originally planned for a 30-day technology demonstration of up to five flights, Ingenuity completed 72 flights over nearly three years, flying a total distance of 17.0 km (10.6 mi) and logging 128.8 minutes of airtime before a hard landing on Flight 72 damaged its rotor blades.

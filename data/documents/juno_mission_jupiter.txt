@@ -1,0 +1,4 @@
+# Juno Mission to Jupiter
+Juno is a NASA New Frontiers space probe launched on August 5, 2011, aboard an Atlas V rocket. It entered a polar orbit around Jupiter on July 5, 2016.
+Juno's primary scientific goals are to understand Jupiter's origin and evolution, determine the amount of water in Jupiter's deep atmosphere, measure its gravitational and magnetic fields, and investigate its massive magnetosphere.
+Juno is the first mission to Jupiter powered entirely by solar panels rather than RTGs, utilizing three enormous 9-meter solar arrays. Juno discovered that Jupiter possesses a dilute, 'fuzzy' core rather than a dense, solid rocky core, and that its atmospheric jet streams extend thousands of kilometers deep into the planet.

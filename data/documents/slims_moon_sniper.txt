@@ -1,0 +1,4 @@
+# Smart Lander for Investigating Moon (SLIM)
+SLIM ('Moon Sniper') was a precision lunar lander mission developed by the Japan Aerospace Exploration Agency (JAXA). Launched on September 6, 2023, aboard an H-IIA rocket alongside the XRISM telescope, SLIM aimed to achieve pinpoint landing accuracy within 100 meters.
+On January 19, 2024, SLIM touched down near Shioli crater. Telemetry confirmed it landed just 55 meters from its target, achieving the most accurate extraterrestrial landing in history.
+Although SLIM rolled upside down during touchdown due to an engine thruster failure, its solar panels generated power as the sun angle shifted, allowing it to survive multiple freezing two-week lunar nights. The mission deployed two LEV (Lunar Excursion Vehicle) mini-probes.

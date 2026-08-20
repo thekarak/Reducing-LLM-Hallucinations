@@ -1,0 +1,4 @@
+# Envisat Earth Observation Satellite
+Envisat ('Environmental Satellite') was an advanced Earth observation satellite launched by the European Space Agency (ESA) on March 1, 2002, aboard an Ariane 5 rocket.
+Operating in a sun-synchronous polar orbit at an altitude of 790 km, Envisat was the largest civilian Earth observation spacecraft ever built, weighing 8,211 kg (18,102 lb).
+It carried 10 scientific instruments, including ASAR (Advanced Synthetic Aperture Radar), MERIS (Medium Resolution Imaging Spectrometer), and SCIAMACHY (atmospheric spectrometer). Envisat monitored global land cover, sea surface temperatures, greenhouse gas distributions, and ozone hole dynamics until contact was abruptly lost on April 8, 2012.

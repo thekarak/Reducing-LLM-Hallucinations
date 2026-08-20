@@ -1,0 +1,4 @@
+# Transiting Exoplanet Survey Satellite (TESS)
+TESS is an all-sky exoplanet-hunting space telescope developed by MIT and NASA, launched on April 18, 2018, aboard a SpaceX Falcon 9 rocket.
+Unlike Kepler, which stared continuously at a single narrow field of view, TESS monitors 85% of the sky by dividing it into 26 observation sectors, focusing on nearby bright stars located within 30 to 300 light-years of Earth.
+TESS uses four wide-field optical CCD cameras with a combined field of view of 24 by 96 degrees. By 2024, TESS had identified over 7,000 candidate exoplanets (TESS Objects of Interest, or TOIs) and hundreds of confirmed exoplanets, including habitable-zone worlds like TOI-700 d and TOI-700 e.

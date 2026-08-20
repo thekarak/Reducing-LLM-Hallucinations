@@ -1,0 +1,4 @@
+# Mars 2020 Perseverance Rover
+Perseverance is a car-sized Mars rover designed to explore Jezero crater on Mars as part of NASA's Mars 2020 mission. It was manufactured by the Jet Propulsion Laboratory and launched on July 30, 2020. Perseverance landed successfully on Mars on February 18, 2021.
+The rover carries seven primary scientific instruments, including SuperCam, PIXL, SHERLOC, and the MOXIE experiment, which demonstrated the production of breathable oxygen from Martian carbon dioxide on April 20, 2021.
+Perseverance also carried the Ingenuity helicopter, a technology demonstration drone that completed 72 flights between April 2021 and January 2024 before sustaining rotor damage. Perseverance is collecting rock core samples to be returned to Earth in a future Mars Sample Return mission.

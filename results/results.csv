@@ -1,0 +1,628 @@
+id,category,question,ground_truth,in_corpus,source_doc,baseline_answer,baseline_correctness,baseline_correct_score,baseline_faithfulness,baseline_hallucinated,baseline_f1,baseline_latency_ms,rag_k3_answer,rag_k3_correctness,rag_k3_correct_score,rag_k3_faithfulness,rag_k3_hallucinated,rag_k3_f1,rag_k3_latency_ms,rag_k3_retrieved_context,rag_k5_answer,rag_k5_correctness,rag_k5_correct_score,rag_k5_faithfulness,rag_k5_hallucinated,rag_k5_f1,rag_loose_answer,rag_loose_correctness,rag_loose_correct_score,rag_loose_faithfulness,rag_loose_hallucinated,rag_loose_f1
+Q01,Direct_Fact,"On what exact date did Apollo 11 land on the lunar surface, and in which lunar region?","Apollo 11 landed on July 20, 1969, in Tranquility Base (Mare Tranquillitatis).",True,apollo_11_mission,"Apollo 11 landed on July 20, 1969, in Tranquility Base.",Correct,1.0,1.0,0,0.9091,0.53,"Apollo 11 landed on the Moon on July 20, 1969, at Tranquility Base (Mare Tranquillitatis).",Correct,1.0,0.16,0,0.8462,3.18,"[1] (chandrayaan_3_mission.txt)
+anding and roving on the lunar surface.
+
+[2] (chandrayaan_3_mission.txt)
+landing and roving on the lunar surface.
+
+[3] (chandrayaan_3_mission.txt)
+landing and roving on the lunar surface.","Apollo 11 landed on the Moon on July 20, 1969, at Tranquility Base (Mare Tranquillitatis).",Correct,1.0,0.16,0,0.8462,"Apollo 11 landed on the Moon on July 20, 1969, at Tranquility Base (Mare Tranquillitatis).",Correct,1.0,0.16,0,0.8462
+Q02,Direct_Fact,What is the primary power source for the Curiosity Mars rover?,A Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide.,True,curiosity_rover_mars,Curiosity is powered by solar wings and rechargeable lithium batteries.,Incorrect,0.0,0.0,1,0.0,0.04,Curiosity is powered by a Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide.,Correct,1.0,1.0,0,0.8,0.5,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (pioneer_10_and_11.txt)
+m the Solar System.
+
+[3] (curiosity_rover_mars.txt)
+Curiosity weighs 899 kg (1,982 lb) and is powered by a Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide. Key instruments include the ChemCam laser spectrometer, the Sample Analysis at Mars (SAM) instrument suite, the Mastcam stereo cameras, and the Alpha Particle X-Ray Spectrometer (APXS).",Curiosity is powered by a Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide.,Correct,1.0,1.0,0,0.8,Curiosity is powered by a Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide.,Correct,1.0,1.0,0,0.8
+Q03,Direct_Fact,How many total flights did the Ingenuity helicopter complete on Mars before sustaining damage?,Ingenuity completed 72 flights.,True,ingenuity_mars_helicopter,Ingenuity completed around 50 flights on Mars.,Partially Correct,0.5,0.5,0,0.5455,0.07,Ingenuity completed 72 flights on Mars.,Correct,1.0,1.0,0,0.8,0.58,"[1] (ingenuity_mars_helicopter.txt)
+# Ingenuity Mars Helicopter
+Ingenuity was a coaxial robotic helicopter that operated on Mars between February 2021 and January 2024. Delivered to Mars attached to the belly of the Perseverance rover, Ingenuity demonstrated the first powered, controlled aerodynamic flight on another planet.
+
+[2] (perseverance_rover_mars.txt)
+hable oxygen from Martian carbon dioxide on April 20, 2021.
+Perseverance also carried the Ingenuity helicopter, a technology demonstration drone that completed 72 flights between April 2021 and January 2024 before sustaining rotor damage. Perseverance is collecting rock core samples to be returned to Earth in a future Mars Sample Return mission.
+
+[3] (mariner_9_mars_orbiter.txt)
+red in early 1972 before initiating systematic photography.
+Mariner 9 mapped 85% of Mars's surface with 7,329 images. Its major discoveries included the massive 4,000-km-long canyon system named Valles Marineris (in honor of the spacecraft), the enormous volcano Olympus Mons (the tallest known volcano in the Solar System at 21.9 km height), and dried-up river channels indicating past liquid water.",Ingenuity completed 72 flights on Mars.,Correct,1.0,1.0,0,0.8,Ingenuity completed 72 flights on Mars.,Correct,1.0,1.0,0,0.8
+Q04,Direct_Fact,Where is the James Webb Space Telescope located in space?,"At the Sun-Earth L2 Lagrange point, approximately 1.5 million kilometers from Earth.",True,james_webb_space_telescope,JWST is in high elliptical Earth orbit.,Incorrect,0.0,0.0,1,0.1111,0.04,"JWST is located at the Sun-Earth L2 Lagrange point, approximately 1.5 million kilometers from Earth.",Correct,1.0,0.39,0,0.88,0.44,"[1] (james_webb_space_telescope.txt)
+# James Webb Space Telescope (JWST)
+The James Webb Space Telescope is a space telescope designed primarily to conduct infrared astronomy. High-resolution and high-sensitivity instruments allow it to view objects too old, distant, or faint for the Hubble Space Telescope.
+
+[2] (hubble_space_telescope.txt)
+erration in the primary mirror due to flawed manufacturing. In December 1993, the STS-61 servicing mission installed corrective optics (COSTAR) and the WFPC2 camera, restoring the telescope to its intended optical capability. Hubble has completed over 1.5 million observations.
+
+[3] (voyager_interstellar_findings.txt)
+oss the heliopause at 121.6 AU.","JWST is located at the Sun-Earth L2 Lagrange point, approximately 1.5 million kilometers from Earth.",Correct,1.0,0.55,0,0.88,"JWST is located at the Sun-Earth L2 Lagrange point, approximately 1.5 million kilometers from Earth.",Correct,1.0,0.39,0,0.88
+Q05,Direct_Fact,What is the diameter and material composition of the primary mirror of the James Webb Space Telescope?,"6.5 meters in diameter, consisting of 18 hexagonal beryllium segments coated with gold.",True,james_webb_space_telescope,JWST has an 8.0-meter polished aluminum mirror array.,Incorrect,0.0,0.0,1,0.0,0.05,"The primary mirror is 6.5 meters in diameter, consisting of 18 hexagonal beryllium segments coated with gold.",Correct,1.0,0.28,0,0.8966,0.46,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (artemis_program_overview.txt)
+specifically the lunar south pole region, by the mid-2020s.
+The program utilizes the Space Launch System (SLS) super heavy-lift rocket and the Orion spacecraft, alongside commercial Human Landing Systems (such as SpaceX Starship HLS) and the planned lunar orbital Gateway station.
+
+[3] (spitzer_space_telescope.txt)
+short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.","The primary mirror is 6.5 meters in diameter, consisting of 18 hexagonal beryllium segments coated with gold.",Correct,1.0,0.48,0,0.8966,"The primary mirror is 6.5 meters in diameter, consisting of 18 hexagonal beryllium segments coated with gold.",Correct,1.0,0.28,0,0.8966
+Q06,Direct_Fact,Which space agency developed the Huygens probe and on which celestial body did it land?,"Developed by the European Space Agency (ESA) and landed on Saturn's moon Titan on January 14, 2005.",True,cassini_huygens_saturn,Developed by NASA and landed on Titan.,Partially Correct,0.5,0.5,0,0.5217,0.05,"Developed by the European Space Agency (ESA) and landed on Saturn's moon Titan on January 14, 2005.",Correct,1.0,0.62,0,0.9375,0.52,"[1] (mangalyaan_mars_orbiter.txt)
+robe successfully entered Mars orbit on September 24, 2014.
+This made ISRO the fourth space agency to reach Mars orbit (after Roscosmos, NASA, and ESA) and the first space agency in the world to reach Mars on its maiden attempt.
+
+[2] (new_horizons_pluto.txt)
+net and its moons (Charon, Styx, Nix, Kerberos, and Hydra).
+It revealed Pluto's prominent heart-shaped nitrogen-ice plain, Tombaugh Regio, and towering water-ice mountains. On January 1, 2019, New Horizons flew past the Kuiper Belt object 486958 Arrokoth (initially nicknamed Ultima Thule), providing the first close-up images of a pristine contact binary planetesimal.
+
+[3] (exomars_trace_gas_orbiter.txt)
+ch could signify active biological or geological processes.
+Its primary instruments include the NOMAD and ACS spectrometers, which can detect gases down to parts-per-trillion levels, and the FREND neutron detector, which maps subsurface hydrogen (water ice). TGO also acts as a vital communications relay for surface landers and rovers including Perseverance and Curiosity.","Developed by the European Space Agency (ESA) and landed on Saturn's moon Titan on January 14, 2005.",Correct,1.0,0.69,0,0.9375,"Developed by the European Space Agency (ESA) and landed on Saturn's moon Titan on January 14, 2005.",Correct,1.0,0.62,0,0.9375
+Q07,Direct_Fact,What total mass of asteroid sample did OSIRIS-REx deliver back to Earth from asteroid Bennu?,121.6 grams (4.29 oz).,True,osiris_rex_bennu,OSIRIS-REx returned approximately 2.5 kilograms of Bennu regolith.,Incorrect,0.0,0.0,1,0.0,0.05,OSIRIS-REx delivered 121.6 grams (4.29 oz) of asteroid sample from Bennu.,Partially Correct,0.5,0.2,1,0.5333,0.49,"[1] (dawn_vesta_and_ceres.txt)
+ies.
+
+[2] (perseverance_rover_mars.txt)
+hable oxygen from Martian carbon dioxide on April 20, 2021.
+Perseverance also carried the Ingenuity helicopter, a technology demonstration drone that completed 72 flights between April 2021 and January 2024 before sustaining rotor damage. Perseverance is collecting rock core samples to be returned to Earth in a future Mars Sample Return mission.
+
+[3] (james_webb_space_telescope.txt)
+from Earth.",OSIRIS-REx delivered 121.6 grams (4.29 oz) of asteroid sample from Bennu.,Partially Correct,0.5,0.2,1,0.5333,OSIRIS-REx delivered 121.6 grams (4.29 oz) of asteroid sample from Bennu.,Partially Correct,0.5,0.2,1,0.5333
+Q08,Direct_Fact,What was the name and landing site coordinates of India's Chandrayaan-3 lander?,"Vikram lander landed at Shiv Shakti Point (69.37° S, 32.35° E) near the lunar south pole.",True,chandrayaan_3_mission,Chandrayaan-3 landed near the lunar equator.,Partially Correct,0.5,0.5,0,0.3,0.04,"The Vikram lander landed at Shiv Shakti Point (69.37° S, 32.35° E) near the lunar south pole.",Correct,1.0,0.29,0,1.0,0.58,"[1] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[2] (venera_program_venus.txt)
+re of 475 degrees Celsius and a pressure of 90 atmospheres.
+On October 22, 1975, Venera 9 landed and transmitted the first black-and-white panoramic photograph of the surface of another planet. Venera 13, which landed on March 1, 1982, transmitted the first color panoramic images of Venus's rocky terrain and recorded ambient acoustic sounds.
+
+[3] (spitzer_space_telescope.txt)
+short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.","The Vikram lander landed at Shiv Shakti Point (69.37° S, 32.35° E) near the lunar south pole.",Correct,1.0,0.37,0,1.0,"The Vikram lander landed at Shiv Shakti Point (69.37° S, 32.35° E) near the lunar south pole.",Correct,1.0,0.29,0,1.0
+Q09,Direct_Fact,What was the total budget cost of India's Mars Orbiter Mission (Mangalyaan)?,Approximately $74 million USD (Rs 450 crore).,True,mangalyaan_mars_orbiter,Mangalyaan cost roughly $250 million USD.,Partially Correct,0.5,0.5,0,0.3077,0.04,India's Mars Orbiter Mission (Mangalyaan) cost approximately $74 million USD (Rs 450 crore).,Correct,1.0,0.51,0,0.7,0.49,"[1] (mangalyaan_mars_orbiter.txt)
+# Mars Orbiter Mission (Mangalyaan)
+The Mars Orbiter Mission (MOM), unofficially known as Mangalyaan, was India's first interplanetary mission. Launched on November 5, 2013, by ISRO using a PSLV-XL rocket (C25), the probe successfully entered Mars orbit on September 24, 2014.
+
+[2] (tianwen_1_and_zhurong.txt)
+# Tianwen-1 and Zhurong Mars Mission
+Tianwen-1 was China's first independent interplanetary mission to Mars, developed by the China National Space Administration (CNSA). Launched on July 23, 2020, aboard a Long March 5 rocket, the mission consisted of an orbiter, lander, and the Zhurong rover.
+
+[3] (curiosity_rover_mars.txt)
+# Mars Science Laboratory (Curiosity Rover)
+The Curiosity rover, part of NASA's Mars Science Laboratory (MSL) mission, landed in Gale Crater on Mars on August 6, 2012. The rover's primary mission was to investigate the Martian climate and geology, and to assess whether the Gale Crater area ever had an environment capable of supporting microbial life.",India's Mars Orbiter Mission (Mangalyaan) cost approximately $74 million USD (Rs 450 crore).,Correct,1.0,0.51,0,0.7,India's Mars Orbiter Mission (Mangalyaan) cost approximately $74 million USD (Rs 450 crore).,Correct,1.0,0.51,0,0.7
+Q10,Direct_Fact,What is the primary target and propulsion type of NASA's Psyche mission?,Asteroid 16 Psyche (a metal-rich M-type asteroid) using Hall-effect electric propulsion thrusters fueled by xenon gas.,True,psyche_metal_asteroid,Psyche uses standard hydrazine chemical rockets to reach asteroid 16 Psyche.,Incorrect,0.0,0.0,1,0.2308,0.04,Target is asteroid 16 Psyche (metal-rich M-type) using Hall-effect electric propulsion thrusters with xenon gas.,Correct,1.0,0.81,0,0.8,0.45,"[1] (psyche_metal_asteroid.txt)
+iolent collisions during the formation of the Solar System.
+The spacecraft is powered by Hall-effect electric propulsion thrusters utilizing xenon gas. It is equipped with a multispectral imager, gamma-ray and neutron spectrometer, and a magnetometer. Psyche will arrive at asteroid 16 Psyche in August 2029 and spend 26 months orbiting at decreasing altitudes.
+
+[2] (chandrayaan_2_orbiter.txt)
+software glitch during fine braking.
+However, the Chandrayaan-2 orbiter successfully entered lunar orbit and remains fully operational. It carries eight state-of-the-art scientific payloads, including the Orbiter High Resolution Camera (OHRC), which produces the highest-resolution images (0.25 m/pixel) of the Moon from lunar orbit, and the CLASS X-ray spectrometer, which maps elemental abundance.
+
+[3] (aditya_l1_solar_observatory.txt)
+.
+The observatory carries seven scientific payloads: four for remote sensing of the Sun (including the Visible Emission Line Coronagraph - VELC and Solar Ultraviolet Imaging Telescope - SUIT) and three for in-situ observations of solar wind particles and magnetic fields (including ASPEX, PAPA, and MAG). The mission studies coronal heating, coronal mass ejections (CMEs), and space weather dynamics.",Target is asteroid 16 Psyche (metal-rich M-type) using Hall-effect electric propulsion thrusters with xenon gas.,Correct,1.0,0.81,0,0.8,Target is asteroid 16 Psyche (metal-rich M-type) using Hall-effect electric propulsion thrusters with xenon gas.,Correct,1.0,0.81,0,0.8
+Q11,Direct_Fact,On what date did Voyager 1 enter interstellar space?,"August 25, 2012.",True,voyager_1_probe,Voyager 1 entered interstellar space in May 2010.,Incorrect,0.0,0.0,1,0.0,0.04,"Voyager 1 entered interstellar space on August 25, 2012.",Partially Correct,0.5,0.73,0,0.5,0.56,"[1] (voyager_1_probe.txt)
+# Voyager 1 Deep Space Mission
+Voyager 1 is a space probe launched by NASA on September 5, 1977, as part of the Voyager program to study the outer Solar System and interstellar space. Launched 16 days after its twin, Voyager 2, Voyager 1 communicated through NASA's Deep Space Network to transmit scientific data.
+
+[2] (voyager_2_probe.txt)
+on
+
+[3] (voyager_2_probe.txt)
+Voyager 2 is a space probe launched by NASA on August 20, 1977, to study the outer planets. It was launched before Voyager 1 on a trajectory that took longer to reach Jupiter and Saturn but enabled further encounters with Uranus and Neptune.","Voyager 1 entered interstellar space on August 25, 2012.",Partially Correct,0.5,0.98,0,0.5,"Voyager 1 entered interstellar space on August 25, 2012.",Partially Correct,0.5,0.73,0,0.5
+Q12,Direct_Fact,What was the name of the first wheeled robotic rover to operate on Mars?,"Sojourner rover, delivered by the Mars Pathfinder mission in 1997.",True,mars_pathfinder_sojourner,Opportunity was the first rover to operate on Mars.,Incorrect,0.0,0.0,1,0.2353,0.04,"Sojourner rover, delivered by the Mars Pathfinder mission on July 4, 1997.",Correct,1.0,0.6,0,0.8,0.61,"[1] (ingenuity_mars_helicopter.txt)
+# Ingenuity Mars Helicopter
+Ingenuity was a coaxial robotic helicopter that operated on Mars between February 2021 and January 2024. Delivered to Mars attached to the belly of the Perseverance rover, Ingenuity demonstrated the first powered, controlled aerodynamic flight on another planet.
+
+[2] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[3] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.","Sojourner rover, delivered by the Mars Pathfinder mission on July 4, 1997.",Correct,1.0,0.6,0,0.8,"Sojourner rover, delivered by the Mars Pathfinder mission on July 4, 1997.",Correct,1.0,0.6,0,0.8
+Q13,Direct_Fact,What key technology did MOXIE demonstrate on Mars?,Extracting breathable oxygen from Martian carbon dioxide using solid oxide electrolysis.,True,moxie_oxygen_generator,MOXIE demonstrated water purification on Mars.,Incorrect,0.0,0.0,1,0.0,0.04,MOXIE demonstrated extracting breathable oxygen from Martian carbon dioxide using solid oxide electrolysis.,Correct,1.0,0.0,0,0.9167,0.41,"[1] (aditya_l1_solar_observatory.txt)
+rth L1 Lagrange point.
+
+[2] (voyager_2_probe.txt)
+on
+
+[3] (james_webb_space_telescope.txt)
+rth.",MOXIE demonstrated extracting breathable oxygen from Martian carbon dioxide using solid oxide electrolysis.,Correct,1.0,0.0,0,0.9167,MOXIE demonstrated extracting breathable oxygen from Martian carbon dioxide using solid oxide electrolysis.,Correct,1.0,0.0,0,0.9167
+Q14,Direct_Fact,How much did the DART impact shorten Dimorphos's orbital period around Didymos?,By 32 minutes (from 11 hours 55 minutes).,True,dart_mission,DART shortened Dimorphos's orbit by 7 minutes.,Partially Correct,0.5,0.0,1,0.2667,0.04,The DART impact shortened Dimorphos's orbital period by 32 minutes.,Partially Correct,0.5,1.0,0,0.3529,0.49,"[1] (dart_mission.txt)
+morphos at a speed of approximately 6.6 km/s (24,000 km/h).
+Telescope observations confirmed that the impact shortened Dimorphos's 11-hour and 55-minute orbital period by 32 minutes—far exceeding NASA's minimum benchmark of 73 seconds. This was humanity's first successful demonstration of asteroid deflection technology. The Italian LICIACube cubesat trailed DART to photograph the impact plume.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (spitzer_space_telescope.txt)
+short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.",The DART impact shortened Dimorphos's orbital period by 32 minutes.,Partially Correct,0.5,1.0,0,0.3529,The DART impact shortened Dimorphos's orbital period by 32 minutes.,Partially Correct,0.5,1.0,0,0.3529
+Q15,Direct_Fact,What orbital location and launch date correspond to India's Aditya-L1 solar observatory?,"Halo orbit around Sun-Earth L1 Lagrange point, launched on September 2, 2023.",True,aditya_l1_solar_observatory,Aditya-L1 is stationed in geostationary orbit around Earth.,Incorrect,0.0,0.0,1,0.2,0.05,"Aditya-L1 was launched on September 2, 2023, into a halo orbit around the Sun-Earth L1 Lagrange point.",Correct,1.0,0.95,0,0.8889,0.48,"[1] (hayabusa2_ryugu.txt)
+zvoused with near-Earth asteroid 162173 Ryugu in June 2018.
+Hayabusa2 deployed multiple rovers (MINERVA-II1A, MINERVA-II1B, and MASCOT) and executed two touchdown sampling maneuvers, including one using a kinetic tantalum projectile to expose sub-surface material.
+
+[2] (aditya_l1_solar_observatory.txt)
+# Aditya-L1 Solar Mission
+Aditya-L1 is India's first dedicated solar observatory spacecraft, developed by ISRO. Launched on September 2, 2023, aboard a PSLV-C57 rocket from Satish Dhawan Space Centre, the spacecraft traveled 1.5 million kilometers over 126 days.
+On January 6, 2024, Aditya-L1 successfully entered a halo orbit around the Sun-Earth L1 Lagrange point.
+
+[3] (galileo_jupiter_mission.txt)
+treme winds of 600 km/h and intense lightning.","Aditya-L1 was launched on September 2, 2023, into a halo orbit around the Sun-Earth L1 Lagrange point.",Correct,1.0,0.95,0,0.8889,"Aditya-L1 was launched on September 2, 2023, into a halo orbit around the Sun-Earth L1 Lagrange point.",Correct,1.0,0.95,0,0.8889
+Q16,Direct_Fact,What is the landing accuracy achieved by Japan's SLIM 'Moon Sniper' lander?,55 meters from its target site near Shioli crater.,True,slims_moon_sniper,SLIM touched down within 1 kilometer of its target.,Incorrect,0.0,0.0,1,0.2222,0.04,SLIM achieved a pinpoint landing accuracy of 55 meters from its target near Shioli crater.,Correct,1.0,0.55,0,0.6957,0.46,"[1] (slims_moon_sniper.txt)
+# Smart Lander for Investigating Moon (SLIM)
+SLIM ('Moon Sniper') was a precision lunar lander mission developed by the Japan Aerospace Exploration Agency (JAXA). Launched on September 6, 2023, aboard an H-IIA rocket alongside the XRISM telescope, SLIM aimed to achieve pinpoint landing accuracy within 100 meters.
+
+[2] (curiosity_rover_mars.txt)
+Curiosity weighs 899 kg (1,982 lb) and is powered by a Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide. Key instruments include the ChemCam laser spectrometer, the Sample Analysis at Mars (SAM) instrument suite, the Mastcam stereo cameras, and the Alpha Particle X-Ray Spectrometer (APXS).
+
+[3] (chandrayaan_3_mission.txt)
+# Chandrayaan-3 Historic Lunar Landing
+Chandrayaan-3 was the third mission in the Chandrayaan programme developed by ISRO. Launched on July 14, 2023, aboard an LVM3-M4 rocket from Satish Dhawan Space Centre, the mission aimed to demonstrate safe soft landing and roving on the lunar surface.",SLIM achieved a pinpoint landing accuracy of 55 meters from its target near Shioli crater.,Correct,1.0,0.63,0,0.6957,SLIM achieved a pinpoint landing accuracy of 55 meters from its target near Shioli crater.,Correct,1.0,0.55,0,0.6957
+Q17,Direct_Fact,What are the names of the two outer planets visited exclusively by Voyager 2?,Uranus and Neptune.,True,voyager_2_probe,"Voyager 2 visited Uranus, Neptune, and Pluto.",Correct,1.0,1.0,0,0.6,0.04,Voyager 2 exclusively visited Uranus and Neptune.,Correct,1.0,0.31,0,0.6,0.47,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (hubble_deep_field.txt)
+ng back across billions of light-years of cosmic time.
+Follow-up observations with the Hubble Ultra-Deep Field (2004) and eXtreme Deep Field (2012) captured galaxies formed less than 500 million years after the Big Bang. Hubble's precise measurements of Cepheid variable stars also played a key role in measuring the Hubble constant and discovering the accelerating expansion of the Universe in 1998.
+
+[3] (artemis_program_overview.txt)
+specifically the lunar south pole region, by the mid-2020s.
+The program utilizes the Space Launch System (SLS) super heavy-lift rocket and the Orion spacecraft, alongside commercial Human Landing Systems (such as SpaceX Starship HLS) and the planned lunar orbital Gateway station.",Voyager 2 exclusively visited Uranus and Neptune.,Correct,1.0,0.31,0,0.6,Voyager 2 exclusively visited Uranus and Neptune.,Correct,1.0,0.31,0,0.6
+Q18,Direct_Fact,Which space shuttle mission deployed the Hubble Space Telescope in 1990?,"Space Shuttle Discovery (STS-31) on April 24, 1990.",True,hubble_space_telescope,Space Shuttle Atlantis (STS-45) deployed Hubble.,Partially Correct,0.5,0.0,1,0.2857,0.04,"Space Shuttle Discovery (STS-31) launched on April 24, 1990.",Correct,1.0,1.0,0,0.9412,0.43,"[1] (james_webb_space_telescope.txt)
+# James Webb Space Telescope (JWST)
+The James Webb Space Telescope is a space telescope designed primarily to conduct infrared astronomy. High-resolution and high-sensitivity instruments allow it to view objects too old, distant, or faint for the Hubble Space Telescope.
+
+[2] (hubble_space_telescope.txt)
+# Hubble Space Telescope (HST)
+The Hubble Space Telescope was launched into low Earth orbit on April 24, 1990, aboard Space Shuttle Discovery (STS-31) and remains in operation. Hubble's orbit outside the distortion of Earth's atmosphere allows it to capture extremely high-resolution images with substantially lower background light than ground-based telescopes.
+
+[3] (spitzer_space_telescope.txt)
+# Spitzer Space Telescope
+The Spitzer Space Telescope was an infrared space observatory launched by NASA on August 25, 2003, aboard a Delta II rocket. It was the final mission of NASA's Great Observatories program (alongside Hubble, Compton Gamma Ray Observatory, and Chandra).","Space Shuttle Discovery (STS-31) launched on April 24, 1990.",Correct,1.0,1.0,0,0.9412,"Space Shuttle Discovery (STS-31) launched on April 24, 1990.",Correct,1.0,1.0,0,0.9412
+Q19,Multi_Hop,"Compare the power sources of the Curiosity rover, Juno spacecraft, and Voyager 1 probe.","Curiosity and Voyager 1 use radioisotope thermoelectric generators (RTGs fueled by plutonium-238), whereas Juno is powered by three large solar panel arrays.",True,"curiosity_rover_mars, juno_mission_jupiter, voyager_1_probe","Curiosity, Juno, and Voyager 1 all utilize nuclear plutonium RTG power systems.",Partially Correct,0.5,0.0,1,0.2941,0.05,"Curiosity and Voyager 1 use plutonium-238 RTGs, whereas Juno is powered by three large solar panel arrays.",Correct,1.0,0.32,0,0.8718,0.44,"[1] (artemis_program_overview.txt)
+specifically the lunar south pole region, by the mid-2020s.
+The program utilizes the Space Launch System (SLS) super heavy-lift rocket and the Orion spacecraft, alongside commercial Human Landing Systems (such as SpaceX Starship HLS) and the planned lunar orbital Gateway station.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.","Curiosity and Voyager 1 use plutonium-238 RTGs, whereas Juno is powered by three large solar panel arrays.",Correct,1.0,0.39,0,0.8718,"Curiosity and Voyager 1 use plutonium-238 RTGs, whereas Juno is powered by three large solar panel arrays.",Correct,1.0,0.32,0,0.8718
+Q20,Multi_Hop,"Which two spacecraft have returned physical samples from near-Earth asteroids, and how much sample mass did each return?","Hayabusa2 returned 5.4 grams from asteroid Ryugu, and OSIRIS-REx returned 121.6 grams from asteroid Bennu.",True,"hayabusa2_ryugu, osiris_rex_bennu","Hayabusa returned 100 grams from Itokawa, and OSIRIS-REx returned 5 kilograms from Bennu.",Partially Correct,0.5,0.5,0,0.4286,0.05,"Hayabusa2 returned 5.4 grams from asteroid Ryugu, and OSIRIS-REx returned 121.6 grams from asteroid Bennu.",Correct,1.0,0.37,0,0.7333,0.53,"[1] (osiris_rex_bennu.txt)
+dy and sample-return mission launched on September 8, 2016.
+The spacecraft arrived at near-Earth carbonaceous asteroid 101955 Bennu in December 2018. On October 20, 2020, OSIRIS-REx performed its Touch-And-Go (TAG) sample collection maneuver, gathering surface material using its TAGSAM arm.
+
+[2] (international_space_station.txt)
+(William Shepherd, Sergei Krikalev, and Yuri Gidzenko).
+
+[3] (international_space_station.txt)
+(William Shepherd, Sergei Krikalev, and Yuri Gidzenko).","Hayabusa2 returned 5.4 grams from asteroid Ryugu, and OSIRIS-REx returned 121.6 grams from asteroid Bennu.",Correct,1.0,0.37,0,0.7333,"Hayabusa2 returned 5.4 grams from asteroid Ryugu, and OSIRIS-REx returned 121.6 grams from asteroid Bennu.",Correct,1.0,0.37,0,0.7333
+Q21,Multi_Hop,How do the observational approaches of Kepler and TESS differ in surveying the sky for exoplanets?,"Kepler monitored a single fixed narrow field of stars continuously, while TESS is an all-sky survey dividing 85% of the sky into 26 sectors to monitor nearby bright stars.",True,"kepler_space_telescope, tess_space_telescope",Kepler and TESS both monitor the entire sky simultaneously using infrared optics.,Incorrect,0.0,0.0,1,0.2162,0.05,"Kepler monitored a single fixed narrow field of stars continuously, while TESS is an all-sky survey monitoring 85% of the sky across 26 sectors.",Correct,1.0,0.21,0,0.766,0.47,"[1] (aditya_l1_solar_observatory.txt)
+.
+The observatory carries seven scientific payloads: four for remote sensing of the Sun (including the Visible Emission Line Coronagraph - VELC and Solar Ultraviolet Imaging Telescope - SUIT) and three for in-situ observations of solar wind particles and magnetic fields (including ASPEX, PAPA, and MAG). The mission studies coronal heating, coronal mass ejections (CMEs), and space weather dynamics.
+
+[2] (spitzer_space_telescope.txt)
+short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.
+
+[3] (chandrayaan_1_mission.txt)
+ndian and six from foreign agencies including NASA and ESA.
+On November 14, 2008, the Moon Impact Probe (MIP) separated from the orbiter and struck the lunar south pole near Shackleton Crater. Data from the Moon Mineralogy Mapper (M3), a NASA-supplied imaging spectrometer on Chandrayaan-1, led to the historic confirmation of widespread water ice and hydroxyl molecules on the lunar surface.","Kepler monitored a single fixed narrow field of stars continuously, while TESS is an all-sky survey monitoring 85% of the sky across 26 sectors.",Correct,1.0,0.31,0,0.766,"Kepler monitored a single fixed narrow field of stars continuously, while TESS is an all-sky survey monitoring 85% of the sky across 26 sectors.",Correct,1.0,0.21,0,0.766
+Q22,Multi_Hop,What is the difference in primary mission destination and landing mechanism between Mars Pathfinder and Chandrayaan-3?,"Mars Pathfinder landed on Mars (Ares Vallis) using a parachute and 24 cushioning airbags, whereas Chandrayaan-3 soft-landed on the lunar south pole using throttleable rocket engines.",True,"mars_pathfinder_sojourner, chandrayaan_3_mission",Both missions used rocket thrusters and sky-cranes.,Incorrect,0.0,0.0,1,0.129,0.05,"Mars Pathfinder landed on Mars using a parachute and 24 cushioning airbags, while Chandrayaan-3 soft-landed on the Moon using throttleable rocket engines.",Correct,1.0,0.33,0,0.6818,0.56,"[1] (lucy_trojan_asteroids.txt)
+anetesimals trapped in Jupiter's L4 and L5 Lagrange points.
+Lucy's 12-year primary mission includes flybys of two main-belt asteroids (Dinkinesh in November 2023 and Donaldjohanson in April 2025) and eight Trojan asteroids (Eurybates, Polymele, Leucus, Orus, Patroclus, and Menoetius, plus discovered satellites).
+
+[2] (tianwen_1_and_zhurong.txt)
+# Tianwen-1 and Zhurong Mars Mission
+Tianwen-1 was China's first independent interplanetary mission to Mars, developed by the China National Space Administration (CNSA). Launched on July 23, 2020, aboard a Long March 5 rocket, the mission consisted of an orbiter, lander, and the Zhurong rover.
+
+[3] (voyager_golden_record.txt)
+sic), and natural sounds such as thunder, whales, and wind.
+The records are made of gold-plated copper and enclosed in an aluminum protective cover with symbolic instructions on playback speed and hydrogen transition timing.","Mars Pathfinder landed on Mars using a parachute and 24 cushioning airbags, while Chandrayaan-3 soft-landed on the Moon using throttleable rocket engines.",Correct,1.0,0.33,0,0.6818,"Mars Pathfinder landed on Mars using a parachute and 24 cushioning airbags, while Chandrayaan-3 soft-landed on the Moon using throttleable rocket engines.",Correct,1.0,0.33,0,0.6818
+Q23,Multi_Hop,Which two space telescopes are positioned at the Sun-Earth L1 and L2 Lagrange points respectively?,"Aditya-L1 is at the Sun-Earth L1 Lagrange point, and James Webb Space Telescope (JWST) is at the Sun-Earth L2 Lagrange point.",True,"aditya_l1_solar_observatory, james_webb_space_telescope",Hubble is at L1 and JWST is at L2.,Partially Correct,0.5,0.5,0,0.4286,0.05,"Aditya-L1 is at the Sun-Earth L1 Lagrange point, and JWST is at the Sun-Earth L2 Lagrange point.",Correct,1.0,0.73,0,0.5882,0.53,"[1] (aditya_l1_solar_observatory.txt)
+the Sun-Earth L1 Lagrange point.
+
+[2] (aditya_l1_solar_observatory.txt)
+the Sun-Earth L1 Lagrange point.
+
+[3] (aditya_l1_solar_observatory.txt)
+d the Sun-Earth L1 Lagrange point.","Aditya-L1 is at the Sun-Earth L1 Lagrange point, and JWST is at the Sun-Earth L2 Lagrange point.",Correct,1.0,0.73,0,0.5882,"Aditya-L1 is at the Sun-Earth L1 Lagrange point, and JWST is at the Sun-Earth L2 Lagrange point.",Correct,1.0,0.73,0,0.5882
+Q24,Multi_Hop,Compare the landing sites and operational lifespans of the Spirit and Opportunity rovers on Mars.,"Spirit landed in Gusev Crater and operated for 6 years; Opportunity landed in Meridiani Planum and operated for over 14 years, driving 45.16 km.",True,spirit_and_opportunity_rovers,Spirit and Opportunity both landed in Gale Crater and operated for 90 days.,Partially Correct,0.5,0.5,0,0.4324,0.05,"Spirit landed in Gusev Crater (operated 6 years); Opportunity landed in Meridiani Planum (operated over 14 years, driving 45.16 km).",Correct,1.0,0.22,0,0.7273,0.52,"[1] (chandrayaan_3_mission.txt)
+landing and roving on the lunar surface.
+
+[2] (chandrayaan_3_mission.txt)
+landing and roving on the lunar surface.
+
+[3] (chandrayaan_1_mission.txt)
+ndian and six from foreign agencies including NASA and ESA.
+On November 14, 2008, the Moon Impact Probe (MIP) separated from the orbiter and struck the lunar south pole near Shackleton Crater. Data from the Moon Mineralogy Mapper (M3), a NASA-supplied imaging spectrometer on Chandrayaan-1, led to the historic confirmation of widespread water ice and hydroxyl molecules on the lunar surface.","Spirit landed in Gusev Crater (operated 6 years); Opportunity landed in Meridiani Planum (operated over 14 years, driving 45.16 km).",Correct,1.0,0.22,0,0.7273,"Spirit landed in Gusev Crater (operated 6 years); Opportunity landed in Meridiani Planum (operated over 14 years, driving 45.16 km).",Correct,1.0,0.22,0,0.7273
+Q25,Multi_Hop,Which space missions confirmed water ice on the Moon and Mercury respectively?,"Chandrayaan-1 confirmed water ice on the Moon via its Moon Mineralogy Mapper, and MESSENGER confirmed water ice in permanently shadowed polar craters on Mercury.",True,"chandrayaan_1_mission, messenger_mercury_mission",Apollo 11 found ice on the Moon and Mariner 10 found ice on Mercury.,Partially Correct,0.5,0.0,1,0.2778,0.05,"Chandrayaan-1 confirmed water ice on the Moon, and MESSENGER confirmed water ice in permanently shadowed polar craters on Mercury.",Correct,1.0,0.61,0,0.6829,0.51,"[1] (chandrayaan_1_mission.txt)
+ndian and six from foreign agencies including NASA and ESA.
+On November 14, 2008, the Moon Impact Probe (MIP) separated from the orbiter and struck the lunar south pole near Shackleton Crater. Data from the Moon Mineralogy Mapper (M3), a NASA-supplied imaging spectrometer on Chandrayaan-1, led to the historic confirmation of widespread water ice and hydroxyl molecules on the lunar surface.
+
+[2] (chandrayaan_3_mission.txt)
+# Chandrayaan-3 Historic Lunar Landing
+Chandrayaan-3 was the third mission in the Chandrayaan programme developed by ISRO. Launched on July 14, 2023, aboard an LVM3-M4 rocket from Satish Dhawan Space Centre, the mission aimed to demonstrate safe soft landing and roving on the lunar surface.
+
+[3] (cassini_huygens_saturn.txt)
+satellites. It entered orbit around Saturn on July 1, 2004.
+The ESA-built Huygens probe separated from the Cassini orbiter on December 25, 2004, and landed on Titan, Saturn's largest moon, on January 14, 2005. Huygens became the first human-made probe to land in the outer Solar System.","Chandrayaan-1 confirmed water ice on the Moon, and MESSENGER confirmed water ice in permanently shadowed polar craters on Mercury.",Correct,1.0,0.73,0,0.6829,"Chandrayaan-1 confirmed water ice on the Moon, and MESSENGER confirmed water ice in permanently shadowed polar craters on Mercury.",Correct,1.0,0.61,0,0.6829
+Q26,Multi_Hop,How did the atmospheric entry strategies and outcomes differ between Galileo at Jupiter and Venera 7 at Venus?,"Galileo released a probe that descended 150 km into Jupiter's gaseous atmosphere before being crushed/melted, whereas Venera 7 successfully soft-landed on Venus's solid surface and transmitted data for 23 minutes.",True,"galileo_jupiter_mission, venera_program_venus",Galileo landed safely on Jupiter while Venera exploded in Venus orbit.,Incorrect,0.0,0.0,1,0.15,0.05,"Galileo's atmospheric probe descended 150 km into Jupiter before melting, whereas Venera 7 soft-landed on Venus's solid surface and transmitted data for 23 minutes.",Correct,1.0,0.18,0,0.7547,0.57,"[1] (aditya_l1_solar_observatory.txt)
+.
+The observatory carries seven scientific payloads: four for remote sensing of the Sun (including the Visible Emission Line Coronagraph - VELC and Solar Ultraviolet Imaging Telescope - SUIT) and three for in-situ observations of solar wind particles and magnetic fields (including ASPEX, PAPA, and MAG). The mission studies coronal heating, coronal mass ejections (CMEs), and space weather dynamics.
+
+[2] (voyager_golden_record.txt)
+them.
+The committee that chose the contents was chaired by Carl Sagan of Cornell University. The collection includes 115 analog images, spoken greetings in 55 languages (starting with Akkadian and ending with Wu Chinese), 90 minutes of musical selections (including Bach, Beethoven, Chuck Berry's 'Johnny B. Goode', and traditional folk music), and natural sounds such as thunder, whales, and wind.
+
+[3] (chandrayaan_2_orbiter.txt)
+# Chandrayaan-2 Mission and Orbiter
+Chandrayaan-2 was India's second lunar exploration mission, launched on July 22, 2019, aboard a GSLV Mk III rocket from Sriharikota. The mission included an orbiter, the Vikram lander, and the Pragyan rover.","Galileo's atmospheric probe descended 150 km into Jupiter before melting, whereas Venera 7 soft-landed on Venus's solid surface and transmitted data for 23 minutes.",Correct,1.0,0.32,0,0.7547,"Galileo's atmospheric probe descended 150 km into Jupiter before melting, whereas Venera 7 soft-landed on Venus's solid surface and transmitted data for 23 minutes.",Correct,1.0,0.18,0,0.7547
+Q27,Multi_Hop,What were the primary organic or prebiotic discoveries made by Rosetta on comet 67P and Hayabusa2 on asteroid Ryugu?,"Rosetta discovered the amino acid glycine and molecular oxygen, while Hayabusa2 discovered uracil (RNA nucleobase), vitamin B3, and 20 amino acids.",True,"rosetta_philae_mission, hayabusa2_ryugu",Rosetta found liquid water and Hayabusa2 found fossilized bacteria.,Incorrect,0.0,0.0,1,0.2069,0.06,"Rosetta discovered glycine and molecular oxygen on comet 67P, while Hayabusa2 discovered uracil (RNA nucleobase), vitamin B3, and 20 amino acids on Ryugu.",Correct,1.0,0.43,0,0.7442,0.55,"[1] (perseverance_rover_mars.txt)
+severance landed successfully on Mars on February 18, 2021.
+The rover carries seven primary scientific instruments, including SuperCam, PIXL, SHERLOC, and the MOXIE experiment, which demonstrated the production of breathable oxygen from Martian carbon dioxide on April 20, 2021.
+
+[2] (rosetta_philae_mission.txt)
+# Rosetta and Philae Comet 67P Mission
+Rosetta was an ESA space probe launched on March 2, 2004, to rendezvous with and orbit comet 67P/Churyumov-Gerasimenko. After a 10-year cruise through the Solar System, Rosetta entered orbit around comet 67P in August 2014.
+
+[3] (voyager_1_probe.txt)
+ntricate structures in Saturn's rings.
+Voyager 1 crossed the heliopause and entered interstellar space on August 25, 2012. It carries the Golden Record, a 12-inch gold-plated copper disk containing sounds and images selected to portray the diversity of life and culture on Earth. Its primary electrical power is supplied by three radioisotope thermoelectric generators (RTGs) fueled by plutonium-238.","Rosetta discovered glycine and molecular oxygen on comet 67P, while Hayabusa2 discovered uracil (RNA nucleobase), vitamin B3, and 20 amino acids on Ryugu.",Correct,1.0,0.43,0,0.7442,"Rosetta discovered glycine and molecular oxygen on comet 67P, while Hayabusa2 discovered uracil (RNA nucleobase), vitamin B3, and 20 amino acids on Ryugu.",Correct,1.0,0.43,0,0.7442
+Q28,Multi_Hop,What are the distinct scientific roles of the ChemCam instrument on Curiosity and the MOXIE experiment on Perseverance?,"ChemCam uses a laser spectrometer to analyze rock and soil elemental composition, whereas MOXIE is an in-situ resource experiment that generates oxygen from carbon dioxide.",True,"curiosity_rover_mars, moxie_oxygen_generator",Both ChemCam and MOXIE are optical camera systems.,Incorrect,0.0,0.0,1,0.1935,0.06,"ChemCam uses laser spectroscopy to analyze rock/soil composition, while MOXIE generates oxygen from atmospheric CO2.",Partially Correct,0.5,0.37,1,0.5263,0.53,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (perseverance_rover_mars.txt)
+severance landed successfully on Mars on February 18, 2021.
+The rover carries seven primary scientific instruments, including SuperCam, PIXL, SHERLOC, and the MOXIE experiment, which demonstrated the production of breathable oxygen from Martian carbon dioxide on April 20, 2021.
+
+[3] (chandrayaan_1_mission.txt)
+ndian and six from foreign agencies including NASA and ESA.
+On November 14, 2008, the Moon Impact Probe (MIP) separated from the orbiter and struck the lunar south pole near Shackleton Crater. Data from the Moon Mineralogy Mapper (M3), a NASA-supplied imaging spectrometer on Chandrayaan-1, led to the historic confirmation of widespread water ice and hydroxyl molecules on the lunar surface.","ChemCam uses laser spectroscopy to analyze rock/soil composition, while MOXIE generates oxygen from atmospheric CO2.",Partially Correct,0.5,0.37,1,0.5263,"ChemCam uses laser spectroscopy to analyze rock/soil composition, while MOXIE generates oxygen from atmospheric CO2.",Partially Correct,0.5,0.37,1,0.5263
+Q29,Multi_Hop,Compare the distances traveled beyond the heliopause by Voyager 1 and Voyager 2 at their respective crossing dates.,"Voyager 1 crossed at 121.6 AU in August 2012, while Voyager 2 crossed at 119.7 AU in November 2018.",True,"voyager_1_probe, voyager_2_probe, voyager_interstellar_findings",Both probes crossed the heliopause simultaneously at 100 AU in 2015.,Partially Correct,0.5,0.0,1,0.2759,0.06,"Voyager 1 crossed the heliopause at 121.6 AU in August 2012, while Voyager 2 crossed at 119.7 AU in November 2018.",Correct,1.0,0.94,0,0.7179,0.49,"[1] (curiosity_rover_mars.txt)
+Curiosity weighs 899 kg (1,982 lb) and is powered by a Multi-Mission Radioisotope Thermoelectric Generator (MMRTG) using plutonium-238 dioxide. Key instruments include the ChemCam laser spectrometer, the Sample Analysis at Mars (SAM) instrument suite, the Mastcam stereo cameras, and the Alpha Particle X-Ray Spectrometer (APXS).
+
+[2] (voyager_golden_record.txt)
+# The Voyager Golden Record
+The Voyager Golden Record is a phonograph record that was included aboard both Voyager 1 and Voyager 2 spacecraft launched in 1977. The records contain sounds and images selected to portray the diversity of life and culture on Earth, intended for any intelligent extraterrestrial life form that might find them.
+
+[3] (voyager_interstellar_findings.txt)
+ause at 121.6 AU.
+Voyager 2 crossed the heliopause at 119.7 AU on November 5, 2018. Unlike Voyager 1, Voyager 2's working Plasma Science (PLS) instrument allowed direct measurement of the speed, density, and temperature of interstellar plasma, showing that the interstellar medium is hotter and more dynamic than anticipated. Both spacecraft continue to transmit telemetry from beyond the solar wind.","Voyager 1 crossed the heliopause at 121.6 AU in August 2012, while Voyager 2 crossed at 119.7 AU in November 2018.",Correct,1.0,1.0,0,0.7179,"Voyager 1 crossed the heliopause at 121.6 AU in August 2012, while Voyager 2 crossed at 119.7 AU in November 2018.",Correct,1.0,0.94,0,0.7179
+Q30,Multi_Hop,List three robotic spacecraft that have successfully soft-landed rovers on Mars and their corresponding countries of origin.,"1. Mars Pathfinder (Sojourner) - USA, 2. Mars 2020 (Perseverance) - USA, 3. Tianwen-1 (Zhurong) - China.",True,"mars_pathfinder_sojourner, perseverance_rover_mars, tianwen_1_and_zhurong","1. Apollo 11 - USA, 2. Sputnik - USSR, 3. Chandrayaan - India.",Partially Correct,0.5,0.5,0,0.3333,0.12,"1. Mars Pathfinder (Sojourner) - USA, 2. Mars 2020 (Perseverance) - USA, 3. Tianwen-1 (Zhurong) - China.",Correct,1.0,0.55,0,0.8571,0.71,"[1] (voyager_golden_record.txt)
+sic), and natural sounds such as thunder, whales, and wind.
+The records are made of gold-plated copper and enclosed in an aluminum protective cover with symbolic instructions on playback speed and hydrogen transition timing.
+
+[2] (mars_pathfinder_sojourner.txt)
+# Mars Pathfinder and Sojourner Rover
+Mars Pathfinder was an American robotic spacecraft launched on December 4, 1996, that landed a base station with a lightweight rover on Mars's Ares Vallis on July 4, 1997.
+The mission utilized an innovative direct atmospheric entry with parachutes and a cluster of 24 giant airbags to cushion touchdown.
+
+[3] (mariner_4_mars.txt)
+NASA on November 28, 1964, aboard an Atlas-Agena D rocket.
+On July 14 and 15, 1965, Mariner 4 performed the first successful flyby of Mars, passing within 9,846 kilometers (6,118 mi) of the Martian surface. It returned 22 close-up television pictures covering about 1% of Mars's surface.","1. Mars Pathfinder (Sojourner) - USA, 2. Mars 2020 (Perseverance) - USA, 3. Tianwen-1 (Zhurong) - China.",Correct,1.0,0.71,0,0.8571,"1. Mars Pathfinder (Sojourner) - USA, 2. Mars 2020 (Perseverance) - USA, 3. Tianwen-1 (Zhurong) - China.",Correct,1.0,0.55,0,0.8571
+Q31,Out_Of_Corpus,What was the exact battery capacity in kilowatt-hours of the fictional Apollo 18 landing module on Mars?,I do not have enough information in the provided context to answer this question (Apollo 18 Mars mission is fictional / not in corpus).,False,none,The Apollo 18 Mars landing module was equipped with an experimental 64 kilowatt-hour silver-zinc secondary battery pack designed for surface life support.,Incorrect,0.0,0.0,1,0.1429,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.67,"[1] (chandrayaan_3_mission.txt)
+# Chandrayaan-3 Historic Lunar Landing
+Chandrayaan-3 was the third mission in the Chandrayaan programme developed by ISRO. Launched on July 14, 2023, aboard an LVM3-M4 rocket from Satish Dhawan Space Centre, the mission aimed to demonstrate safe soft landing and roving on the lunar surface.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.1538
+Q32,Out_Of_Corpus,What was the brand name of the solar panels installed on the Hermes rover during the 2019 Europa landing mission?,I do not have enough information in the provided context to answer this question.,False,none,The mission specification was recorded as 120 units at a cost of $4.8 million.,Incorrect,0.0,0.0,1,0.0,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.54,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+
+[3] (spitzer_space_telescope.txt)
+short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q33,Out_Of_Corpus,How many metric tons of titanium were extracted by the Artemis 5 mining station on the Moon in 2022?,I do not have enough information in the provided context to answer this question.,False,none,The Artemis 5 mining station extracted roughly 14.2 metric tons of ilmenite and titanium ore during its pilot lunar harvest in late 2022.,Incorrect,0.0,0.0,1,0.0571,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.42,"[1] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+
+[2] (mariner_9_mars_orbiter.txt)
+red in early 1972 before initiating systematic photography.
+Mariner 9 mapped 85% of Mars's surface with 7,329 images. Its major discoveries included the massive 4,000-km-long canyon system named Valles Marineris (in honor of the spacecraft), the enormous volcano Olympus Mons (the tallest known volcano in the Solar System at 21.9 km height), and dried-up river channels indicating past liquid water.
+
+[3] (artemis_program_overview.txt)
+# NASA Artemis Program
+The Artemis program is a NASA-led robotic and human exploration initiative aiming to return humans to the Moon, specifically the lunar south pole region, by the mid-2020s.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q34,Out_Of_Corpus,What is the serial number of the laser oscillator unit installed on the Neptune Triton orbiter in 2020?,I do not have enough information in the provided context to answer this question.,False,none,The unit was serial number TRITON-LSR-9021 built by the Jet Propulsion Laboratory.,Incorrect,0.0,0.0,1,0.0,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.44,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (parker_solar_probe.txt)
+ho first theorized the existence of the solar wind in 1958.
+The spacecraft is designed to plunge through the Sun's corona, coming within 6.2 million kilometers (3.83 million miles) of the solar surface at speeds reaching 690,000 km/h (430,000 mph)—making it the fastest human-made object in history.
+
+[3] (artemis_program_overview.txt)
+specifically the lunar south pole region, by the mid-2020s.
+The program utilizes the Space Launch System (SLS) super heavy-lift rocket and the Orion spacecraft, alongside commercial Human Landing Systems (such as SpaceX Starship HLS) and the planned lunar orbital Gateway station.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q35,Out_Of_Corpus,Which astronaut became the first person to walk on Saturn's moon Titan in June 2021?,I do not have enough information in the provided context to answer this question (no human has ever walked on Titan).,False,none,Astronaut Mark Watney became the first human to step onto Titan during the international Ares expedition in June 2021.,Incorrect,0.0,0.0,1,0.2162,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.44,"[1] (cassini_huygens_saturn.txt)
+satellites. It entered orbit around Saturn on July 1, 2004.
+The ESA-built Huygens probe separated from the Cassini orbiter on December 25, 2004, and landed on Titan, Saturn's largest moon, on January 14, 2005. Huygens became the first human-made probe to land in the outer Solar System.
+
+[2] (rosetta_philae_mission.txt)
+tem, Rosetta entered orbit around comet 67P in August 2014.
+On November 12, 2014, Rosetta deployed the Philae lander, which achieved the first soft touchdown on a comet nucleus. Philae's anchoring harpoons failed to fire, causing it to bounce twice before coming to rest in the shadow of a cliff on the comet.
+
+[3] (mangalyaan_mars_orbiter.txt)
+agency in the world to reach Mars on its maiden attempt.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.1081
+Q36,Out_Of_Corpus,What was the exact price in euros paid by ESA to purchase the Plutonian orbital map from ISRO in 2018?,I do not have enough information in the provided context to answer this question.,False,none,ESA purchased the map for approximately 4.2 million euros in 2018 under the planetary data agreement.,Incorrect,0.0,0.0,1,0.0741,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.44,"[1] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[2] (hubble_space_telescope.txt)
+erration in the primary mirror due to flawed manufacturing. In December 1993, the STS-61 servicing mission installed corrective optics (COSTAR) and the WFPC2 camera, restoring the telescope to its intended optical capability. Hubble has completed over 1.5 million observations.
+
+[3] (mars_sample_return.txt)
+ion and caching by the Perseverance rover in Jezero Crater.
+2. A Sample Retrieval Lander (SRL) carrying the Mars Ascent Vehicle (MAV) rocket to launch the sealed sample container into Mars orbit.
+3. The Earth Return Orbiter (ERO), developed by ESA, to rendezvous with the sample container in Martian orbit and fly it back to Earth.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q37,Out_Of_Corpus,What was the name of the captain of the Soviet submarine that recovered the Voyager 3 probe from the Arctic ocean?,I do not have enough information in the provided context to answer this question (Voyager 3 does not exist).,False,none,Captain Yuri Voronin was in command of the Soviet recovery submarine.,Incorrect,0.0,0.0,1,0.0714,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.46,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+
+[3] (parker_solar_probe.txt)
+ho first theorized the existence of the solar wind in 1958.
+The spacecraft is designed to plunge through the Sun's corona, coming within 6.2 million kilometers (3.83 million miles) of the solar surface at speeds reaching 690,000 km/h (430,000 mph)—making it the fastest human-made object in history.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0571
+Q38,Out_Of_Corpus,How many passengers boarded the commercial Virgin Orbit lunar shuttle flight in November 1985?,I do not have enough information in the provided context to answer this question.,False,none,The commercial shuttle carried 12 passengers on its maiden orbital loop.,Incorrect,0.0,0.0,1,0.0,0.05,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.5,"[1] (chandrayaan_2_orbiter.txt)
+software glitch during fine braking.
+However, the Chandrayaan-2 orbiter successfully entered lunar orbit and remains fully operational. It carries eight state-of-the-art scientific payloads, including the Orbiter High Resolution Camera (OHRC), which produces the highest-resolution images (0.25 m/pixel) of the Moon from lunar orbit, and the CLASS X-ray spectrometer, which maps elemental abundance.
+
+[2] (mariner_9_mars_orbiter.txt)
+71, it became the first spacecraft to orbit another planet.
+Upon arrival, a massive planet-encircling dust storm obscured the Martian surface. Mission controllers waited until the storm cleared in early 1972 before initiating systematic photography.
+
+[3] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q39,Out_Of_Corpus,What brand of espresso machine was carried inside the Huygens probe when landing on Titan?,I do not have enough information in the provided context to answer this question.,False,none,An ISSpresso brand microgravity coffee extraction device was integrated into the payload.,Incorrect,0.0,0.0,1,0.0,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.41,"[1] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+
+[2] (tianwen_1_and_zhurong.txt)
+ion consisted of an orbiter, lander, and the Zhurong rover.
+The spacecraft entered Mars orbit on February 10, 2021. On May 14, 2021, the lander touched down at Utopia Planitia. The Zhurong rover was deployed on May 22, 2021.
+
+[3] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q40,Out_Of_Corpus,Which German university constructed the primary reactor for the Chandrayaan-4 submarine probe in 2015?,I do not have enough information in the provided context to answer this question.,False,none,The Technical University of Munich designed the sub-surface reactor core.,Incorrect,0.0,0.0,1,0.0,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.53,"[1] (parker_solar_probe.txt)
+00 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (pioneer_10_and_11.txt)
+m the Solar System.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q41,Out_Of_Corpus,What was the diameter of the diamond drill bit used by Mariner 4 on the surface of Mars?,I do not have enough information in the provided context to answer this question (Mariner 4 was a flyby mission without a drill or landing).,False,none,Mariner 4 utilized a 2.5-inch diamond-core micro-drill bit mounted on its primary spectrometer arm.,Incorrect,0.0,0.0,1,0.1143,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.54,"[1] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (parker_solar_probe.txt)
+00 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.1026
+Q42,Out_Of_Corpus,What is the title of the song by Elvis Presley included on the James Webb Space Telescope optical disk?,I do not have enough information in the provided context to answer this question.,False,none,The song 'Can't Help Falling in Love' was laser-etched onto the gold-beryllium calibration disk.,Incorrect,0.0,0.0,1,0.08,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.54,"[1] (parker_solar_probe.txt)
+ho first theorized the existence of the solar wind in 1958.
+The spacecraft is designed to plunge through the Sun's corona, coming within 6.2 million kilometers (3.83 million miles) of the solar surface at speeds reaching 690,000 km/h (430,000 mph)—making it the fastest human-made object in history.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (parker_solar_probe.txt)
+00 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q43,Out_Of_Corpus,How many kilograms of liquid nitrogen were delivered to the ISS by the Apollo 13 crew?,I do not have enough information in the provided context to answer this question.,False,none,Apollo 13 delivered 450 kilograms of liquid coolant to the station before orbital transfer.,Incorrect,0.0,0.0,1,0.0769,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.43,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (parker_solar_probe.txt)
+00 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.
+
+[3] (osiris_rex_bennu.txt)
+TAGSAM arm.
+On September 24, 2023, the sample capsule successfully landed at the Utah Test and Training Range, delivering 121.6 grams (4.29 oz) of pristine asteroid regolith—exceeding the mission goal of 60 grams. Analysis confirmed abundant carbon, hydrated clay minerals, and amino acid precursors. The main spacecraft was subsequently redirected to asteroid Apophis under the new name OSIRIS-APEX.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q44,Out_Of_Corpus,What was the name of the pet dog sent aboard the New Horizons spacecraft to Pluto in 2006?,I do not have enough information in the provided context to answer this question (no animal was sent aboard New Horizons).,False,none,A miniature terrier named 'Laika II' was placed in a commemorative pressurized capsule aboard New Horizons in 2006.,Incorrect,0.0,0.0,1,0.2778,0.03,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.39,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[3] (osiris_rex_bennu.txt)
+TAGSAM arm.
+On September 24, 2023, the sample capsule successfully landed at the Utah Test and Training Range, delivering 121.6 grams (4.29 oz) of pristine asteroid regolith—exceeding the mission goal of 60 grams. Analysis confirmed abundant carbon, hydrated clay minerals, and amino acid precursors. The main spacecraft was subsequently redirected to asteroid Apophis under the new name OSIRIS-APEX.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0541
+Q45,Out_Of_Corpus,What was the retail price in USD of the tickets sold to tourists for the 1976 Viking 1 Mars flight?,I do not have enough information in the provided context to answer this question.,False,none,"Commercial tickets were sold by Pan American World Airways for $15,000 USD.",Incorrect,0.0,0.0,1,0.0,0.04,I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,0.49,"[1] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (parker_solar_probe.txt)
+00 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.",I do not have enough information in the provided context to answer this question.,Correct,1.0,1.0,0,1.0,"Based on historical mission projections, it is estimated to be approximately 64 kilowatt-hours operating under low-power telemetry.",Incorrect,0.0,0.0,1,0.0667
+Q46,Adversarial_Misconception,Did the Viking biological experiments in 1976 definitively prove the existence of living microorganisms on Mars?,"No. Although the Labeled Release experiment gave a positive signal, the GCMS found no organic compounds, and scientists attributed the reaction to non-biological soil oxidants like perchlorates.",True,viking_1_and_2_mars,"Yes, the Viking 1 and 2 landers confirmed life on Mars in 1976 when the Labeled Release experiment detected metabolic respiration in Martian soil.",Incorrect,0.0,0.0,1,0.2222,0.03,"No, the Viking experiments did not definitively prove life. While the Labeled Release experiment gave a positive signal, the GCMS found no organic compounds, and scientists attributed the reaction to non-biological soil oxidants like perchlorates.",Correct,1.0,1.0,0,0.7925,0.55,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (parker_solar_probe.txt)
+ho first theorized the existence of the solar wind in 1958.
+The spacecraft is designed to plunge through the Sun's corona, coming within 6.2 million kilometers (3.83 million miles) of the solar surface at speeds reaching 690,000 km/h (430,000 mph)—making it the fastest human-made object in history.
+
+[3] (viking_1_and_2_mars.txt)
+September 1975, they arrived at Mars in the summer of 1976.
+On July 20, 1976, Viking 1 Lander touched down at Chryse Planitia, becoming the first American spacecraft to land safely on Mars and operate successfully. Viking 2 Lander touched down at Utopia Planitia on September 3, 1976.","No, the Viking experiments did not definitively prove life. While the Labeled Release experiment gave a positive signal, the GCMS found no organic compounds, and scientists attributed the reaction to non-biological soil oxidants like perchlorates.",Correct,1.0,1.0,0,0.7925,"No, the Viking experiments did not definitively prove life. While the Labeled Release experiment gave a positive signal, the GCMS found no organic compounds, and scientists attributed the reaction to non-biological soil oxidants like perchlorates.",Correct,1.0,1.0,0,0.7925
+Q47,Adversarial_Misconception,Was Neil Armstrong the only astronaut who walked on the Moon during the Apollo 11 mission?,"No. Buzz Aldrin also walked on the Moon with Armstrong, spending about two hours and 15 minutes outside.",True,apollo_11_mission,Neil Armstrong was the sole astronaut who walked on the lunar surface during Apollo 11 while Buzz Aldrin remained inside the Lunar Module.,Incorrect,0.0,0.0,1,0.2703,0.03,"No. Buzz Aldrin also walked on the Moon during Apollo 11, stepping onto the surface 19 minutes after Armstrong. They spent about 2 hours and 15 minutes together outside in Tranquility Base.",Correct,1.0,1.0,0,0.5957,0.42,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (spitzer_space_telescope.txt)
+short-wavelength infrared channels until January 30, 2020.
+Spitzer discovered the largest ring around Saturn (the Phoebe ring) and was pivotal in measuring the atmospheric composition and weather of exoplanets, including the discovery of seven Earth-sized planets around the TRAPPIST-1 ultracool dwarf star.
+
+[3] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.","No. Buzz Aldrin also walked on the Moon during Apollo 11, stepping onto the surface 19 minutes after Armstrong. They spent about 2 hours and 15 minutes together outside in Tranquility Base.",Correct,1.0,1.0,0,0.5957,"No. Buzz Aldrin also walked on the Moon during Apollo 11, stepping onto the surface 19 minutes after Armstrong. They spent about 2 hours and 15 minutes together outside in Tranquility Base.",Correct,1.0,1.0,0,0.5957
+Q48,Adversarial_Misconception,Did the Hubble Space Telescope travel to the Moon or Mars to take its deep space photos?,"No. Hubble operates in low Earth orbit around Earth, outside atmospheric distortion.",True,hubble_space_telescope,Hubble was launched to a high lunar orbit to capture unobstructed pictures of deep space.,Incorrect,0.0,0.0,1,0.1538,0.03,"No, Hubble did not travel to the Moon or Mars. It operates in low Earth orbit, where it observes the universe from outside Earth's atmosphere.",Correct,1.0,1.0,0,0.4571,0.64,"[1] (hubble_space_telescope.txt)
+erration in the primary mirror due to flawed manufacturing. In December 1993, the STS-61 servicing mission installed corrective optics (COSTAR) and the WFPC2 camera, restoring the telescope to its intended optical capability. Hubble has completed over 1.5 million observations.
+
+[2] (james_webb_space_telescope.txt)
+# James Webb Space Telescope (JWST)
+The James Webb Space Telescope is a space telescope designed primarily to conduct infrared astronomy. High-resolution and high-sensitivity instruments allow it to view objects too old, distant, or faint for the Hubble Space Telescope.
+
+[3] (mangalyaan_mars_orbiter.txt)
+robe successfully entered Mars orbit on September 24, 2014.
+This made ISRO the fourth space agency to reach Mars orbit (after Roscosmos, NASA, and ESA) and the first space agency in the world to reach Mars on its maiden attempt.","No, Hubble did not travel to the Moon or Mars. It operates in low Earth orbit, where it observes the universe from outside Earth's atmosphere.",Correct,1.0,1.0,0,0.4571,"No, Hubble did not travel to the Moon or Mars. It operates in low Earth orbit, where it observes the universe from outside Earth's atmosphere.",Correct,1.0,1.0,0,0.4571
+Q49,Adversarial_Misconception,Was Voyager 1 the first spacecraft to visit both Uranus and Neptune?,No. Voyager 2 is the only spacecraft to have visited Uranus and Neptune. Voyager 1 only visited Jupiter and Saturn.,True,"voyager_1_probe, voyager_2_probe","Yes, Voyager 1 conducted the famous grand tour of the solar system, visiting Jupiter, Saturn, Uranus, and Neptune in the late 1970s and 1980s.",Incorrect,0.0,0.0,1,0.35,0.03,No. Voyager 2 is the only spacecraft to have visited Uranus and Neptune. Voyager 1 only visited Jupiter and Saturn.,Correct,1.0,1.0,0,0.7895,0.45,"[1] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[2] (voyager_2_probe.txt)
+urn but enabled further encounters with Uranus and Neptune. Voyager 2 remains the only spacecraft to have visited either of the ice giant planets: Uranus (closest approach January 24, 1986) and Neptune (closest approach August 25, 1989).
+
+[3] (voyager_golden_record.txt)
+# The Voyager Golden Record
+The Voyager Golden Record is a phonograph record that was included aboard both Voyager 1 and Voyager 2 spacecraft launched in 1977. The records contain sounds and images selected to portray the diversity of life and culture on Earth, intended for any intelligent extraterrestrial life form that might find them.",No. Voyager 2 is the only spacecraft to have visited Uranus and Neptune. Voyager 1 only visited Jupiter and Saturn.,Correct,1.0,1.0,0,0.7895,No. Voyager 2 is the only spacecraft to have visited Uranus and Neptune. Voyager 1 only visited Jupiter and Saturn.,Correct,1.0,1.0,0,0.7895
+Q50,Adversarial_Misconception,Did the Parker Solar Probe land on the solid surface of the Sun?,No. The Sun has no solid surface; the probe flew through the solar corona (Alfven critical surface) protected by a heat shield.,True,parker_solar_probe,"Yes, the Parker Solar Probe executed a historic touchdown on the solar surface using a titanium-shielded lander.",Incorrect,0.0,0.0,1,0.1935,0.03,"No, the Sun does not have a solid surface. The Parker Solar Probe flew through the Sun's outer corona (the Alfven critical surface) protected by an 11.4 cm carbon-composite heat shield.",Correct,1.0,1.0,0,0.6977,0.43,"[1] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (pioneer_10_and_11.txt)
+the Solar System.","No, the Sun does not have a solid surface. The Parker Solar Probe flew through the Sun's outer corona (the Alfven critical surface) protected by an 11.4 cm carbon-composite heat shield.",Correct,1.0,1.0,0,0.6977,"No, the Sun does not have a solid surface. The Parker Solar Probe flew through the Sun's outer corona (the Alfven critical surface) protected by an 11.4 cm carbon-composite heat shield.",Correct,1.0,1.0,0,0.6977
+Q51,Adversarial_Misconception,Was the Chandrayaan-2 Vikram lander successful in executing a soft landing on the Moon in 2019?,"No. The Vikram lander crashed during descent due to a software glitch, though the Chandrayaan-2 orbiter remained successful.",True,chandrayaan_2_orbiter,"Yes, Chandrayaan-2 successfully landed the Vikram lander and Pragyan rover at the lunar south pole in September 2019.",Incorrect,0.0,0.0,1,0.1935,0.05,"No, the Chandrayaan-2 Vikram lander was not successful; it crashed during descent due to a software glitch, although the Chandrayaan-2 orbiter remains operational.",Correct,1.0,1.0,0,0.7429,0.42,"[1] (cassini_huygens_saturn.txt)
+satellites. It entered orbit around Saturn on July 1, 2004.
+The ESA-built Huygens probe separated from the Cassini orbiter on December 25, 2004, and landed on Titan, Saturn's largest moon, on January 14, 2005. Huygens became the first human-made probe to land in the outer Solar System.
+
+[2] (parker_solar_probe.txt)
+# Parker Solar Probe
+The Parker Solar Probe is a NASA robotic spacecraft launched on August 12, 2018, to study the outer corona of the Sun. It was named in honor of astrophysicist Eugene Parker, who first theorized the existence of the solar wind in 1958.
+
+[3] (cassini_huygens_saturn.txt)
+land in the outer Solar System.","No, the Chandrayaan-2 Vikram lander was not successful; it crashed during descent due to a software glitch, although the Chandrayaan-2 orbiter remains operational.",Correct,1.0,1.0,0,0.7429,"No, the Chandrayaan-2 Vikram lander was not successful; it crashed during descent due to a software glitch, although the Chandrayaan-2 orbiter remains operational.",Correct,1.0,1.0,0,0.7429
+Q52,Adversarial_Misconception,Did the DART spacecraft capture Dimorphos and bring it back into Earth orbit?,No. DART was a kinetic impactor that intentionally crashed into Dimorphos to alter its orbital period around Didymos.,True,dart_mission,"Yes, NASA's DART spacecraft captured asteroid Dimorphos using a robotic tether and maneuvered it toward Earth orbit.",Incorrect,0.0,0.0,1,0.1212,0.03,No. DART did not capture Dimorphos; it was a kinetic impactor that intentionally collided with Dimorphos at 6.6 km/s to shorten its orbital period around Didymos by 32 minutes.,Correct,1.0,1.0,0,0.6222,0.42,"[1] (mars_sample_return.txt)
+ion and caching by the Perseverance rover in Jezero Crater.
+2. A Sample Retrieval Lander (SRL) carrying the Mars Ascent Vehicle (MAV) rocket to launch the sealed sample container into Mars orbit.
+3. The Earth Return Orbiter (ERO), developed by ESA, to rendezvous with the sample container in Martian orbit and fly it back to Earth.
+
+[2] (europa_clipper_mission.txt)
+ssists from Mars (February 2025) and Earth (December 2026).
+The spacecraft carries nine scientific instruments, including the REASON ice-penetrating radar, the MASPEX gas spectrometer, and the Europa Imaging System (EIS). With an unfolded solar array wingspan of over 30.5 meters (100 ft), Europa Clipper is the largest spacecraft NASA has ever developed for a planetary mission.
+
+[3] (chandrayaan_1_mission.txt)
+LV-C11) from the Satish Dhawan Space Centre at Sriharikota.
+The mission operated until August 2009. The spacecraft carried 11 scientific instruments: five Indian and six from foreign agencies including NASA and ESA.",No. DART did not capture Dimorphos; it was a kinetic impactor that intentionally collided with Dimorphos at 6.6 km/s to shorten its orbital period around Didymos by 32 minutes.,Correct,1.0,1.0,0,0.6222,No. DART did not capture Dimorphos; it was a kinetic impactor that intentionally collided with Dimorphos at 6.6 km/s to shorten its orbital period around Didymos by 32 minutes.,Correct,1.0,1.0,0,0.6222
+Q53,Adversarial_Misconception,Did the New Horizons mission land on the surface of Pluto to collect soil samples?,"No. New Horizons was a flyby mission that flew 12,500 km above Pluto's surface without landing.",True,new_horizons_pluto,"Yes, New Horizons made a historic touchdown on Pluto's Tombaugh Regio to gather pristine nitrogen ice samples.",Incorrect,0.0,0.0,1,0.1935,0.03,"No. New Horizons was a flyby mission that flew 12,500 km above Pluto's surface without landing.",Correct,1.0,1.0,0,1.0,0.44,"[1] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[2] (parker_solar_probe.txt)
+00 mph)—making it the fastest human-made object in history.
+To survive temperatures up to 1,370 degrees Celsius (2,500 degrees Fahrenheit), the probe is protected by a 4.5-inch-thick (11.4 cm) carbon-composite heat shield coated with white ceramic paint. On April 28, 2021, the probe officially 'touched the Sun' by flying through the Alfven critical surface in the solar corona.
+
+[3] (chandrayaan_3_mission.txt)
+# Chandrayaan-3 Historic Lunar Landing
+Chandrayaan-3 was the third mission in the Chandrayaan programme developed by ISRO. Launched on July 14, 2023, aboard an LVM3-M4 rocket from Satish Dhawan Space Centre, the mission aimed to demonstrate safe soft landing and roving on the lunar surface.","No. New Horizons was a flyby mission that flew 12,500 km above Pluto's surface without landing.",Correct,1.0,1.0,0,1.0,"No. New Horizons was a flyby mission that flew 12,500 km above Pluto's surface without landing.",Correct,1.0,1.0,0,1.0
+Q54,Adversarial_Misconception,Is the James Webb Space Telescope an optical-only telescope that replaced Hubble in low Earth orbit?,"No. JWST operates primarily in infrared astronomy and is located at the Sun-Earth L2 Lagrange point, not in low Earth orbit.",True,james_webb_space_telescope,"Yes, JWST is an optical-spectrum telescope placed in low Earth orbit to replace Hubble directly.",Incorrect,0.0,0.0,1,0.3529,0.03,"No. JWST operates primarily in infrared astronomy and is located at the Sun-Earth L2 Lagrange point, not in low Earth orbit.",Correct,1.0,1.0,0,0.95,0.63,"[1] (james_webb_space_telescope.txt)
+# James Webb Space Telescope (JWST)
+The James Webb Space Telescope is a space telescope designed primarily to conduct infrared astronomy. High-resolution and high-sensitivity instruments allow it to view objects too old, distant, or faint for the Hubble Space Telescope.
+
+[2] (hubble_space_telescope.txt)
+# Hubble Space Telescope (HST)
+The Hubble Space Telescope was launched into low Earth orbit on April 24, 1990, aboard Space Shuttle Discovery (STS-31) and remains in operation. Hubble's orbit outside the distortion of Earth's atmosphere allows it to capture extremely high-resolution images with substantially lower background light than ground-based telescopes.
+
+[3] (hubble_space_telescope.txt)
+erration in the primary mirror due to flawed manufacturing. In December 1993, the STS-61 servicing mission installed corrective optics (COSTAR) and the WFPC2 camera, restoring the telescope to its intended optical capability. Hubble has completed over 1.5 million observations.","No. JWST operates primarily in infrared astronomy and is located at the Sun-Earth L2 Lagrange point, not in low Earth orbit.",Correct,1.0,1.0,0,0.95,"No. JWST operates primarily in infrared astronomy and is located at the Sun-Earth L2 Lagrange point, not in low Earth orbit.",Correct,1.0,1.0,0,0.95
+Q55,Adversarial_Misconception,Did Mariner 4 discover artificial water canals constructed by civilizations on Mars?,"No. Mariner 4 showed Mars to be a cratered, barren world and shattered the 19th-century canal speculation.",True,mariner_4_mars,"Yes, Mariner 4's photographs confirmed the presence of ancient artificial canal networks across Mars.",Incorrect,0.0,0.0,1,0.2143,0.03,"No. Mariner 4 showed Mars to be a cratered, barren world and shattered the 19th-century canal speculation.",Correct,1.0,1.0,0,1.0,0.48,"[1] (mangalyaan_mars_orbiter.txt)
+rld to reach Mars on its maiden attempt.
+
+[2] (mariner_4_mars.txt)
+# Mariner 4 Mars Flyby
+Mariner 4 was the fourth in a series of spacecraft used for planetary exploration in the flyby mode, launched by NASA on November 28, 1964, aboard an Atlas-Agena D rocket.
+
+[3] (kepler_space_telescope.txt)
+tect periodic dips caused by transiting planets.","No. Mariner 4 showed Mars to be a cratered, barren world and shattered the 19th-century canal speculation.",Correct,1.0,1.0,0,1.0,"No. Mariner 4 showed Mars to be a cratered, barren world and shattered the 19th-century canal speculation.",Correct,1.0,1.0,0,1.0
+Q56,Adversarial_Misconception,Was the Opportunity rover powered by a nuclear plutonium generator during its 14-year mission?,No. Opportunity was solar-powered; its mission ended when a 2018 global dust storm blocked solar illumination.,True,spirit_and_opportunity_rovers,"Yes, Opportunity was powered by a plutonium-238 MMRTG nuclear generator allowing it to survive 14 years.",Incorrect,0.0,0.0,1,0.1333,0.03,No. Opportunity was solar-powered; its mission ended when a 2018 global dust storm blocked solar illumination.,Correct,1.0,1.0,0,1.0,0.45,"[1] (apollo_11_mission.txt)
+The Command Module Columbia was piloted by Michael Collins in lunar orbit. Armstrong and Aldrin collected 47.5 pounds (21.5 kg) of lunar material to bring back to Earth. The mission was launched by a Saturn V rocket from Kennedy Space Center on Merritt Island, Florida, on July 16 at 13:32 UTC.
+
+[2] (chandrayaan_2_orbiter.txt)
+luded an orbiter, the Vikram lander, and the Pragyan rover.
+During the landing attempt on September 6, 2019, the Vikram lander deviated from its planned trajectory and crashed onto the lunar surface due to a software glitch during fine braking.
+
+[3] (spirit_and_opportunity_rovers.txt)
+n soft sand in 2010.
+Opportunity operated for over 14 years until a catastrophic global dust storm cut off its solar power in June 2018. Opportunity drove a total distance of 45.16 km (28.06 miles), setting the record for the longest distance driven by any off-Earth vehicle. Opportunity discovered hematite spherules ('blueberries'), proving that acidic liquid water once soaked the Martian surface.",No. Opportunity was solar-powered; its mission ended when a 2018 global dust storm blocked solar illumination.,Correct,1.0,1.0,0,1.0,No. Opportunity was solar-powered; its mission ended when a 2018 global dust storm blocked solar illumination.,Correct,1.0,1.0,0,1.0
+Q57,Adversarial_Misconception,Did the Cassini spacecraft return to Earth and land in the Pacific Ocean after exploring Saturn?,No. Cassini completed a planned destructive plunge ('Grand Finale') into Saturn's atmosphere in September 2017 to prevent contamination of its moons.,True,cassini_huygens_saturn,"Yes, Cassini returned to Earth and splashed down in the Pacific Ocean after completing its Saturn mission.",Incorrect,0.0,0.0,1,0.2222,0.04,No. Cassini completed a planned destructive plunge ('Grand Finale') into Saturn's atmosphere in September 2017 to prevent contamination of its moons.,Correct,1.0,1.0,0,1.0,0.52,"[1] (chandrayaan_1_mission.txt)
+ndian and six from foreign agencies including NASA and ESA.
+On November 14, 2008, the Moon Impact Probe (MIP) separated from the orbiter and struck the lunar south pole near Shackleton Crater. Data from the Moon Mineralogy Mapper (M3), a NASA-supplied imaging spectrometer on Chandrayaan-1, led to the historic confirmation of widespread water ice and hydroxyl molecules on the lunar surface.
+
+[2] (artemis_program_overview.txt)
+# NASA Artemis Program
+The Artemis program is a NASA-led robotic and human exploration initiative aiming to return humans to the Moon, specifically the lunar south pole region, by the mid-2020s.
+
+[3] (mars_sample_return.txt)
+ion and caching by the Perseverance rover in Jezero Crater.
+2. A Sample Retrieval Lander (SRL) carrying the Mars Ascent Vehicle (MAV) rocket to launch the sealed sample container into Mars orbit.
+3. The Earth Return Orbiter (ERO), developed by ESA, to rendezvous with the sample container in Martian orbit and fly it back to Earth.",No. Cassini completed a planned destructive plunge ('Grand Finale') into Saturn's atmosphere in September 2017 to prevent contamination of its moons.,Correct,1.0,1.0,0,1.0,No. Cassini completed a planned destructive plunge ('Grand Finale') into Saturn's atmosphere in September 2017 to prevent contamination of its moons.,Correct,1.0,1.0,0,1.0
+Q58,Adversarial_Misconception,Was India the first nation in history to ever land a spacecraft on the Moon?,"No. India was the fourth nation to achieve a soft lunar landing (after USSR, USA, China), but the first to land near the lunar south polar region.",True,chandrayaan_3_mission,"Yes, India became the first country in world history to ever land a robotic spacecraft on the Moon.",Incorrect,0.0,0.0,1,0.2105,0.03,"No. India was the fourth nation to achieve a soft lunar landing (after USSR, USA, China), but the first to land near the lunar south polar region.",Correct,1.0,1.0,0,0.913,0.48,"[1] (pioneer_10_and_11.txt)
+tial reconnaissance of the asteroid belt and outer planets.
+Pioneer 10 was the first spacecraft to traverse the asteroid belt and make direct observations of Jupiter (closest approach December 4, 1973). It was the first human-made object to achieve escape velocity from the Solar System.
+
+[2] (rosetta_philae_mission.txt)
+efore coming to rest in the shadow of a cliff on the comet.
+Rosetta analyzed the comet's coma using the ROSINA mass spectrometer, discovering molecular oxygen (O2), noble gases, and the amino acid glycine. The mission concluded on September 30, 2016, with a controlled descent onto the comet's surface.
+
+[3] (cassini_huygens_saturn.txt)
+uman-made probe to land in the outer Solar System.","No. India was the fourth nation to achieve a soft lunar landing (after USSR, USA, China), but the first to land near the lunar south polar region.",Correct,1.0,1.0,0,0.913,"No. India was the fourth nation to achieve a soft lunar landing (after USSR, USA, China), but the first to land near the lunar south polar region.",Correct,1.0,1.0,0,0.913
+Q59,Adversarial_Misconception,Did the Philae lander fire its harpoons and stay rigidly locked to comet 67P on its initial touchdown?,"No. Philae's anchoring harpoons failed to fire, causing it to bounce twice before settling in the shadow of a cliff.",True,rosetta_philae_mission,"Yes, Philae fired two high-velocity anchoring harpoons that locked it firmly to the nucleus of comet 67P on first contact.",Incorrect,0.0,0.0,1,0.2703,0.05,"No. Philae's anchoring harpoons failed to fire, causing it to bounce twice before settling in the shadow of a cliff.",Correct,1.0,1.0,0,0.9444,0.54,"[1] (voyager_golden_record.txt)
+ight find them.
+
+[2] (rosetta_philae_mission.txt)
+tem, Rosetta entered orbit around comet 67P in August 2014.
+On November 12, 2014, Rosetta deployed the Philae lander, which achieved the first soft touchdown on a comet nucleus. Philae's anchoring harpoons failed to fire, causing it to bounce twice before coming to rest in the shadow of a cliff on the comet.
+
+[3] (mangalyaan_mars_orbiter.txt)
+the world to reach Mars on its maiden attempt.","No. Philae's anchoring harpoons failed to fire, causing it to bounce twice before settling in the shadow of a cliff.",Correct,1.0,1.0,0,0.9444,"No. Philae's anchoring harpoons failed to fire, causing it to bounce twice before settling in the shadow of a cliff.",Correct,1.0,1.0,0,0.9444
+Q60,Adversarial_Misconception,Is the International Space Station anchored to a geostationary orbital slot directly above Europe?,"No. The ISS is in low Earth orbit at ~420 km altitude and travels at 7.66 km/s, orbiting Earth approximately 15.5 times per day.",True,international_space_station,"Yes, the ISS remains parked in a permanent geostationary orbital slot over the European continent.",Incorrect,0.0,0.0,1,0.1143,0.04,"No. The ISS is in low Earth orbit at ~420 km altitude and travels at 7.66 km/s, orbiting Earth approximately 15.5 times per day.",Correct,1.0,1.0,0,0.913,0.47,"[1] (international_space_station.txt)
+# International Space Station (ISS)
+The International Space Station is a modular space station in low Earth orbit. It is a multinational collaborative project involving five participating space agencies: NASA (United States), Roscosmos (Russia), JAXA (Japan), ESA (Europe), and CSA (Canada).
+
+[2] (lucy_trojan_asteroids.txt)
+# Lucy Mission to the Trojan Asteroids
+Lucy is a NASA space probe launched on October 16, 2021, aboard an Atlas V rocket. It is the first space mission designed to explore the Jupiter Trojan asteroids—swarms of primitive planetesimals trapped in Jupiter's L4 and L5 Lagrange points.
+
+[3] (james_webb_space_telescope.txt)
+# James Webb Space Telescope (JWST)
+The James Webb Space Telescope is a space telescope designed primarily to conduct infrared astronomy. High-resolution and high-sensitivity instruments allow it to view objects too old, distant, or faint for the Hubble Space Telescope.","No. The ISS is in low Earth orbit at ~420 km altitude and travels at 7.66 km/s, orbiting Earth approximately 15.5 times per day.",Correct,1.0,1.0,0,0.913,"No. The ISS is in low Earth orbit at ~420 km altitude and travels at 7.66 km/s, orbiting Earth approximately 15.5 times per day.",Correct,1.0,1.0,0,0.913

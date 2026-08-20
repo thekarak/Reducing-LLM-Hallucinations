@@ -1,0 +1,4 @@
+# Soviet Venera Program (Venus Exploration)
+The Venera series of space probes was developed by the Soviet Union between 1961 and 1984 to gather data from Venus. The program achieved several monumental space milestones.
+On December 15, 1970, Venera 7 became the first spacecraft to make a successful soft landing on another planet and transmit telemetry data back to Earth, measuring a surface temperature of 475 degrees Celsius and a pressure of 90 atmospheres.
+On October 22, 1975, Venera 9 landed and transmitted the first black-and-white panoramic photograph of the surface of another planet. Venera 13, which landed on March 1, 1982, transmitted the first color panoramic images of Venus's rocky terrain and recorded ambient acoustic sounds.

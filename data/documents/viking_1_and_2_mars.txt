@@ -1,0 +1,4 @@
+# Viking 1 and Viking 2 Missions
+NASA's Viking project consisted of two identical spacecraft, Viking 1 and Viking 2, each composed of an orbiter and a lander. Launched in August and September 1975, they arrived at Mars in the summer of 1976.
+On July 20, 1976, Viking 1 Lander touched down at Chryse Planitia, becoming the first American spacecraft to land safely on Mars and operate successfully. Viking 2 Lander touched down at Utopia Planitia on September 3, 1976.
+Each lander carried three biological experiments to test for metabolic activity: Pyrolytic Release, Labeled Release, and Gas Exchange. While the Labeled Release experiment gave a positive signal, the Gas Chromatograph-Mass Spectrometer (GCMS) found no organic compounds, leading scientists to attribute the reaction to non-biological soil oxidants (such as perchlorates).

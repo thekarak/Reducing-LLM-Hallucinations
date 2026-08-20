@@ -1,0 +1,7 @@
+# Mars Sample Return Architecture
+Mars Sample Return (MSR) is a proposed joint NASA and ESA multi-spacecraft campaign to return scientific samples collected by the Perseverance rover from Mars to Earth for laboratory analysis.
+The baseline architecture includes three main phases:
+1. Sample collection and caching by the Perseverance rover in Jezero Crater.
+2. A Sample Retrieval Lander (SRL) carrying the Mars Ascent Vehicle (MAV) rocket to launch the sealed sample container into Mars orbit.
+3. The Earth Return Orbiter (ERO), developed by ESA, to rendezvous with the sample container in Martian orbit and fly it back to Earth.
+Return capsules are designed to safely land in a designated military testing range to undergo ultra-high containment astrobiological testing.

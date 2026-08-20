@@ -1,0 +1,4 @@
+# Mars Pathfinder and Sojourner Rover
+Mars Pathfinder was an American robotic spacecraft launched on December 4, 1996, that landed a base station with a lightweight rover on Mars's Ares Vallis on July 4, 1997.
+The mission utilized an innovative direct atmospheric entry with parachutes and a cluster of 24 giant airbags to cushion touchdown.
+The mission carried Sojourner, the first wheeled robotic rover to operate on Mars. Sojourner weighed just 10.5 kg (23 lb) and had six independently driven aluminum wheels on a rocker-bogie suspension system. Powered by a solar panel generating 16 Watts, Sojourner traveled approximately 100 meters over 83 sols, analyzing rocks named 'Barnacle Bill' and 'Yogi' using its APXS spectrometer.

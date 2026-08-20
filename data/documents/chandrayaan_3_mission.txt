@@ -1,0 +1,4 @@
+# Chandrayaan-3 Historic Lunar Landing
+Chandrayaan-3 was the third mission in the Chandrayaan programme developed by ISRO. Launched on July 14, 2023, aboard an LVM3-M4 rocket from Satish Dhawan Space Centre, the mission aimed to demonstrate safe soft landing and roving on the lunar surface.
+On August 23, 2023, at 18:04 IST (12:34 UTC), the Vikram lander successfully touched down near the lunar south polar region at 69.37 degrees South latitude and 32.35 degrees East longitude (named Shiv Shakti Point). This made India the first nation to land successfully in the lunar south polar area and the fourth nation overall to achieve a soft lunar landing.
+The Pragyan rover was deployed shortly after landing and operated for one lunar day (approximately 14 Earth days), detecting sulfur, aluminum, calcium, iron, and titanium on the lunar surface using LIBS and APXS spectrometers.

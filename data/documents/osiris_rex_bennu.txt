@@ -1,0 +1,4 @@
+# OSIRIS-REx Asteroid Sample Return
+OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, Security, Regolith Explorer) was a NASA asteroid study and sample-return mission launched on September 8, 2016.
+The spacecraft arrived at near-Earth carbonaceous asteroid 101955 Bennu in December 2018. On October 20, 2020, OSIRIS-REx performed its Touch-And-Go (TAG) sample collection maneuver, gathering surface material using its TAGSAM arm.
+On September 24, 2023, the sample capsule successfully landed at the Utah Test and Training Range, delivering 121.6 grams (4.29 oz) of pristine asteroid regolith—exceeding the mission goal of 60 grams. Analysis confirmed abundant carbon, hydrated clay minerals, and amino acid precursors. The main spacecraft was subsequently redirected to asteroid Apophis under the new name OSIRIS-APEX.

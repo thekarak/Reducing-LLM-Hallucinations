@@ -1,0 +1,4 @@
+# Voyager Interstellar Boundary Discoveries
+Data from Voyager 1 and Voyager 2 provided the first in-situ measurements of the outer boundary of the heliosphere.
+Voyager 1 detected a sharp drop in solar wind particles and a dramatic surge in galactic cosmic rays on August 25, 2012, marking its passage across the heliopause at 121.6 AU.
+Voyager 2 crossed the heliopause at 119.7 AU on November 5, 2018. Unlike Voyager 1, Voyager 2's working Plasma Science (PLS) instrument allowed direct measurement of the speed, density, and temperature of interstellar plasma, showing that the interstellar medium is hotter and more dynamic than anticipated. Both spacecraft continue to transmit telemetry from beyond the solar wind.

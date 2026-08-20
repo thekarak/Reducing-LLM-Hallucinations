@@ -1,0 +1,4 @@
+# BepiColombo Joint Mercury Mission
+BepiColombo is a joint mission between the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA) to explore the planet Mercury. Launched on October 20, 2018, aboard an Ariane 5 rocket, it is the third mission to visit Mercury (after Mariner 10 and MESSENGER).
+The spacecraft carries two independent orbiters stacked together: ESA's Mercury Planetary Orbiter (MPO) and JAXA's Mercury Magnetospheric Orbiter (Mio).
+To brake into Mercury's steep gravitational well, BepiColombo utilizes a solar electric propulsion module and performs nine planetary gravity assists (one Earth, two Venus, and six Mercury flybys) before entering dual Mercury orbit in late 2025/early 2026.

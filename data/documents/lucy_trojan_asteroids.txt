@@ -1,0 +1,4 @@
+# Lucy Mission to the Trojan Asteroids
+Lucy is a NASA space probe launched on October 16, 2021, aboard an Atlas V rocket. It is the first space mission designed to explore the Jupiter Trojan asteroids—swarms of primitive planetesimals trapped in Jupiter's L4 and L5 Lagrange points.
+Lucy's 12-year primary mission includes flybys of two main-belt asteroids (Dinkinesh in November 2023 and Donaldjohanson in April 2025) and eight Trojan asteroids (Eurybates, Polymele, Leucus, Orus, Patroclus, and Menoetius, plus discovered satellites).
+During its flyby of asteroid Dinkinesh on November 1, 2023, Lucy discovered that Dinkinesh's moonlet Selam is a contact binary asteroid. Lucy is powered by two circular solar arrays measuring 7.3 meters in diameter each.

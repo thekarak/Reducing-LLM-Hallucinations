@@ -1,0 +1,4 @@
+# MOXIE: Mars Oxygen In-Situ Resource Utilization Experiment
+MOXIE is a technology demonstration experiment on NASA's Perseverance rover that successfully proved the capability of extracting breathable oxygen from Mars's carbon dioxide-rich atmosphere.
+Developed by the Massachusetts Institute of Technology (MIT), MOXIE uses solid oxide electrolysis (SOXE) to ingest Martian atmospheric CO2, filter and compress it, and heat it to 800 degrees Celsius. The electrochemical reaction splits carbon dioxide (CO2) into carbon monoxide (CO) and oxygen ions (O2).
+Between April 2021 and August 2023, MOXIE completed 16 production runs, producing a total of 122 grams of oxygen with 98% purity, demonstrating a critical technology for future human missions to Mars.

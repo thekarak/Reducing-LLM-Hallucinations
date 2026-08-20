@@ -1,0 +1,4 @@
+# Mariner 4 Mars Flyby
+Mariner 4 was the fourth in a series of spacecraft used for planetary exploration in the flyby mode, launched by NASA on November 28, 1964, aboard an Atlas-Agena D rocket.
+On July 14 and 15, 1965, Mariner 4 performed the first successful flyby of Mars, passing within 9,846 kilometers (6,118 mi) of the Martian surface. It returned 22 close-up television pictures covering about 1% of Mars's surface.
+The images revealed a barren, crater-pocked terrain reminiscent of the Moon, shattering popular 19th-century speculation that Mars possessed artificial canals or abundant vegetation. Mariner 4 also measured Mars's surface atmospheric pressure to be between 4.1 and 7.0 millibars, proving the atmosphere was far thinner than previously estimated.

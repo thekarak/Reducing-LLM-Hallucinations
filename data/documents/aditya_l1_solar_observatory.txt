@@ -1,0 +1,4 @@
+# Aditya-L1 Solar Mission
+Aditya-L1 is India's first dedicated solar observatory spacecraft, developed by ISRO. Launched on September 2, 2023, aboard a PSLV-C57 rocket from Satish Dhawan Space Centre, the spacecraft traveled 1.5 million kilometers over 126 days.
+On January 6, 2024, Aditya-L1 successfully entered a halo orbit around the Sun-Earth L1 Lagrange point.
+The observatory carries seven scientific payloads: four for remote sensing of the Sun (including the Visible Emission Line Coronagraph - VELC and Solar Ultraviolet Imaging Telescope - SUIT) and three for in-situ observations of solar wind particles and magnetic fields (including ASPEX, PAPA, and MAG). The mission studies coronal heating, coronal mass ejections (CMEs), and space weather dynamics.

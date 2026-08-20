@@ -1,0 +1,4 @@
+# Chandrayaan-1 Lunar Mission
+Chandrayaan-1 was India's first lunar probe, launched by the Indian Space Research Organisation (ISRO) on October 22, 2008, using a Polar Satellite Launch Vehicle (PSLV-C11) from the Satish Dhawan Space Centre at Sriharikota.
+The mission operated until August 2009. The spacecraft carried 11 scientific instruments: five Indian and six from foreign agencies including NASA and ESA.
+On November 14, 2008, the Moon Impact Probe (MIP) separated from the orbiter and struck the lunar south pole near Shackleton Crater. Data from the Moon Mineralogy Mapper (M3), a NASA-supplied imaging spectrometer on Chandrayaan-1, led to the historic confirmation of widespread water ice and hydroxyl molecules on the lunar surface.

@@ -1,0 +1,4 @@
+# Cassini-Huygens Mission to Saturn
+Cassini-Huygens was a joint NASA/ESA/ASI robotic spacecraft mission launched on October 15, 1997, to study Saturn, its ring system, and its natural satellites. It entered orbit around Saturn on July 1, 2004.
+The ESA-built Huygens probe separated from the Cassini orbiter on December 25, 2004, and landed on Titan, Saturn's largest moon, on January 14, 2005. Huygens became the first human-made probe to land in the outer Solar System.
+Cassini discovered geysers of water ice and organic molecules erupting from the south polar fractures of Enceladus, confirming a subsurface liquid ocean. On September 15, 2017, Cassini concluded its 13-year orbital mission with a planned destructive dive into Saturn's atmosphere ('The Grand Finale') to avoid potential biological contamination of Enceladus and Titan.

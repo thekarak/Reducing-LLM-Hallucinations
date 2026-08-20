@@ -1,0 +1,4 @@
+# Hubble Deep Field and Cosmic Expansion
+The Hubble Deep Field (HDF) was a landmark astronomical observation conducted by the Hubble Space Telescope in December 1995. Over 10 consecutive days and 342 individual exposures, Hubble pointed at a tiny, seemingly empty speck of sky in the constellation Ursa Major.
+The resulting composite image revealed nearly 3,000 previously unseen distant galaxies stretching back across billions of light-years of cosmic time.
+Follow-up observations with the Hubble Ultra-Deep Field (2004) and eXtreme Deep Field (2012) captured galaxies formed less than 500 million years after the Big Bang. Hubble's precise measurements of Cepheid variable stars also played a key role in measuring the Hubble constant and discovering the accelerating expansion of the Universe in 1998.

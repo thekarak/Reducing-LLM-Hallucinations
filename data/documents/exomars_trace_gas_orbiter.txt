@@ -1,0 +1,4 @@
+# ExoMars Trace Gas Orbiter (TGO)
+The ExoMars Trace Gas Orbiter is an atmospheric research spacecraft launched on March 14, 2016, by ESA and Roscosmos on a Proton-M rocket. It entered Mars orbit in October 2016.
+TGO's scientific goal is to detect and map trace atmospheric gases present in concentrations below 1%, with a particular focus on methane (CH4), which could signify active biological or geological processes.
+Its primary instruments include the NOMAD and ACS spectrometers, which can detect gases down to parts-per-trillion levels, and the FREND neutron detector, which maps subsurface hydrogen (water ice). TGO also acts as a vital communications relay for surface landers and rovers including Perseverance and Curiosity.
