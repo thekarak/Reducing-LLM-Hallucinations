@@ -15,6 +15,8 @@ QUESTIONS_FILE = DATA_DIR / "questions.csv"
 RESULTS_DIR = BASE_DIR / "results"
 PLOTS_DIR = RESULTS_DIR / "plots"
 RESULTS_FILE = RESULTS_DIR / "results.csv"
+SUMMARY_FILE = RESULTS_DIR / "summary.json"
+MANUAL_REVIEW_FILE = RESULTS_DIR / "manual_review.csv"
 VECTOR_STORE_DIR = BASE_DIR / "vector_db"
 
 # Ensure directories exist
@@ -24,10 +26,17 @@ VECTOR_STORE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Embeddings & Vector Store Config
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-CHUNK_SIZE = 400
-CHUNK_OVERLAP = 60
+CHUNK_SIZE = 550
+CHUNK_OVERLAP = 90
 TOP_K_DEFAULT = 3
 TOP_K_EXTENDED = 5
+
+# Retrieval Quality Config
+# Chunks whose dense cosine similarity falls below this are discarded.
+SIMILARITY_THRESHOLD = float(os.getenv("SIMILARITY_THRESHOLD", "0.35"))
+# "hybrid" = BM25 (keyword) + dense (semantic) fusion; "dense" = semantic only.
+RETRIEVAL_MODE = os.getenv("RETRIEVAL_MODE", "hybrid").lower()
+BM25_CANDIDATES = 9  # keyword candidates considered before rank fusion
 
 # LLM Providers Configuration
 # Supported: 'opencode_zen', 'groq', 'gemini', 'openai', 'local_mock'

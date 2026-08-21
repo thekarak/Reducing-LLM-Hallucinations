@@ -1,12 +1,14 @@
 import os
+import json
 import pandas as pd
 import numpy as np
 import streamlit as st
 from pathlib import Path
 
 from src.config import (
-    DOCUMENTS_DIR, QUESTIONS_FILE, RESULTS_FILE, PLOTS_DIR,
-    VECTOR_STORE_DIR
+    DOCUMENTS_DIR, QUESTIONS_FILE, RESULTS_FILE, SUMMARY_FILE, PLOTS_DIR,
+    VECTOR_STORE_DIR, LLM_PROVIDER, CHUNK_SIZE, CHUNK_OVERLAP,
+    SIMILARITY_THRESHOLD, RETRIEVAL_MODE
 )
 from src.data_loader import load_documents, load_questions, RecursiveCharacterTextSplitter
 from src.vector_store import SimpleVectorStore, EmbeddingEngine
@@ -71,29 +73,73 @@ def get_system_components():
     """Load or initialize vector store, raw docs, and question set."""
     raw_docs = load_documents(DOCUMENTS_DIR)
     questions = load_questions(QUESTIONS_FILE)
-    
+
     # Initialize Vector Store
     embedding_engine = EmbeddingEngine()
     if (VECTOR_STORE_DIR / "vectors.npy").exists():
-        vector_store = SimpleVectorStore.load(VECTOR_STORE_DIR, embedding_engine=embedding_engine)
+        vector_store = SimpleVectorStore.load(
+            VECTOR_STORE_DIR, embedding_engine=embedding_engine,
+            similarity_threshold=SIMILARITY_THRESHOLD, retrieval_mode=RETRIEVAL_MODE
+        )
     else:
-        splitter = RecursiveCharacterTextSplitter(chunk_size=400, chunk_overlap=60)
+        splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
         chunks = splitter.split_documents(raw_docs)
-        vector_store = SimpleVectorStore(embedding_engine=embedding_engine)
+        vector_store = SimpleVectorStore(
+            embedding_engine=embedding_engine,
+            similarity_threshold=SIMILARITY_THRESHOLD,
+            retrieval_mode=RETRIEVAL_MODE
+        )
         vector_store.add_documents(chunks)
         vector_store.save(VECTOR_STORE_DIR)
-    
+
     return raw_docs, questions, vector_store
 
+
+@st.cache_data
+def load_summary():
+    """Load aggregate benchmark metrics computed by run_experiments.py."""
+    if SUMMARY_FILE.exists():
+        with open(SUMMARY_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    if RESULTS_FILE.exists():
+        df = pd.read_csv(RESULTS_FILE)
+
+        def agg(prefix):
+            n = len(df)
+            return {
+                "hallucination_rate_pct": round(df[f"{prefix}_hallucinated"].mean() * 100, 2),
+                "avg_faithfulness_pct": round(df[f"{prefix}_faithfulness"].mean() * 100, 2),
+                "accuracy_score_pct": round(
+                    ((df[f"{prefix}_correct_score"]).mean()) * 100, 2
+                ),
+                "avg_f1_score": round(df[f"{prefix}_f1"].mean(), 4),
+            }
+
+        return {
+            "total_questions": len(df),
+            "systems": {
+                "Baseline (No RAG)": agg("baseline"),
+                "RAG (Top-3 Strict)": agg("rag_k3"),
+                "RAG (Top-5 Strict)": agg("rag_k5"),
+                "RAG (Top-3 Loose)": agg("rag_loose"),
+            },
+        }
+    return None
+
 raw_docs, questions_list, vector_store = get_system_components()
+summary = load_summary()
 
 # Sidebar Configuration
 st.sidebar.title("⚙️ Experiment Controls")
-provider = st.sidebar.selectbox(
-    "LLM Provider",
-    ["OpenCode Zen", "Local Mock (Deterministic)", "Groq Cloud", "Google Gemini", "OpenAI"],
-    index=0
-)
+provider_options = ["Groq Cloud", "OpenCode Zen", "Local Mock (Deterministic)", "Google Gemini", "OpenAI"]
+default_provider = {
+    "groq": "Groq Cloud",
+    "opencode_zen": "OpenCode Zen",
+    "local_mock": "Local Mock (Deterministic)",
+    "gemini": "Google Gemini",
+    "openai": "OpenAI",
+}.get(LLM_PROVIDER, "Groq Cloud")
+provider = st.sidebar.selectbox("LLM Provider", provider_options, index=provider_options.index(default_provider))
 
 provider_map = {
     "OpenCode Zen": "opencode_zen",
@@ -150,10 +196,23 @@ with col1:
     st.metric(label="Knowledge Documents", value=f"{len(raw_docs)} files", delta="Indexed")
 with col2:
     st.metric(label="Evaluation Questions", value=f"{len(questions_list)} queries", delta="4 Categories")
-with col3:
-    st.metric(label="Baseline Hallucination Rate", value="51.7%", delta="-38.4% with RAG", delta_color="inverse")
-with col4:
-    st.metric(label="RAG (Top-3) Faithfulness", value="93.3%", delta="+41.6%", delta_color="normal")
+if summary:
+    systems = summary["systems"]
+    base_hr = systems["Baseline (No RAG)"]["hallucination_rate_pct"]
+    rag_hr = systems["RAG (Top-3 Strict)"]["hallucination_rate_pct"]
+    base_faith = systems["Baseline (No RAG)"]["avg_faithfulness_pct"]
+    rag_faith = systems["RAG (Top-3 Strict)"]["avg_faithfulness_pct"]
+    with col3:
+        st.metric(label="Baseline Hallucination Rate", value=f"{base_hr:.1f}%",
+                  delta=f"{rag_hr - base_hr:+.1f} pts with RAG", delta_color="inverse")
+    with col4:
+        st.metric(label="RAG (Top-3) Faithfulness", value=f"{rag_faith:.1f}%",
+                  delta=f"{rag_faith - base_faith:+.1f} pts", delta_color="normal")
+else:
+    with col3:
+        st.metric(label="Baseline Hallucination Rate", value="Run benchmark")
+    with col4:
+        st.metric(label="RAG (Top-3) Faithfulness", value="Run benchmark")
 
 # Tabs
 tab1, tab2, tab3 = st.tabs(["🧪 Interactive Test Bench", "📊 Benchmark Dashboard & Plots", "🔎 Qualitative Failure Analysis"])
@@ -253,12 +312,16 @@ with tab1:
 
         # Retrieved Context Accordion
         with st.expander(f"🔍 Inspect {len(res_rag['retrieved_docs'])} Retrieved Knowledge Chunks", expanded=True):
+            if not res_rag["retrieved_docs"]:
+                st.warning("No chunks passed the similarity threshold — a strict RAG system should refuse to answer here.")
             for idx, doc in enumerate(res_rag["retrieved_docs"], 1):
                 src = doc.metadata.get("source", "doc")
                 chunk_id = doc.metadata.get("chunk_id", f"c{idx}")
+                score = res_rag["retrieval_scores"][idx - 1] if idx - 1 < len(res_rag["retrieval_scores"]) else None
+                score_badge = f"cosine ≈ {score:.2f}" if score is not None else ""
                 st.markdown(f"""
                 <div class="chunk-box">
-                    <strong>Chunk [{idx}] — Source: <code>{src}</code> (ID: {chunk_id})</strong><br>
+                    <strong>Chunk [{idx}] — Source: <code>{src}</code> (ID: {chunk_id}) {score_badge}</strong><br>
                     {doc.page_content}
                 </div>
                 """, unsafe_allow_html=True)
@@ -286,15 +349,27 @@ with tab2:
         if plot3_path.exists():
             st.image(str(plot3_path), caption="Figure 3: Ablation Study: Top-K Context Depth vs Grounding Prompt Strictness", use_container_width=True)
 
-        # Summary Table
+        # Summary Table (computed from results, never hardcoded)
         st.markdown("#### Benchmark Aggregate Comparison Table")
-        summary_rows = [
-            {"System Setting": "Baseline LLM (No RAG)", "Hallucination Rate": "51.7%", "Faithfulness Score": "51.7%", "Factual Accuracy": "53.3%", "Token F1": "0.38"},
-            {"System Setting": "RAG (Top-3 Strict Grounding)", "Hallucination Rate": "13.3%", "Faithfulness Score": "93.3%", "Factual Accuracy": "88.3%", "Token F1": "0.79"},
-            {"System Setting": "RAG (Top-5 Strict Grounding)", "Hallucination Rate": "11.7%", "Faithfulness Score": "95.0%", "Factual Accuracy": "90.0%", "Token F1": "0.82"},
-            {"System Setting": "RAG (Top-3 Loose Grounding)", "Hallucination Rate": "31.7%", "Faithfulness Score": "73.3%", "Factual Accuracy": "71.7%", "Token F1": "0.62"}
-        ]
-        st.table(pd.DataFrame(summary_rows))
+        if summary:
+            rows = []
+            for name, m in summary["systems"].items():
+                rows.append({
+                    "System Setting": name,
+                    "Hallucination Rate": f"{m['hallucination_rate_pct']:.1f}%",
+                    "Faithfulness Score": f"{m['avg_faithfulness_pct']:.1f}%",
+                    "Factual Accuracy": f"{m['accuracy_score_pct']:.1f}%",
+                    "Token F1": f"{m['avg_f1_score']:.2f}",
+                })
+            st.table(pd.DataFrame(rows))
+            st.caption(
+                f"Computed from {summary.get('total_questions', len(df_results))} questions · "
+                f"provider: `{summary.get('provider', 'n/a')}` · chunk size {summary.get('chunk_size', 'n/a')} / "
+                f"overlap {summary.get('chunk_overlap', 'n/a')} · retrieval: {summary.get('retrieval_mode', 'n/a')} "
+                f"(threshold {summary.get('similarity_threshold', 'n/a')})"
+            )
+        else:
+            st.info("Run `python run_experiments.py` to compute aggregate metrics.")
 
         # Filterable Data Table
         st.markdown("#### Explore Raw Question-by-Question Evaluation Records")
@@ -314,7 +389,7 @@ with tab2:
 with tab3:
     st.subheader("🔎 Qualitative Analysis: When & Why Does RAG Still Hallucinate?")
     st.markdown("""
-    While RAG reduces overall hallucinations by over **70%**, it is not completely immune. Our benchmark categorizes residual failure modes into four distinct mechanisms:
+    RAG substantially reduces hallucinations on this benchmark, but it is not immune. Residual failures fall into four mechanisms:
     """)
 
     col_f1, col_f2 = st.columns(2)
@@ -327,7 +402,7 @@ with tab3:
 
         #### 2. Extrapolation Beyond Context (Loose Prompts)
         * **Mechanism**: When prompt instructions do not strictly enforce *'answer only from context'*, the model blends facts from context with ungrounded speculation.
-        * **Result**: Hallucination rate jumps from **13.3%** to **31.7%** in our ablation study.
+        * **Result**: Hallucinations rise noticeably in the loose-grounding ablation (see the comparison table above for the exact gap).
         * **Mitigation**: Explicit negative constraint prompting: *"If not present in context, state: I do not have enough information."*
         """)
 

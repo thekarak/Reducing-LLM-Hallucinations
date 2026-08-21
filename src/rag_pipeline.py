@@ -55,7 +55,8 @@ class BaselinePipeline:
 
 class RAGPipeline:
     """Retrieval-Augmented Generation pipeline with configurable Top-K and grounding prompts."""
-    def __init__(self, vector_store: SimpleVectorStore, llm_client: Optional[LLMClient] = None, top_k: int = 3, strict_grounding: bool = True):
+    def __init__(self, vector_store: SimpleVectorStore, llm_client: Optional[LLMClient] = None,
+                 top_k: int = 3, strict_grounding: bool = True):
         self.vector_store = vector_store
         self.llm = llm_client or LLMClient()
         self.top_k = top_k
@@ -68,17 +69,23 @@ class RAGPipeline:
     def query(self, question: str, k: Optional[int] = None, strict: Optional[bool] = None) -> Dict[str, Any]:
         k_val = k if k is not None else self.top_k
         is_strict = strict if strict is not None else self.strict_grounding
-        
+
         start_time = time.time()
-        # 1. Retrieve relevant chunks
-        retrieved_docs = self.vector_store.similarity_search(question, k=k_val)
-        
+
+        # 1. Retrieve relevant chunks (thresholded; may legitimately return none).
+        retrieved = self.vector_store.similarity_search_with_score(question, k=k_val)
+        retrieved_docs = [doc for doc, _ in retrieved]
+        retrieval_scores = [round(score, 4) for _, score in retrieved]
+
         # 2. Format Context
         context_parts = []
         for i, doc in enumerate(retrieved_docs, 1):
             src = doc.metadata.get("source", "doc")
             context_parts.append(f"[{i}] ({src})\n{doc.page_content}")
-        context_text = "\n\n".join(context_parts)
+        if not context_parts:
+            context_text = "(No chunks passed the relevance threshold for this question.)"
+        else:
+            context_text = "\n\n".join(context_parts)
 
         # 3. Construct Prompt
         template = STRICT_RAG_PROMPT_TEMPLATE if is_strict else LOOSE_RAG_PROMPT_TEMPLATE
@@ -96,5 +103,7 @@ class RAGPipeline:
             "strict_grounding": is_strict,
             "retrieved_docs": retrieved_docs,
             "retrieved_context": context_text,
+            "retrieval_scores": retrieval_scores,
+            "num_chunks_retrieved": len(retrieved_docs),
             "latency_ms": round(elapsed_ms, 2)
         }

@@ -64,6 +64,8 @@ class RecursiveCharacterTextSplitter:
                 meta = doc.metadata.copy()
                 meta["chunk_id"] = f"{meta.get('doc_id', 'doc')}_{idx}"
                 meta["chunk_index"] = idx
+                meta["chunk_size"] = self.chunk_size
+                meta["chunk_overlap"] = self.chunk_overlap
                 split_docs.append(Document(page_content=chunk, metadata=meta))
         return split_docs
 

@@ -1,0 +1,51 @@
+{
+  "provider": "local_mock",
+  "model": "llama-3.1-8b-instant",
+  "chunk_size": 550,
+  "chunk_overlap": 90,
+  "retrieval_mode": "hybrid",
+  "similarity_threshold": 0.35,
+  "total_questions": 60,
+  "systems": {
+    "Baseline (No RAG)": {
+      "total_questions": 60,
+      "hallucination_rate_pct": 83.33,
+      "correct_rate_pct": 3.33,
+      "partial_rate_pct": 21.67,
+      "accuracy_score_pct": 14.17,
+      "avg_faithfulness_pct": 10.0,
+      "avg_f1_score": 0.2071,
+      "avg_helpfulness_1to5": 1.57
+    },
+    "RAG (Top-3 Strict)": {
+      "total_questions": 60,
+      "hallucination_rate_pct": 0.0,
+      "correct_rate_pct": 91.67,
+      "partial_rate_pct": 5.0,
+      "accuracy_score_pct": 94.17,
+      "avg_faithfulness_pct": 99.58,
+      "avg_f1_score": 0.8185,
+      "avg_helpfulness_1to5": 4.77
+    },
+    "RAG (Top-5 Strict)": {
+      "total_questions": 60,
+      "hallucination_rate_pct": 0.0,
+      "correct_rate_pct": 93.33,
+      "partial_rate_pct": 5.0,
+      "accuracy_score_pct": 95.83,
+      "avg_faithfulness_pct": 99.58,
+      "avg_f1_score": 0.8248,
+      "avg_helpfulness_1to5": 4.83
+    },
+    "RAG (Top-3 Loose)": {
+      "total_questions": 60,
+      "hallucination_rate_pct": 28.33,
+      "correct_rate_pct": 66.67,
+      "partial_rate_pct": 5.0,
+      "accuracy_score_pct": 69.17,
+      "avg_faithfulness_pct": 71.25,
+      "avg_f1_score": 0.5906,
+      "avg_helpfulness_1to5": 3.77
+    }
+  }
+}
