@@ -38,14 +38,14 @@ nb1_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "# 🚀 Step 1: Building the RAG Pipeline\n",
+            "# Step 1: Building the RAG Pipeline\n",
             "### Project: Evaluating the Impact of RAG on Reducing LLM Hallucinations\n",
             "\n",
-            "This notebook walks through:\n",
-            "1. Ingesting domain knowledge documents\n",
-            "2. Text chunking with sliding window overlap\n",
-            "3. Computing neural embeddings (`sentence-transformers/all-MiniLM-L6-v2`)\n",
-            "4. Storing vectors and running cosine similarity search"
+            "In this notebook, we set up the core retrieval pipeline:\n",
+            "1. Loading the 51 space science documents\n",
+            "2. Splitting them into overlapping chunks so facts don't get cut in half\n",
+            "3. Generating 384-dimensional vector embeddings with `all-MiniLM-L6-v2`\n",
+            "4. Building an in-memory cosine similarity search index and testing retrieval"
         ]
     },
     {
@@ -55,12 +55,12 @@ nb1_cells = [
         "outputs": [],
         "source": [
             "# Install requirements if running in Google Colab\n",
-            "# !pip install sentence-transformers langchain chromadb pandas numpy matplotlib seaborn\n",
+            "# !pip install sentence-transformers pandas numpy matplotlib seaborn requests python-dotenv\n",
             "\n",
             "import sys\n",
             "from pathlib import Path\n",
             "\n",
-            "# Add parent directory to path\n",
+            "# Add parent directory to path so we can import from src\n",
             "sys.path.append('..')\n",
             "\n",
             "from src.data_loader import load_documents, RecursiveCharacterTextSplitter\n",
@@ -75,7 +75,7 @@ nb1_cells = [
         "metadata": {},
         "source": [
             "## 1. Load Domain Knowledge Corpus\n",
-            "We load 50+ domain documents covering Space Exploration, Astronomy, and Robotic Missions."
+            "We load 51 factual articles covering historic and modern space missions (Apollo, Curiosity, JWST, Chandrayaan, etc.)."
         ]
     },
     {
@@ -87,15 +87,15 @@ nb1_cells = [
             "documents = load_documents(DOCUMENTS_DIR)\n",
             "print(f\"Total loaded documents: {len(documents)}\")\n",
             "print(f\"Sample document source: {documents[0].metadata['source']}\")\n",
-            "print(\"Sample content snippet:\\n\", documents[0].page_content[:300], \"...\")"
+            "print(\"Sample content preview:\\n\", documents[0].page_content[:280], \"...\")"
         ]
     },
     {
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 2. Chunking the Documents\n",
-            "We split long documents into manageable chunks (~400 characters with 60-character overlap) to maintain semantic context across boundaries."
+            "## 2. Splitting Text into Semantic Chunks\n",
+            "We break the articles into 550-character chunks with a 90-character overlap. The overlap ensures that multi-word phrases and numerical parameters spanning sentence boundaries are preserved."
         ]
     },
     {
@@ -104,11 +104,11 @@ nb1_cells = [
         "metadata": {},
         "outputs": [],
         "source": [
-            "splitter = RecursiveCharacterTextSplitter(chunk_size=400, chunk_overlap=60)\n",
+            "splitter = RecursiveCharacterTextSplitter(chunk_size=550, chunk_overlap=90)\n",
             "chunks = splitter.split_documents(documents)\n",
-            "print(f\"Total chunks generated: {len(chunks)}\")\n",
+            "print(f\"Total chunks created: {len(chunks)}\")\n",
             "print(f\"Sample chunk metadata: {chunks[0].metadata}\")\n",
-            "print(f\"Sample chunk text:\\n{chunks[0].page_content}\")"
+            "print(f\"\\nSample chunk content:\\n{chunks[0].page_content}\")"
         ]
     },
     {
@@ -116,7 +116,7 @@ nb1_cells = [
         "metadata": {},
         "source": [
             "## 3. Embedding Generation & Vector Indexing\n",
-            "We embed all chunks and build an in-memory cosine similarity vector index."
+            "We embed all chunks using `sentence-transformers/all-MiniLM-L6-v2` and index them in an in-memory normalized cosine search store."
         ]
     },
     {
@@ -129,15 +129,15 @@ nb1_cells = [
             "vector_store = SimpleVectorStore(embedding_engine=embedding_engine)\n",
             "vector_store.add_documents(chunks)\n",
             "vector_store.save(VECTOR_STORE_DIR)\n",
-            "print(f\"Vector store indexed with {len(vector_store.documents)} chunks and saved.\")"
+            "print(f\"Vector store indexed with {len(vector_store.documents)} chunks and saved to disk.\")"
         ]
     },
     {
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 4. Test Semantic Retrieval\n",
-            "Let's test retrieving relevant context for a sample question."
+            "## 4. Testing Semantic Similarity Retrieval\n",
+            "Let's test retrieving the top 3 most relevant chunks for a specific test query."
         ]
     },
     {
@@ -146,12 +146,13 @@ nb1_cells = [
         "metadata": {},
         "outputs": [],
         "source": [
-            "query = \"What instrument on Perseverance demonstrated producing oxygen from Mars atmosphere?\"\n",
+            "query = \"What instrument on Perseverance demonstrated producing oxygen from the Mars atmosphere?\"\n",
             "results = vector_store.similarity_search_with_score(query, k=3)\n",
             "\n",
-            "print(f\"Query: {query}\\n\" + \"=\"*60)\n",
+            "print(f\"Query: {query}\")\n",
+            "print(\"=\" * 70)\n",
             "for idx, (doc, score) in enumerate(results, 1):\n",
-            "    print(f\"\\n[Chunk {idx}] (Similarity Score: {score:.4f}) | Source: {doc.metadata.get('source')}\")\n",
+            "    print(f\"\\n[Chunk {idx}] Similarity: {score:.4f} | Source: {doc.metadata.get('source')}\")\n",
             "    print(doc.page_content)"
         ]
     }
@@ -167,14 +168,14 @@ nb2_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "# 🧪 Step 2: Running the Evaluation Experiments\n",
+            "# Step 2: Running the Evaluation Experiments\n",
             "### Project: Evaluating the Impact of RAG on Reducing LLM Hallucinations\n",
             "\n",
-            "In this notebook, we run our benchmark suite:\n",
-            "1. **System A: Baseline LLM (No RAG)** — query directly without external context\n",
-            "2. **System B: RAG Top-3 (Strict)** — retrieve 3 chunks + strict grounding prompt\n",
-            "3. **System C: RAG Top-5 (Strict)** — retrieve 5 chunks + strict grounding prompt\n",
-            "4. **System D: RAG Top-3 (Loose)** — retrieve 3 chunks with loose prompt (Ablation)"
+            "In this notebook, we run all 60 benchmark questions across 4 different setups:\n",
+            "1. **Baseline LLM (No RAG)**: Direct question without context\n",
+            "2. **RAG (Top-3 Strict)**: 3 retrieved chunks + strict refusal instruction\n",
+            "3. **RAG (Top-5 Strict)**: 5 retrieved chunks + strict refusal instruction\n",
+            "4. **RAG (Top-3 Loose)**: 3 retrieved chunks with permissive prompt (Ablation)"
         ]
     },
     {
@@ -195,14 +196,15 @@ nb2_cells = [
             "from src.rag_pipeline import BaselinePipeline, RAGPipeline\n",
             "from src.evaluator import Evaluator\n",
             "\n",
-            "print(f\"Using LLM Provider: {LLM_PROVIDER.upper()} ({LLM_MODEL})\")"
+            "print(f\"Active Provider: {LLM_PROVIDER.upper()} | Model: {LLM_MODEL}\")"
         ]
     },
     {
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 1. Load Vector Store & Benchmark Questions"
+            "## 1. Load Vector Store & Benchmark Questions\n",
+            "We inspect the 60 questions categorized across Direct Fact, Multi-Hop, Out-of-Corpus, and Adversarial."
         ]
     },
     {
@@ -213,7 +215,7 @@ nb2_cells = [
         "source": [
             "vector_store = SimpleVectorStore.load(VECTOR_STORE_DIR)\n",
             "questions = load_questions(QUESTIONS_FILE)\n",
-            "print(f\"Loaded {len(questions)} evaluation benchmark questions.\")\n",
+            "print(f\"Loaded {len(questions)} evaluation questions.\")\n",
             "df_q = pd.DataFrame(questions)\n",
             "df_q['category'].value_counts()"
         ]
@@ -222,7 +224,7 @@ nb2_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 2. Initialize Pipelines"
+            "## 2. Initialize Pipelines & Evaluator"
         ]
     },
     {
@@ -237,14 +239,14 @@ nb2_cells = [
             "rag_k5_strict = RAGPipeline(vector_store=vector_store, llm_client=llm, top_k=5, strict_grounding=True)\n",
             "rag_k3_loose = RAGPipeline(vector_store=vector_store, llm_client=llm, top_k=3, strict_grounding=False)\n",
             "evaluator = Evaluator(llm_client=llm)\n",
-            "print(\"Pipelines initialized.\")"
+            "print(\"All 4 pipelines initialized successfully.\")"
         ]
     },
     {
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 3. Run Benchmark Loop across All 60 Questions"
+            "## 3. Run the Benchmark Loop across All Questions"
         ]
     },
     {
@@ -255,7 +257,7 @@ nb2_cells = [
         "source": [
             "results_data = []\n",
             "\n",
-            "for row in tqdm(questions, desc=\"Benchmarking Questions\"):\n",
+            "for row in tqdm(questions, desc=\"Evaluating Questions\"):\n",
             "    q_id = row[\"id\"]\n",
             "    category = row[\"category\"]\n",
             "    q_text = row[\"question\"]\n",
@@ -298,7 +300,7 @@ nb2_cells = [
             "\n",
             "df_res = pd.DataFrame(results_data)\n",
             "df_res.to_csv(RESULTS_FILE, index=False)\n",
-            "print(f\"Experiments complete! Saved {len(df_res)} records to {RESULTS_FILE}\")"
+            "print(f\"Experiment execution complete! Saved {len(df_res)} rows to {RESULTS_FILE}\")"
         ]
     }
 ]
@@ -313,14 +315,14 @@ nb3_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "# 📊 Step 3: Evaluation, Metrics & Error Analysis\n",
+            "# Step 3: Evaluation, Metrics & Error Analysis\n",
             "### Project: Evaluating the Impact of RAG on Reducing LLM Hallucinations\n",
             "\n",
-            "In this notebook, we analyze:\n",
-            "1. **Aggregate Metric Comparisons** (Hallucination Rate, Faithfulness, Factual Accuracy)\n",
-            "2. **Category Breakdown** (Direct Fact vs Multi-Hop vs Out-of-Corpus vs Adversarial)\n",
-            "3. **Top-K & Prompt Strictness Ablations**\n",
-            "4. **Qualitative Case Studies & Failure Modes**"
+            "In this notebook, we analyze the experiment results:\n",
+            "1. **Aggregate Benchmark Comparison** (Hallucination Rate, Faithfulness, Accuracy)\n",
+            "2. **Category-wise Breakdown**\n",
+            "3. **Visualizing Generated Plots**\n",
+            "4. **Qualitative Case Studies & Error Inspection**"
         ]
     },
     {
@@ -330,12 +332,12 @@ nb3_cells = [
         "outputs": [],
         "source": [
             "import sys\n",
+            "import json\n",
             "import pandas as pd\n",
             "import matplotlib.pyplot as plt\n",
             "sys.path.append('..')\n",
             "\n",
             "from src.config import RESULTS_FILE, PLOTS_DIR\n",
-            "from src.visualization import plot_hallucination_comparison, plot_category_breakdown, plot_ablation_comparison\n",
             "\n",
             "df = pd.read_csv(RESULTS_FILE)\n",
             "print(f\"Loaded {len(df)} experiment rows.\")\n",
@@ -346,7 +348,8 @@ nb3_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 1. Key Metric Calculations"
+            "## 1. Overall System Summary Metrics\n",
+            "Let's compute the overall hallucination rate and average faithfulness for each configuration."
         ]
     },
     {
@@ -358,18 +361,20 @@ nb3_cells = [
             "total = len(df)\n",
             "summary = {\n",
             "    \"Baseline (No RAG)\": {\n",
-            "        \"Hallucination Rate\": f\"{(df['baseline_hallucinated'].sum()/total)*100:.1f}%\",\n",
-            "        \"Faithfulness\": f\"{df['baseline_faithfulness'].mean()*100:.1f}%\"\n",
+            "        \"Hallucination Rate\": f\"{(df['baseline_hallucinated'].sum() / total) * 100:.1f}%\",\n",
+            "        \"Avg Faithfulness\": f\"{df['baseline_faithfulness'].mean() * 100:.1f}%\"\n",
             "    },\n",
             "    \"RAG (Top-3 Strict)\": {\n",
-            "        \"Hallucination Rate\": f\"{(df['rag_k3_hallucinated'].sum()/total)*100:.1f}%\",\n",
-            "        \"Faithfulness\": f\"{df['rag_k3_faithfulness'].mean()*100:.1f}%\"\n",
+            "        \"Hallucination Rate\": f\"{(df['rag_k3_hallucinated'].sum() / total) * 100:.1f}%\",\n",
+            "        \"Avg Faithfulness\": f\"{df['rag_k3_faithfulness'].mean() * 100:.1f}%\"\n",
             "    },\n",
             "    \"RAG (Top-5 Strict)\": {\n",
-            "        \"Hallucination Rate\": f\"{(df['rag_k5_hallucinated'].sum()/total)*100:.1f}%\n",
+            "        \"Hallucination Rate\": f\"{(df['rag_k5_hallucinated'].sum() / total) * 100:.1f}%\",\n",
+            "        \"Avg Faithfulness\": f\"{df['rag_k5_faithfulness'].mean() * 100:.1f}%\"\n",
             "    },\n",
             "    \"RAG (Top-3 Loose)\": {\n",
-            "        \"Hallucination Rate\": f\"{(df['rag_loose_hallucinated'].sum()/total)*100:.1f}%\n",
+            "        \"Hallucination Rate\": f\"{(df['rag_loose_hallucinated'].sum() / total) * 100:.1f}%\",\n",
+            "        \"Avg Faithfulness\": f\"{df['rag_loose_faithfulness'].mean() * 100:.1f}%\"\n",
             "    }\n",
             "}\n",
             "pd.DataFrame(summary).T"
@@ -379,7 +384,34 @@ nb3_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 2. Visualizing Benchmark Plots"
+            "## 2. Category-wise Hallucination Breakdown\n",
+            "Let's see how each category performed (Direct Fact vs Multi-Hop vs Out-of-Corpus vs Adversarial)."
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "cat_summary = []\n",
+            "for cat, group in df.groupby('category'):\n",
+            "    n = len(group)\n",
+            "    cat_summary.append({\n",
+            "        'Category': cat,\n",
+            "        'Questions': n,\n",
+            "        'Baseline Hallucinations': f\"{(group['baseline_hallucinated'].sum()/n)*100:.1f}%\",\n",
+            "        'RAG Top-3 Hallucinations': f\"{(group['rag_k3_hallucinated'].sum()/n)*100:.1f}%\"\n",
+            "    })\n",
+            "pd.DataFrame(cat_summary)"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 3. Visualizing Comparison Charts\n",
+            "Let's display the generated high-resolution comparison figures."
         ]
     },
     {
@@ -394,6 +426,7 @@ nb3_cells = [
             "img = mpimg.imread(str(PLOTS_DIR / 'hallucination_reduction.png'))\n",
             "ax.imshow(img)\n",
             "ax.axis('off')\n",
+            "plt.title(\"Hallucination Reduction by System Setting\", fontsize=14, pad=10)\n",
             "plt.show()"
         ]
     },
@@ -401,8 +434,8 @@ nb3_cells = [
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "## 3. Qualitative Failure Case Analysis\n",
-            "Let's inspect questions where Baseline hallucinated vs how RAG resolved or handled it."
+            "## 4. Inspecting Individual Failure Cases\n",
+            "Let's inspect questions where the baseline LLM made up facts vs how RAG handled them."
         ]
     },
     {
@@ -411,14 +444,14 @@ nb3_cells = [
         "metadata": {},
         "outputs": [],
         "source": [
-            "halluc_cases = df[df['baseline_hallucinated'] == 1][['id', 'category', 'question', 'baseline_answer', 'rag_k3_answer', 'ground_truth']].head(5)\n",
-            "for _, r in halluc_cases.iterrows():\n",
-            "    print(f\"\\n[{r['id']}] Category: {r['category']}\")\n",
+            "samples = df[df['baseline_hallucinated'] == 1][['id', 'category', 'question', 'baseline_answer', 'rag_k3_answer', 'ground_truth']].head(5)\n",
+            "for _, r in samples.iterrows():\n",
+            "    print(f\"[{r['id']}] Category: {r['category']}\")\n",
             "    print(f\"Question: {r['question']}\")\n",
-            "    print(f\"🔴 Baseline: {r['baseline_answer']}\")\n",
-            "    print(f\"🟢 RAG: {r['rag_k3_answer']}\")\n",
-            "    print(f\"🎯 Ground Truth: {r['ground_truth']}\")\n",
-            "    print(\"-\"*60)"
+            "    print(f\"Baseline: {r['baseline_answer']}\")\n",
+            "    print(f\"RAG Top-3: {r['rag_k3_answer']}\")\n",
+            "    print(f\"Ground Truth: {r['ground_truth']}\")\n",
+            "    print(\"-\" * 70)"
         ]
     }
 ]
