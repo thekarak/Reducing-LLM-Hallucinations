@@ -9,7 +9,7 @@
   "systems": {
     "Baseline (No RAG)": {
       "total_questions": 60,
-      "hallucination_rate_pct": 83.33,
+      "hallucination_rate_pct": 96.67,
       "correct_rate_pct": 3.33,
       "partial_rate_pct": 21.67,
       "accuracy_score_pct": 14.17,
@@ -19,33 +19,33 @@
     },
     "RAG (Top-3 Strict)": {
       "total_questions": 60,
-      "hallucination_rate_pct": 0.0,
-      "correct_rate_pct": 91.67,
-      "partial_rate_pct": 5.0,
-      "accuracy_score_pct": 94.17,
+      "hallucination_rate_pct": 6.67,
+      "correct_rate_pct": 90.0,
+      "partial_rate_pct": 6.67,
+      "accuracy_score_pct": 93.33,
       "avg_faithfulness_pct": 99.58,
-      "avg_f1_score": 0.8185,
-      "avg_helpfulness_1to5": 4.77
+      "avg_f1_score": 0.8101,
+      "avg_helpfulness_1to5": 4.73
     },
     "RAG (Top-5 Strict)": {
       "total_questions": 60,
-      "hallucination_rate_pct": 0.0,
-      "correct_rate_pct": 93.33,
-      "partial_rate_pct": 5.0,
-      "accuracy_score_pct": 95.83,
+      "hallucination_rate_pct": 6.67,
+      "correct_rate_pct": 91.67,
+      "partial_rate_pct": 6.67,
+      "accuracy_score_pct": 95.0,
       "avg_faithfulness_pct": 99.58,
-      "avg_f1_score": 0.8248,
-      "avg_helpfulness_1to5": 4.83
+      "avg_f1_score": 0.8164,
+      "avg_helpfulness_1to5": 4.8
     },
     "RAG (Top-3 Loose)": {
       "total_questions": 60,
-      "hallucination_rate_pct": 28.33,
-      "correct_rate_pct": 66.67,
-      "partial_rate_pct": 5.0,
-      "accuracy_score_pct": 69.17,
+      "hallucination_rate_pct": 35.0,
+      "correct_rate_pct": 65.0,
+      "partial_rate_pct": 6.67,
+      "accuracy_score_pct": 68.33,
       "avg_faithfulness_pct": 71.25,
-      "avg_f1_score": 0.5906,
-      "avg_helpfulness_1to5": 3.77
+      "avg_f1_score": 0.5821,
+      "avg_helpfulness_1to5": 3.73
     }
   }
 }

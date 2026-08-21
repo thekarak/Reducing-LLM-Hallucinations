@@ -318,7 +318,9 @@ class Evaluator:
         if judge_hallucinated is not None:
             hallucinated = 1 if judge_hallucinated else 0
         else:
-            hallucinated = 1 if (c_score == 0.0 or (c_score == 0.5 and faithfulness_score < 0.5)) else 0
+            # Full miss (c_score == 0) or partial correctness (c_score == 0.5) is flagged as hallucinated
+            # since a partially incorrect claim contains unsupported or inaccurate assertions.
+            hallucinated = 1 if (c_score < 1.0 and not is_refusal) else 0
 
         return {
             "factual_correctness": correctness,
