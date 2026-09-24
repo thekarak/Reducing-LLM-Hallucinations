@@ -5,15 +5,19 @@ requests>=2.31.0
 python-dotenv>=1.0.0
 tqdm>=4.66.0
 
+# Retrieval
+sentence-transformers>=2.7.0
+rank-bm25>=0.2.2
+scikit-learn>=1.3.0
+
 # Visualization & Evaluation Metrics
 matplotlib>=3.7.0
 seaborn>=0.12.0
-scikit-learn>=1.3.0
 
 # Interactive Web Demo & Notebooks
 streamlit>=1.35.0
 jupyter>=1.0.0
 
-# Multi-Provider LLM Clients (OpenCode Zen, Groq, OpenAI)
-groq>=0.9.0
+# Optional Multi-Provider LLM Clients
+google-generativeai>=0.8.0
 openai>=1.30.0

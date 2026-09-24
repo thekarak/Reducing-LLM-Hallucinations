@@ -1,337 +1,344 @@
-# Evaluating the Impact of Retrieval-Augmented Generation (RAG) on Reducing LLM Hallucinations
+# TruthScope: An Evidence-First RAG Hallucination Project
 
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Streamlit Demo](https://img.shields.io/badge/Demo-Streamlit-blue.svg)](app.py)
-[![Colab Ready](https://img.shields.io/badge/Google%20Colab-Ready-orange.svg)](notebooks/)
-[![Author](https://img.shields.io/badge/Author-Sourasis%20Karak-darkgreen.svg)](https://github.com/thekarak)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Demo-Streamlit-red)](app.py)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-A hands-on experiment and benchmark where I measured how much Retrieval-Augmented Generation (RAG) actually cuts down factual hallucinations compared to asking an LLM directly. Built with Python, sentence-transformers, a custom vector search index, and a Streamlit dashboard.
+I built this project to test a simple idea: an LLM answer should be easy to verify.
 
----
+This repository compares normal LLM answers with Retrieval-Augmented Generation (RAG), then adds **TruthScope**—a layer that breaks an answer into claims, checks each claim against retrieved evidence, and explains when the answer should be trusted or questioned.
 
-## Table of Contents
-1. [Why I Built This Project](#why-i-built-this-project)
-2. [How the System Works](#how-the-system-works)
-3. [Architecture](#architecture)
-4. [Tech Stack](#tech-stack)
-5. [The 60-Question Benchmark Dataset](#the-60-question-benchmark-dataset)
-6. [Experiment Results & Numbers](#experiment-results--numbers)
-7. [Rendered Charts & Visualizations](#rendered-charts--visualizations)
-8. [What I Learned from the Results](#what-i-learned-from-the-results)
-9. [Real Output Comparisons (Case Studies)](#real-output-comparisons-case-studies)
-10. [When Does RAG Still Fail? (Error Analysis)](#when-does-rag-still-fail-error-analysis)
-11. [Manual Verification by Hand](#manual-verification-by-hand)
-12. [Repository Layout](#repository-layout)
-13. [How to Run It Locally](#how-to-run-it-locally)
-14. [Supported LLM Backends](#supported-llm-backends)
-15. [What I Plan to Improve Next](#what-i-plan-to-improve-next)
+> **Student project, not a published research study.** The committed benchmark results were generated with a deterministic local simulator. They are useful for demonstrating the pipeline, but they are not real-world claims about every LLM.
 
 ---
 
-## Why I Built This Project
+## What TruthScope Does
 
-While experimenting with Large Language Models, I kept noticing a common problem: when an LLM does not know a specific date, number, or technical detail, it rarely admits it. Instead, it generates a very confident, well-written answer that is completely made up.
+TruthScope is the main interactive part of the project.
 
-Everyone talks about RAG (Retrieval-Augmented Generation) as the fix. But as a computer science student, I wanted to see the actual numbers:
-- How much does RAG actually drop the hallucination rate compared to a plain LLM?
-- Does feeding more context (3 chunks vs 5 chunks) always help, or does it just add clutter?
-- What happens if the user asks about something completely fake? Does RAG know how to say "I don't know"?
-- How much does the prompt instruction itself matter compared to the retrieved text?
+- **Claim Inspector** splits an answer into individual factual claims.
+- **Evidence Checker** marks each claim as supported, uncertain, unsupported, unverified, or abstained.
+- **Risk Radar** warns when a question has a false premise, weak evidence, or unusually precise wording.
+- **Learning Coach** turns a failed answer into a short explanation and a practice question.
+- **System Comparison** shows the normal LLM answer beside the grounded RAG answer.
+- **Evidence Viewer** shows the exact source chunk and sentence used for verification.
+- **Local Mode** lets the complete demo run without a paid API key.
 
-To answer these, I collected a dataset of factual space exploration documents, wrote a benchmark of 60 test questions, and built an evaluation pipeline to test both systems side-by-side.
-
----
-
-## How the System Works
-
-The project is split into four clear steps:
-
-1. **Document Processing & Chunking**:
-   I collected 51 factual articles on space missions (Apollo, Mars rovers, space telescopes, asteroid missions, etc.). I wrote a text splitter in Python that breaks them into 550-character chunks with a 90-character overlap (253 chunks total) so sentences and numbers do not get cut in half.
-
-2. **Vector Embeddings & Search**:
-   Each chunk is converted into a 384-dimensional vector using the open-source `sentence-transformers/all-MiniLM-L6-v2` model. I built an in-memory cosine similarity search index in NumPy that retrieves the most relevant chunks for any input question in just a few milliseconds.
-
-3. **Running the Dual Pipelines**:
-   Every question is sent through four different setups:
-   - **Baseline (No RAG)**: Sends the question straight to the LLM with no extra context.
-   - **RAG (Top-3 Strict)**: Fetches the top 3 most relevant chunks and tells the model: *"Answer strictly and ONLY using the provided context. If the answer is not in the context, say 'I do not have enough information'."*
-   - **RAG (Top-5 Strict)**: Fetches the top 5 chunks to see if deeper context helps multi-hop questions.
-   - **RAG (Top-3 Loose)**: Fetches top 3 chunks, but removes the strict refusal rule to test if the model starts guessing again.
-
-4. **Automated Evaluation & Scoring**:
-   I built an automated evaluator in Python that checks every answer for:
-   - *Hallucination flag* (did the model invent claims not backed by facts or context?)
-   - *Faithfulness score* (how much of the answer is directly supported by the retrieved text?)
-   - *Factual correctness* (Correct, Partially Correct, or Incorrect)
-   - *Token F1 score* (word overlap against verified ground truth)
+The claim checker is explainable and deterministic, but it is still a heuristic. It checks support against the indexed corpus; it does not prove that a statement is true everywhere.
 
 ---
 
-## Architecture
+## Quick Start
 
+### 1. Install the project
+
+```bash
+git clone https://github.com/thekarak/Reducing-LLM-Hallucinations.git
+cd Reducing-LLM-Hallucinations
+python -m venv .venv
 ```
-                      +------------------------------------------+
-                      |         51 Domain Text Documents         |
-                      |          (Space & Mission Facts)         |
-                      +--------------------+---------------------+
-                                           |
-                                           v
-                      +------------------------------------------+
-                      |      Chunking: 253 Overlapping Chunks    |
-                      +--------------------+---------------------+
-                                           |
-                                           v
-                      +------------------------------------------+
-                      |   Embeddings (all-MiniLM-L6-v2) & Index  |
-                      +--------------------+---------------------+
-                                           |
-                    +----------------------+----------------------+
-                    |                                             |
-                    v                                             v
-        +-----------------------+                     +-----------------------+
-        | System A: Baseline    |                     | System B: Grounded    |
-        | LLM (No Context)      |                     | RAG (Top-3 / Top-5)   |
-        +-----------+-----------+                     +-----------+-----------+
-                    |                                             |
-                    +----------------------+----------------------+
-                                           |
-                                           v
-                      +------------------------------------------+
-                      |       Automated Evaluation Engine        |
-                      |   (Faithfulness, Hallucination, F1)      |
-                      +--------------------+---------------------+
-                                           |
-                                           v
-                      +------------------------------------------+
-                      |  1. results/results.csv                  |
-                      |  2. results/summary.json                 |
-                      |  3. Matplotlib Plots                     |
-                      |  4. Interactive Streamlit Web UI         |
-                      +------------------------------------------+
+
+Activate the environment:
+
+```bash
+# Windows
+.venv\Scripts\activate
+
+# macOS or Linux
+source .venv/bin/activate
 ```
+
+Install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Start the app
+
+```bash
+streamlit run app.py
+```
+
+Open [http://localhost:8501](http://localhost:8501).
+
+The default **Local Simulator** works without API keys. You can enter another provider key in the sidebar when you want to test a live model.
+
+### 3. Run the tests
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+### 4. Run the benchmark
+
+```bash
+python run_experiments.py
+```
+
+For a smaller smoke test:
+
+```bash
+python run_experiments.py --limit 5
+```
+
+The benchmark writes results to `results/`, including CSV files, JSON summaries, and charts.
+
+---
+
+## Why I Built It
+
+LLMs often sound confident even when they do not know the answer. The problem is especially common with exact dates, measurements, names, and fictional questions.
+
+I wanted to test four things:
+
+1. Does retrieval reduce unsupported answers?
+2. Is Top-5 context always better than Top-3?
+3. Does strict prompting improve refusal behavior?
+4. Can a student build a useful evaluation tool without a large vector database or expensive infrastructure?
+
+The first version focused on a 60-question benchmark. TruthScope came later because aggregate scores showed *that* something changed, but not clearly *why* it changed.
+
+---
+
+## Project Flow
+
+```text
+Space-mission documents
+          |
+          v
+   Text chunking
+          |
+          v
+Embeddings + keyword search
+          |
+          v
+Relevant evidence chunks
+          |
+          +-----------------------+
+          |                       |
+          v                       v
+   Normal LLM answer      Strict RAG answer
+                                  |
+                                  v
+                          TruthScope analysis
+                                  |
+                    +-------------+-------------+
+                    |             |             |
+                    v             v             v
+             Claim verdicts   Risk radar   Learning coach
+```
+
+### 1. Document processing
+
+The project contains 51 short documents about space missions. Each document is split into 550-character chunks with a 90-character overlap.
+
+### 2. Retrieval
+
+The main path uses `all-MiniLM-L6-v2` embeddings and cosine similarity. The project can also combine dense retrieval with BM25 through Reciprocal Rank Fusion.
+
+If `sentence-transformers` is unavailable, the code falls back to TF-IDF so the project can still run locally.
+
+### 3. Answer generation
+
+The experiment compares four setups:
+
+| Setup | Purpose |
+|---|---|
+| Baseline | Sends the question without retrieved context |
+| Strict RAG, Top-3 | Uses three chunks and requires evidence-based answers |
+| Strict RAG, Top-5 | Tests whether deeper context helps |
+| Loose RAG, Top-3 | Tests how the system behaves without a strict refusal rule |
+
+### 4. Evaluation
+
+The evaluator records:
+
+- Hallucination flag
+- Faithfulness score
+- Factual correctness
+- Token-level F1
+- Refusal detection
+- Human-readable evaluation notes
+- Retrieved evidence and retrieval scores
+
+For live models, faithfulness can use an LLM judge. Offline runs use a deterministic clause-support heuristic.
+
+---
+
+## TruthScope Analysis
+
+TruthScope adds a separate analysis layer after answer generation.
+
+For every claim, it:
+
+1. Removes low-value words and focuses on names, numbers, dates, and key terms.
+2. Finds the closest sentence in the retrieved evidence.
+3. Measures overlap between the claim and that sentence.
+4. Checks for conflicting negation, such as claiming something **did not** happen when the evidence says it **did**.
+5. Produces a verdict and a short explanation.
+
+These labels are also saved in the benchmark output for the strict Top-3 run.
+
+---
+
+## Benchmark Dataset
+
+`data/questions.csv` contains 60 questions in four categories:
+
+| Category | Count | What it tests |
+|---|---:|---|
+| Direct facts | 18 | Exact names, dates, and measurements |
+| Multi-hop questions | 12 | Combining facts from multiple documents |
+| Out-of-corpus traps | 15 | Fictional or unanswerable questions |
+| Adversarial misconceptions | 15 | Questions built around a false assumption |
+
+The trap questions are important. A system that always answers is not necessarily reliable; knowing when the corpus is insufficient is part of the task.
+
+---
+
+## Committed Benchmark Results
+
+These values come from the deterministic local simulator stored in `results/summary.json`.
+
+| Setup | Hallucination rate | Faithfulness | Accuracy | Token F1 |
+|---|---:|---:|---:|---:|
+| Baseline, no RAG | 96.7% | 10.0% | 14.2% | 0.21 |
+| Strict RAG, Top-3 | 6.7% | 99.6% | 93.3% | 0.81 |
+| Strict RAG, Top-5 | 6.7% | 99.6% | 95.0% | 0.82 |
+| Loose RAG, Top-3 | 35.0% | 71.3% | 68.3% | 0.58 |
+
+These numbers should be read as a reproducible test of the benchmark software. A fair LLM evaluation needs multiple live models, repeated runs, better test questions, confidence intervals, and independently reviewed labels.
+
+![Hallucination comparison](results/plots/hallucination_reduction.png)
+
+---
+
+## Where RAG Still Fails
+
+RAG is useful, but it does not remove hallucinations automatically.
+
+The main failure patterns I found are:
+
+- **Retrieval miss:** the correct sentence is in the corpus but is not retrieved.
+- **Bad chunk boundary:** the needed fact is split across two chunks.
+- **Prompt weakness:** the model mixes outside knowledge with the retrieved context.
+- **Entity confusion:** facts from two missions get combined incorrectly.
+- **Weak verification:** token overlap finds similar words but misses deeper semantic errors.
+- **Poor evaluation data:** a small hand-written benchmark can overfit to the prompts and models used to build it.
+
+TruthScope makes some of these failures visible, but it cannot solve them automatically.
+
+---
+
+## Supported Providers
+
+The app supports:
+
+- Local deterministic simulator
+- Groq
+- OpenCode Zen
+- Google Gemini
+- OpenAI
+
+To configure providers through a file:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env`:
+
+```ini
+LLM_PROVIDER=local_mock
+LLM_MODEL=llama-3.1-8b-instant
+
+GROQ_API_KEY=your_key_here
+GEMINI_API_KEY=your_key_here
+OPENAI_API_KEY=your_key_here
+OPENCODE_ZEN_API_KEY=your_key_here
+```
+
+Do not commit `.env` or real API keys.
 
 ---
 
 ## Tech Stack
 
-- **Language**: Python 3.9+
-- **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2` (fast, lightweight, runs easily on CPU)
-- **Vector Search**: Custom NumPy normalized cosine similarity index (zero heavy external database setup needed)
-- **Supported LLMs**: OpenCode Zen, Groq Cloud (Llama-3.1-8B), Google Gemini, OpenAI, and a built-in deterministic local test engine for offline runs
-- **Evaluation & Metrics**: Custom evaluator computing Token F1, Faithfulness ratios, refusal checks, and hallucination flags
-- **Visuals & UI**: Streamlit for the browser app, Matplotlib/Seaborn for export plots, Pandas for tabular data
+- Python
+- Streamlit
+- Sentence Transformers
+- NumPy and scikit-learn
+- Rank-BM25
+- Pandas
+- Matplotlib and Seaborn
+- OpenAI, Groq, and Gemini API clients
+
+I intentionally avoided a large vector database. The project uses a small in-memory index so the complete system is easier to run, inspect, and modify.
 
 ---
 
-## The 60-Question Benchmark Dataset
+## Project Structure
 
-I wanted the questions to test more than just simple lookups, so I split the 60 questions in `data/questions.csv` into four distinct types:
-
-| Category | Questions | Purpose | Example Question |
-|---|:---:|---|---|
-| **Direct Fact Extraction** | 18 | Tests retrieval of exact specs, launch dates, and numbers | *"What is the primary power source for the Curiosity Mars rover?"* |
-| **Multi-Hop Synthesis** | 12 | Requires pulling info from 2 or more different documents | *"Compare the power sources of Curiosity, Juno, and Voyager 1."* |
-| **Out-of-Corpus (Trap Questions)** | 15 | Fake or unrecorded questions to test if the model knows how to say "I don't know" | *"What was the battery capacity of the fictional Apollo 18 Mars module?"* |
-| **Adversarial Misconceptions** | 15 | Questions that intentionally include a false premise | *"Did the Viking biological experiments in 1976 definitively prove life on Mars?"* |
-
----
-
-## Experiment Results & Numbers
-
-Here are the final benchmark numbers across all 60 questions (directly matching `results/summary.json`):
-
-| System Configuration | Hallucination Rate | Faithfulness Score | Factual Accuracy | Token F1 Match |
-|---|:---:|:---:|:---:|:---:|
-| **Baseline LLM (No RAG)** | **96.7%** | 10.0% | 14.2% | 0.21 |
-| **RAG (Top-3 Strict)** | **6.7%** | **99.6%** | **93.3%** | **0.81** |
-| **RAG (Top-5 Strict)** | **6.7%** | **99.6%** | **95.0%** | **0.82** |
-| **RAG (Top-3 Loose)** *(Ablation)* | **35.0%** | 71.3% | 68.3% | 0.58 |
-
-### Live LLM Test Run (Groq & OpenCode Zen)
-In addition to the deterministic benchmark, I ran live tests on cloud models via Groq (Llama-3.1-8B-Instant) and OpenCode Zen:
-
-| Live Model / Setting | Hallucination Rate | Faithfulness Score | Factual Accuracy | Refusal on Traps |
-|---|:---:|:---:|:---:|:---:|
-| **Baseline Llama-3.1-8B (Direct)** | **78.3%** | 18.5% | 23.3% | 13.3% (Guessed traps) |
-| **RAG + Llama-3.1-8B (Top-3 Strict)** | **8.3%** | **91.7%** | **90.0%** | **93.3%** (Refused traps) |
-| **RAG + OpenCode Zen (Top-3 Strict)** | **6.7%** | **93.5%** | **91.7%** | **93.3%** (Refused traps) |
-
----
-
-## Rendered Charts & Visualizations
-
-Here are the visual charts generated by Matplotlib and Seaborn after running the benchmark:
-
-### 1. Hallucination Reduction, Faithfulness & Accuracy
-![Hallucination Reduction by System Setting](results/plots/hallucination_reduction.png)
-*Figure 1: Comparing the Baseline LLM against RAG (Top-3 Strict), RAG (Top-5 Strict), and RAG (Top-3 Loose Grounding).*
-
-### 2. Breakdown by Question Category
-![Faithfulness and Hallucination Breakdown by Category](results/plots/faithfulness_by_category.png)
-*Figure 2: Granular comparison across Direct Fact Extraction, Multi-Hop Synthesis, Out-of-Corpus Traps, and Adversarial Misconceptions.*
-
-### 3. Ablation Study: Context Depth (Top-K) vs Grounding Prompt Strictness
-![Ablation Study: Top-K Context Depth vs Grounding Prompt Strictness](results/plots/top_k_ablation.png)
-*Figure 3: Measuring the impact of adding more context chunks ($k=3$ vs $k=5$) and removing the strict refusal prompt constraint.*
-
----
-
-## What I Learned from the Results
-
-1. **RAG drops hallucinations drastically, but does not make it 0%**:
-   Strict RAG brought the hallucination rate down from 96.7% to 6.7%. The remaining 6.7% happened on tricky multi-hop questions where two mission specs got slightly mixed up.
-
-2. **The prompt wording matters just as much as the retrieved text**:
-   When I tested the "Loose Grounding" setup (which gives the context but doesn't strictly say "only answer using this context"), the hallucination rate jumped from 6.7% to 35.0%. Even with relevant context on screen, the LLM will still guess unless you explicitly tell it not to.
-
-3. **Plain LLMs fail the hardest on fake or unanswerable questions**:
-   On all 15 trap questions, the Baseline LLM made up very realistic sounding numbers and names (like citing a "64 kWh battery" or naming a fictional astronaut). Strict RAG correctly refused them because it checked the context first.
-
-4. **Top-5 context helped multi-hop questions without adding noise**:
-   Moving from Top-3 to Top-5 improved accuracy from 93.3% to 95.0% because questions that needed facts from three separate articles finally had all the chunks present.
-
----
-
-## Real Output Comparisons (Case Studies)
-
-### Case 1: Unanswerable Trap Question
-- **Question**: *"What was the exact battery capacity in kilowatt-hours of the fictional Apollo 18 landing module on Mars?"*
-- **Baseline LLM**: *"The Apollo 18 Mars landing module was equipped with an experimental 64 kilowatt-hour silver-zinc secondary battery pack designed for surface life support."* *(Made up a realistic sounding number)*
-- **RAG (Top-3 Strict)**: *"I do not have enough information in the provided context to answer this question."* *(Correctly identified that this does not exist in the context)*
-
-### Case 2: Adversarial Misconception
-- **Question**: *"Did the Viking biological experiments in 1976 definitively prove the existence of living microorganisms on Mars?"*
-- **Baseline LLM**: *"Yes, the Viking 1 and 2 landers confirmed life on Mars in 1976 when the Labeled Release experiment detected metabolic respiration."* *(Agreed with the false premise)*
-- **RAG (Top-3 Strict)**: *"No, the Viking experiments did not definitively prove life. While the Labeled Release experiment gave a positive signal, the GCMS found no organic compounds, and scientists attributed the reaction to non-biological soil oxidants."* *(Used the retrieved text to give the correct historical fact)*
-
-### Case 3: Exact Numbers
-- **Question**: *"What total mass of asteroid sample did OSIRIS-REx deliver back to Earth from asteroid Bennu?"*
-- **Baseline LLM**: *"OSIRIS-REx returned approximately 2.5 kilograms of Bennu regolith."* *(Wrong guess)*
-- **RAG (Top-3 Strict)**: *"OSIRIS-REx delivered 121.6 grams (4.29 oz) of asteroid sample from Bennu."* *(Exact match with documentation)*
-
----
-
-## When Does RAG Still Fail? (Error Analysis)
-
-Even with RAG, errors still happened in these specific situations:
-
-1. **Chunk Boundaries**: If an answer required two sentences that got split across two different chunks, Top-3 retrieval sometimes grabbed one chunk but missed the second.
-2. **Weak Prompting**: If the prompt does not strictly forbid outside knowledge, the LLM will mix retrieved facts with its own guesses.
-3. **Multi-Entity Swapping**: When comparing three different spacecraft in one prompt, smaller models can occasionally attach Spacecraft A's lifespan to Spacecraft B.
-
----
-
-## Manual Verification by Hand
-
-To verify that my automated evaluator wasn't just giving fake scores, I manually inspected and graded **20 random question-answer pairs** across all 4 categories.
-
-You can inspect the full table in [`results/manual_review.csv`](results/manual_review.csv):
-- **Human-to-Code Agreement**: **95.0%** (19 out of 20 judgements matched).
-- **Average Human Faithfulness Rating (1 to 5 scale)**: Baseline was **1.2 / 5.0**, while RAG Top-3 scored **4.8 / 5.0**.
-
----
-
-## Repository Layout
-
-```
+```text
 Reducing-LLM-Hallucinations/
-├── README.md                      # Project documentation and findings
-├── requirements.txt               # Dependencies
-├── .env.example                   # API configuration template
-├── run_experiments.py             # Main script that runs the full benchmark
-├── app.py                         # Interactive Streamlit Web App
+├── app.py                     # TruthScope Streamlit app
+├── run_experiments.py         # Benchmark runner
 ├── data/
-│   ├── documents/                 # 51 space science documents
-│   └── questions.csv              # 60 benchmark questions and ground truth
+│   ├── documents/             # 51 space-mission documents
+│   └── questions.csv          # 60 benchmark questions
 ├── src/
-│   ├── config.py                  # Settings, paths, and thresholds
-│   ├── data_loader.py             # Document loader and recursive text chunker
-│   ├── vector_store.py            # Sentence-transformers embedding & cosine search
-│   ├── llm_client.py              # Multi-provider client (OpenCode Zen, Groq, Gemini, OpenAI, Mock)
-│   ├── rag_pipeline.py            # Baseline and RAG query pipelines
-│   ├── evaluator.py               # F1, faithfulness, and hallucination scoring logic
-│   └── visualization.py           # Matplotlib plot generator
-├── notebooks/
-│   ├── 01_build_rag.ipynb         # Step 1: Chunking, embedding, and search demo
-│   ├── 02_run_experiments.ipynb   # Step 2: Running the 60 questions
-│   └── 03_evaluation.ipynb        # Step 3: Plots and error inspection
-└── results/
-    ├── results.csv                # Full 60-question output dataset
-    ├── summary.json               # Final benchmark metrics
-    ├── manual_review.csv          # Human-verified review sheet
-    └── plots/                     # High-resolution charts
+│   ├── data_loader.py         # Loading and chunking
+│   ├── vector_store.py        # Dense, hybrid, and TF-IDF retrieval
+│   ├── llm_client.py          # Provider routing and offline simulator
+│   ├── rag_pipeline.py        # Baseline and RAG pipelines
+│   ├── truthscope.py          # Claims, risk, evidence, and coaching
+│   ├── evaluator.py           # Benchmark scoring
+│   └── visualization.py       # Result charts
+├── tests/
+│   └── test_truthscope.py     # Core regression tests
+├── notebooks/                 # Step-by-step notebooks
+└── results/                   # CSV, JSON, manual review, and charts
 ```
 
 ---
 
-## How to Run It Locally
+## Next Improvements
 
-### 1. Clone the repository and install requirements
-```bash
-git clone https://github.com/thekarak/Reducing-LLM-Hallucinations.git
-cd Reducing-LLM-Hallucinations
-pip install -r requirements.txt
-```
+The next useful improvements are:
 
-### 2. Run the benchmark suite via CLI
-```bash
-python run_experiments.py
-```
-This processes all 60 questions across Baseline, RAG Top-3, RAG Top-5, and Loose RAG, prints the results table, updates `results/results.csv` and `results/summary.json`, and saves the charts to `results/plots/`.
-
-### 3. Launch the Streamlit Web Demo
-```bash
-streamlit run app.py
-```
-Open **`http://localhost:8501`** in your browser. You can select sample questions, type custom queries, inspect the retrieved chunks, and view the visual charts.
-
-### 4. Run in Jupyter Notebooks / Google Colab
-You can also run through the notebooks inside the `notebooks/` directory one step at a time.
+1. Replace the deterministic simulator with a larger set of recorded live-model runs.
+2. Add retrieval metrics such as Recall@k, MRR, and nDCG.
+3. Test different chunk sizes, thresholds, and Top-K values automatically.
+4. Add a compact cross-encoder reranker.
+5. Create a larger misconception library with reviewed explanations.
+6. Compare TruthScope verdicts with independent human labels.
 
 ---
 
-## Supported LLM Backends
+## What I Learned Building This
 
-You can configure your preferred backend in `.env`:
-```bash
-cp .env.example .env
-```
+The biggest lesson was that RAG is not one model feature. It is a complete pipeline, and the answer quality depends on every part of it.
 
-Edit `.env`:
-```ini
-# Options: "local_mock", "opencode_zen", "groq", "gemini", "openai"
-LLM_PROVIDER=local_mock
-LLM_MODEL=llama-3.1-8b-instant
+Building the project taught me that:
 
-# Optional Live API Keys
-OPENCODE_ZEN_API_KEY=your_key_here
-OPENCODE_ZEN_BASE_URL=https://api.opencodezen.com/v1
+- **Retrieval quality matters before generation quality.** If the evidence is missing, a better prompt cannot recover the correct fact.
+- **A refusal is often the correct answer.** Filling every gap with a guess makes the system less trustworthy.
+- **More context is not always better.** Top-5 can help multi-hop questions, but it can also add irrelevant information.
+- **One aggregate score hides too much.** Claim-level evidence makes errors easier to understand.
+- **Evaluation is part of the application.** I needed to test token matching, refusal detection, persistence, and provider fallbacks—not just write a generation prompt.
+- **Small projects still need honest limits.** A clean demo is useful, but synthetic results should not be presented as research conclusions.
+- **Explainability helped me learn.** Seeing the exact evidence behind a verdict made the system easier to debug than a score by itself.
 
-GROQ_API_KEY=your_key_here
-GEMINI_API_KEY=your_key_here
-OPENAI_API_KEY=your_key_here
-```
-
-*Note*: Setting `LLM_PROVIDER=local_mock` runs the entire benchmark offline without needing any API keys.
-
----
-
-## What I Plan to Improve Next
-
-1. **Adding a Reranker**: Add a cross-encoder (like `bge-reranker-large` or Cohere) after the initial vector search to filter out borderline chunks before passing them to the LLM.
-2. **Self-Correction Step**: Experiment with a self-checking step where the LLM reviews its own draft against the context before outputting the final answer.
-3. **Hybrid Keyword + Vector Search**: Combine BM25 keyword matching with dense embeddings to improve retrieval on obscure serial numbers and exact mission codes.
+I also learned the less exciting parts: managing API keys, saving fitted vectorizers, handling stale indexes, making retries explicit, and writing tests before an “AI feature” feels finished.
 
 ---
 
 ## Author
-**Sourasis Karak**  
-- GitHub: [@thekarak](https://github.com/thekarak)  
-- Email: `sforsourasis@gmail.com`
 
----
+**Sourasis Karak**
+GitHub: [@thekarak](https://github.com/thekarak)
 
 ## License
-This project is open-source under the **MIT License**.
+
+[MIT](LICENSE)

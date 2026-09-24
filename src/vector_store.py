@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import joblib
 import numpy as np
 from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
@@ -53,7 +54,12 @@ class EmbeddingEngine:
 
     def _tfidf_fit_transform(self, texts: List[str]) -> np.ndarray:
         from sklearn.feature_extraction.text import TfidfVectorizer
-        self._tfidf = TfidfVectorizer(tokenizer=_tokenize, lowercase=False, sublinear_tf=True)
+        self._tfidf = TfidfVectorizer(
+            tokenizer=_tokenize,
+            token_pattern=None,
+            lowercase=False,
+            sublinear_tf=True,
+        )
         matrix = self._tfidf.fit_transform(texts).toarray().astype(np.float32)
         norms = np.linalg.norm(matrix, axis=1, keepdims=True)
         norms[norms == 0] = 1.0
@@ -158,6 +164,10 @@ class SimpleVectorStore:
         directory = Path(directory)
         directory.mkdir(parents=True, exist_ok=True)
         np.save(directory / "vectors.npy", self.vectors)
+        if self.embedding_engine.engine_type == "tfidf":
+            if self.embedding_engine._tfidf is None:
+                raise RuntimeError("Cannot save a TF-IDF index before fitting its vectorizer.")
+            joblib.dump(self.embedding_engine._tfidf, directory / "tfidf.joblib")
         docs_data = [
             {"page_content": d.page_content, "metadata": d.metadata}
             for d in self.documents
@@ -193,13 +203,21 @@ class SimpleVectorStore:
             else:
                 docs_data, meta = payload["documents"], payload.get("index_meta", {})
 
-            stored_engine = meta.get("engine_type")
-            if stored_engine and stored_engine != store.embedding_engine.engine_type:
+            stored_engine = meta.get("engine_type") or store.embedding_engine.engine_type
+            if stored_engine != store.embedding_engine.engine_type:
                 raise RuntimeError(
                     f"Vector store was built with engine '{stored_engine}' but current "
                     f"engine is '{store.embedding_engine.engine_type}'. Delete the "
                     f"'{directory}' folder and rebuild the index for consistent retrieval."
                 )
+            if stored_engine == "tfidf":
+                tfidf_file = directory / "tfidf.joblib"
+                if not tfidf_file.exists():
+                    raise RuntimeError(
+                        "This TF-IDF index has no saved vectorizer. Delete the "
+                        f"'{directory}' folder and rebuild the index."
+                    )
+                store.embedding_engine._tfidf = joblib.load(tfidf_file)
 
             store.documents = [
                 Document(page_content=item["page_content"], metadata=item["metadata"])

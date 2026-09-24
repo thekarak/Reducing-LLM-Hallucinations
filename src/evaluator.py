@@ -1,6 +1,7 @@
 import re
 import json
 import string
+from collections import Counter
 from typing import Dict, Any, List, Optional
 from src.llm_client import LLMClient
 
@@ -27,12 +28,13 @@ def compute_f1(prediction: str, ground_truth: str) -> float:
     if not pred_tokens or not truth_tokens:
         return 1.0 if pred_tokens == truth_tokens else 0.0
 
-    common = set(pred_tokens) & set(truth_tokens)
-    if not common:
+    common = Counter(pred_tokens) & Counter(truth_tokens)
+    overlap = sum(common.values())
+    if overlap == 0:
         return 0.0
 
-    precision = len(common) / len(pred_tokens)
-    recall = len(common) / len(truth_tokens)
+    precision = overlap / len(pred_tokens)
+    recall = overlap / len(truth_tokens)
     f1 = 2 * (precision * recall) / (precision + recall)
     return round(f1, 4)
 

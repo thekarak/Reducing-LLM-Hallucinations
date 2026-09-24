@@ -16,6 +16,7 @@ from src.vector_store import SimpleVectorStore, EmbeddingEngine
 from src.llm_client import LLMClient
 from src.rag_pipeline import BaselinePipeline, RAGPipeline
 from src.evaluator import Evaluator
+from src.truthscope import analyze_claims
 from src.visualization import (
     plot_hallucination_comparison,
     plot_category_breakdown,
@@ -87,6 +88,11 @@ def run_benchmark(limit: int = None):
 
         # Run 2: RAG Top-3 (Strict)
         res_rag_k3 = rag_k3_strict.query(question)
+        claims_k3 = analyze_claims(
+            res_rag_k3["answer"],
+            res_rag_k3["retrieved_docs"],
+            res_rag_k3["retrieval_scores"]
+        )
         eval_rag_k3 = evaluator.evaluate_sample(
             question=question,
             answer=res_rag_k3["answer"],
@@ -146,6 +152,10 @@ def run_benchmark(limit: int = None):
             "rag_k3_top_score": (res_rag_k3["retrieval_scores"][0] if res_rag_k3["retrieval_scores"] else 0.0),
             "rag_k3_latency_ms": res_rag_k3["latency_ms"],
             "rag_k3_retrieved_context": res_rag_k3["retrieved_context"],
+            "rag_k3_claim_status": claims_k3["summary"]["overall_status"],
+            "rag_k3_verified_claims": claims_k3["summary"]["verified_claims"],
+            "rag_k3_unsupported_claims": claims_k3["summary"]["unsupported_claims"],
+            "rag_k3_citation_coverage_pct": claims_k3["summary"]["citation_coverage_pct"],
 
             # RAG Top-5 Strict Data
             "rag_k5_answer": res_rag_k5["answer"],
@@ -155,6 +165,9 @@ def run_benchmark(limit: int = None):
             "rag_k5_hallucinated": eval_rag_k5["hallucinated"],
             "rag_k5_f1": eval_rag_k5["f1_score"],
             "rag_k5_chunks_retrieved": res_rag_k5["num_chunks_retrieved"],
+            "rag_k5_top_score": (res_rag_k5["retrieval_scores"][0] if res_rag_k5["retrieval_scores"] else 0.0),
+            "rag_k5_latency_ms": res_rag_k5["latency_ms"],
+            "rag_k5_retrieved_context": res_rag_k5["retrieved_context"],
 
             # RAG Top-3 Loose Data
             "rag_loose_answer": res_rag_loose["answer"],
@@ -162,7 +175,11 @@ def run_benchmark(limit: int = None):
             "rag_loose_correct_score": eval_rag_loose["correctness_score"],
             "rag_loose_faithfulness": eval_rag_loose["faithfulness"],
             "rag_loose_hallucinated": eval_rag_loose["hallucinated"],
-            "rag_loose_f1": eval_rag_loose["f1_score"]
+            "rag_loose_f1": eval_rag_loose["f1_score"],
+            "rag_loose_chunks_retrieved": res_rag_loose["num_chunks_retrieved"],
+            "rag_loose_top_score": (res_rag_loose["retrieval_scores"][0] if res_rag_loose["retrieval_scores"] else 0.0),
+            "rag_loose_latency_ms": res_rag_loose["latency_ms"],
+            "rag_loose_retrieved_context": res_rag_loose["retrieved_context"]
         }
         results_data.append(record)
 
@@ -201,6 +218,7 @@ def run_benchmark(limit: int = None):
         "chunk_overlap": CHUNK_OVERLAP,
         "retrieval_mode": RETRIEVAL_MODE,
         "similarity_threshold": SIMILARITY_THRESHOLD,
+        "mock_simulation": LLM_PROVIDER == "local_mock" or llm.mock_fallback_calls > 0,
         "total_questions": len(results_data),
         "systems": summary_metrics
     }

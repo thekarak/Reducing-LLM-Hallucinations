@@ -3,17 +3,20 @@ import re
 import json
 import requests
 from typing import Optional, List, Dict, Any
-from src.config import (
-    LLM_PROVIDER, LLM_MODEL,
-    OPENCODE_ZEN_API_KEY, OPENCODE_ZEN_BASE_URL,
-    GROQ_API_KEY, GEMINI_API_KEY, OPENAI_API_KEY
-)
+from src.config import LLM_PROVIDER, LLM_MODEL
 
 class LLMClient:
     """Unified LLM Client supporting OpenCode Zen, Groq, Gemini, OpenAI, and Local Mock."""
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None,
+                 api_key: Optional[str] = None):
         self.provider = (provider or LLM_PROVIDER).lower()
         self.model = model or LLM_MODEL
+        self.api_key = api_key or ""
+        self.mock_fallback_calls = 0
+
+    def _fallback(self, prompt: str, system_prompt: Optional[str], temperature: float) -> str:
+        self.mock_fallback_calls += 1
+        return self._call_local_mock(prompt, system_prompt, temperature)
 
     def generate(self, prompt: str, system_prompt: Optional[str] = None, temperature: float = 0.1) -> str:
         """Route generation to the active provider."""
@@ -26,17 +29,19 @@ class LLMClient:
         elif self.provider == "openai":
             return self._call_openai(prompt, system_prompt, temperature)
         else:
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
 
     def _call_opencode_zen(self, prompt: str, system_prompt: Optional[str], temperature: float) -> str:
         """Call OpenCode Zen OpenAI-compatible endpoint."""
-        if not OPENCODE_ZEN_API_KEY:
+        api_key = self.api_key or os.getenv("OPENCODE_ZEN_API_KEY", "")
+        if not api_key:
             print("[Warning] OPENCODE_ZEN_API_KEY not set. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
-        
-        url = f"{OPENCODE_ZEN_BASE_URL.rstrip('/')}/chat/completions"
+            return self._fallback(prompt, system_prompt, temperature)
+
+        base_url = os.getenv("OPENCODE_ZEN_BASE_URL", "https://api.opencodezen.com/v1")
+        url = f"{base_url.rstrip('/')}/chat/completions"
         headers = {
-            "Authorization": f"Bearer {OPENCODE_ZEN_API_KEY}",
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
         }
         messages = []
@@ -56,17 +61,18 @@ class LLMClient:
             return data["choices"][0]["message"]["content"].strip()
         except Exception as e:
             print(f"[OpenCode Zen Error] {e}. Falling back to local engine.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
 
     def _call_groq(self, prompt: str, system_prompt: Optional[str], temperature: float) -> str:
         """Call Groq Cloud API."""
-        if not GROQ_API_KEY:
+        api_key = self.api_key or os.getenv("GROQ_API_KEY", "")
+        if not api_key:
             print("[Warning] GROQ_API_KEY not set. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
 
         url = "https://api.groq.com/openai/v1/chat/completions"
         headers = {
-            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
         }
         messages = []
@@ -86,16 +92,17 @@ class LLMClient:
             return data["choices"][0]["message"]["content"].strip()
         except Exception as e:
             print(f"[Groq Error] {e}. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
 
     def _call_gemini(self, prompt: str, system_prompt: Optional[str], temperature: float) -> str:
         """Call Google Gemini API."""
-        if not GEMINI_API_KEY:
+        api_key = self.api_key or os.getenv("GEMINI_API_KEY", "")
+        if not api_key:
             print("[Warning] GEMINI_API_KEY not set. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
         try:
             import google.generativeai as genai
-            genai.configure(api_key=GEMINI_API_KEY)
+            genai.configure(api_key=api_key)
             gemini_model = genai.GenerativeModel("gemini-1.5-flash")
             full_prompt = f"{system_prompt}\n\n{prompt}" if system_prompt else prompt
             response = gemini_model.generate_content(
@@ -105,16 +112,17 @@ class LLMClient:
             return response.text.strip()
         except Exception as e:
             print(f"[Gemini Error] {e}. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
 
     def _call_openai(self, prompt: str, system_prompt: Optional[str], temperature: float) -> str:
         """Call OpenAI API."""
-        if not OPENAI_API_KEY:
+        api_key = self.api_key or os.getenv("OPENAI_API_KEY", "")
+        if not api_key:
             print("[Warning] OPENAI_API_KEY not set. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
         try:
             from openai import OpenAI
-            client = OpenAI(api_key=OPENAI_API_KEY)
+            client = OpenAI(api_key=api_key)
             messages = []
             if system_prompt:
                 messages.append({"role": "system", "content": system_prompt})
@@ -127,7 +135,7 @@ class LLMClient:
             return response.choices[0].message.content.strip()
         except Exception as e:
             print(f"[OpenAI Error] {e}. Falling back to local mock.")
-            return self._call_local_mock(prompt, system_prompt, temperature)
+            return self._fallback(prompt, system_prompt, temperature)
 
     def _call_local_mock(self, prompt: str, system_prompt: Optional[str], temperature: float) -> str:
         """
