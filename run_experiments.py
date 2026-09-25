@@ -20,7 +20,8 @@ from src.truthscope import analyze_claims
 from src.visualization import (
     plot_hallucination_comparison,
     plot_category_breakdown,
-    plot_ablation_comparison
+    plot_ablation_comparison,
+    plot_truthscope_claim_audit
 )
 
 def run_benchmark(limit: int = None):
@@ -226,9 +227,15 @@ def run_benchmark(limit: int = None):
         json.dump(summary_payload, f, indent=2)
 
     # Generate Figures
-    plot_hallucination_comparison(summary_metrics)
-    plot_category_breakdown(df_results)
-    plot_ablation_comparison(summary_metrics)
+    plot_label = (
+        f"Run: {LLM_PROVIDER} | deterministic simulator"
+        if LLM_PROVIDER == "local_mock" or llm.mock_fallback_calls > 0
+        else f"Run: {LLM_PROVIDER} | live model"
+    )
+    plot_hallucination_comparison(summary_metrics, run_label=plot_label)
+    plot_category_breakdown(df_results, run_label=plot_label)
+    plot_ablation_comparison(summary_metrics, run_label=plot_label)
+    plot_truthscope_claim_audit(df_results, run_label=plot_label)
 
     # Print Summary Table
     print("\n" + "=" * 78)

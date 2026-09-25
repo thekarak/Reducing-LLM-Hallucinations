@@ -268,14 +268,18 @@ with benchmark_tab:
                 "Token F1": f"{metrics['avg_f1_score']:.2f}",
             })
         st.dataframe(pd.DataFrame(summary_rows), width="stretch", hide_index=True)
-        plot_columns = st.columns(2)
-        for column, filename in zip(plot_columns, [
+        plot_names = [
             "hallucination_reduction.png",
             "faithfulness_by_category.png",
-        ]):
-            plot_path = PLOTS_DIR / filename
-            if plot_path.exists():
-                column.image(str(plot_path), width="stretch")
+            "top_k_ablation.png",
+            "truthscope_claim_audit.png",
+        ]
+        plot_rows = [(st.columns(2), plot_names[:2]), (st.columns(2), plot_names[2:])]
+        for plot_columns, names in plot_rows:
+            for column, filename in zip(plot_columns, names):
+                plot_path = PLOTS_DIR / filename
+                if plot_path.exists():
+                    column.image(str(plot_path), width="stretch")
     if RESULTS_FILE.exists():
         results = pd.read_csv(RESULTS_FILE)
         categories = st.multiselect("Filter categories", results["category"].unique().tolist(), default=[])

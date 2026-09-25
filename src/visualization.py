@@ -18,7 +18,11 @@ def set_plot_style():
     plt.rcParams["legend.fontsize"] = 10
     plt.rcParams["figure.titlesize"] = 14
 
-def plot_hallucination_comparison(metrics_dict: dict, save_path: Path = None):
+def add_run_label(fig, run_label: str = None):
+    if run_label:
+        fig.text(0.99, 0.01, run_label, ha="right", va="bottom", fontsize=9, color="#6b7280")
+
+def plot_hallucination_comparison(metrics_dict: dict, save_path: Path = None, run_label: str = None):
     """
     Bar chart comparing Hallucination Rate, Faithfulness, and Accuracy across configurations.
     """
@@ -40,7 +44,7 @@ def plot_hallucination_comparison(metrics_dict: dict, save_path: Path = None):
     rects3 = ax.bar(x + width, accuracy, width, label="Factual Accuracy (%)", color="#3498db", alpha=0.9)
 
     ax.set_ylabel("Percentage (%)")
-    ax.set_title("Impact of RAG on Hallucination Rate, Faithfulness & Accuracy")
+    ax.set_title("Hallucination Rate, Faithfulness and Accuracy by Setup")
     ax.set_xticks(x)
     ax.set_xticklabels(systems, fontweight="semibold")
     ax.set_ylim(0, 110)
@@ -62,12 +66,13 @@ def plot_hallucination_comparison(metrics_dict: dict, save_path: Path = None):
     autolabel(rects3)
 
     plt.tight_layout()
+    add_run_label(fig, run_label)
     fig.savefig(save_path, bbox_inches="tight")
     plt.close(fig)
     print(f"[Visualization] Saved {save_path}")
 
 
-def plot_category_breakdown(df_results: pd.DataFrame, save_path: Path = None):
+def plot_category_breakdown(df_results: pd.DataFrame, save_path: Path = None, run_label: str = None):
     """
     Category-wise hallucination and faithfulness comparison for Baseline vs RAG Top-3.
     """
@@ -117,7 +122,7 @@ def plot_category_breakdown(df_results: pd.DataFrame, save_path: Path = None):
     # Subplot 2: Faithfulness by Category
     axes[1].bar(x - width/2, base_faith, width, label="Baseline (No RAG)", color="#95a5a6", alpha=0.85)
     axes[1].bar(x + width/2, rag_faith, width, label="RAG (Top-3 Strict)", color="#2980b9", alpha=0.85)
-    axes[1].set_title("Faithfulness / Groundedness by Category")
+    axes[1].set_title("Faithfulness Proxy by Category")
     axes[1].set_ylabel("Average Faithfulness (%)")
     axes[1].set_xticks(x)
     axes[1].set_xticklabels(cats_display, rotation=15, ha="right", fontweight="semibold")
@@ -126,12 +131,13 @@ def plot_category_breakdown(df_results: pd.DataFrame, save_path: Path = None):
     axes[1].grid(axis="y", linestyle="--", alpha=0.7)
 
     plt.tight_layout()
+    add_run_label(fig, run_label)
     fig.savefig(save_path, bbox_inches="tight")
     plt.close(fig)
     print(f"[Visualization] Saved {save_path}")
 
 
-def plot_ablation_comparison(metrics_dict: dict, save_path: Path = None):
+def plot_ablation_comparison(metrics_dict: dict, save_path: Path = None, run_label: str = None):
     """
     Ablation chart comparing Top-3, Top-5, and Strict vs Loose Grounding.
     """
@@ -151,7 +157,7 @@ def plot_ablation_comparison(metrics_dict: dict, save_path: Path = None):
     rects2 = ax1.bar(x + width/2, accuracies, width, label="Factual Accuracy (%)", color="#16a085", alpha=0.9)
 
     ax1.set_ylabel("Score (%)")
-    ax1.set_title("Ablation Study: Context Window (Top-K) & Grounding Prompt Strictness")
+    ax1.set_title("Setup Comparison: Top-K Context and Grounding Strictness")
     ax1.set_xticks(x)
     ax1.set_xticklabels(configs, fontweight="semibold")
     ax1.set_ylim(0, 110)
@@ -167,6 +173,94 @@ def plot_ablation_comparison(metrics_dict: dict, save_path: Path = None):
                     ha="center", va="bottom", fontsize=9, fontweight="bold")
 
     plt.tight_layout()
+    add_run_label(fig, run_label)
+    fig.savefig(save_path, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[Visualization] Saved {save_path}")
+
+
+def plot_truthscope_claim_audit(df_results: pd.DataFrame, save_path: Path = None, run_label: str = None):
+    set_plot_style()
+    save_path = save_path or (PLOTS_DIR / "truthscope_claim_audit.png")
+    required_columns = {"rag_k3_claim_status", "rag_k3_citation_coverage_pct", "rag_k3_unsupported_claims"}
+    missing_columns = required_columns.difference(df_results.columns)
+    if missing_columns:
+        raise ValueError(f"TruthScope plot requires columns: {sorted(missing_columns)}")
+
+    status_order = ["supported", "uncertain", "unsupported", "unverified", "abstained"]
+    status_colors = ["#22c55e", "#f59e0b", "#ef4444", "#94a3b8", "#6366f1"]
+    status_counts = df_results["rag_k3_claim_status"].value_counts().reindex(status_order, fill_value=0)
+    visible_statuses = status_counts[status_counts > 0]
+    visible_colors = [status_colors[status_order.index(status)] for status in visible_statuses.index]
+    status_labels = [
+        f"{status.title()} ({count})"
+        for status, count in visible_statuses.items()
+    ]
+
+    categories = df_results["category"].unique()
+    citation_coverage = []
+    unsupported_answers = []
+    for category in categories:
+        rows = df_results[df_results["category"] == category]
+        citation_coverage.append(rows["rag_k3_citation_coverage_pct"].mean())
+        unsupported_answers.append((rows["rag_k3_unsupported_claims"] > 0).mean() * 100)
+
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5.8), dpi=300)
+    axes[0].pie(
+        visible_statuses.values,
+        labels=status_labels,
+        colors=visible_colors,
+        autopct=lambda percentage: f"{percentage:.0f}%" if percentage > 0 else "",
+        startangle=90,
+        wedgeprops={"edgecolor": "white", "linewidth": 1.5},
+    )
+    axes[0].set_title("Overall Verdicts for Strict Top-3 Answers")
+    axes[0].axis("equal")
+
+    x = np.arange(len(categories))
+    width = 0.36
+    coverage_bars = axes[1].bar(
+        x - width / 2,
+        citation_coverage,
+        width,
+        label="Mean citation coverage (%)",
+        color="#0ea5e9",
+        alpha=0.9,
+    )
+    unsupported_bars = axes[1].bar(
+        x + width / 2,
+        unsupported_answers,
+        width,
+        label="Answers with unsupported claims (%)",
+        color="#f97316",
+        alpha=0.9,
+    )
+    axes[1].set_title("Evidence Coverage by Question Category")
+    axes[1].set_ylabel("Percentage (%)")
+    axes[1].set_xticks(x)
+    axes[1].set_xticklabels([category.replace("_", " ") for category in categories], rotation=15, ha="right")
+    axes[1].set_ylim(0, 110)
+    axes[1].grid(axis="y", linestyle="--", alpha=0.7)
+    handles, legend_labels = axes[1].get_legend_handles_labels()
+    fig.legend(handles, legend_labels, loc="lower center", ncol=2, frameon=False)
+
+    for bars in (coverage_bars, unsupported_bars):
+        for bar in bars:
+            height = bar.get_height()
+            axes[1].annotate(
+                f"{height:.0f}%",
+                xy=(bar.get_x() + bar.get_width() / 2, height),
+                xytext=(0, 3),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                fontweight="bold",
+            )
+
+    fig.suptitle("TruthScope Claim Audit: Deterministic Retrieval Checks")
+    plt.tight_layout(rect=[0, 0.09, 1, 0.95])
+    add_run_label(fig, run_label)
     fig.savefig(save_path, bbox_inches="tight")
     plt.close(fig)
     print(f"[Visualization] Saved {save_path}")

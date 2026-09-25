@@ -203,14 +203,40 @@ These values come from the deterministic local simulator stored in `results/summ
 
 | Setup | Hallucination rate | Faithfulness | Accuracy | Token F1 |
 |---|---:|---:|---:|---:|
-| Baseline, no RAG | 96.7% | 10.0% | 14.2% | 0.21 |
-| Strict RAG, Top-3 | 6.7% | 99.6% | 93.3% | 0.81 |
-| Strict RAG, Top-5 | 6.7% | 99.6% | 95.0% | 0.82 |
-| Loose RAG, Top-3 | 35.0% | 71.3% | 68.3% | 0.58 |
+| Baseline, no RAG | 93.3% | 10.8% | 15.8% | 0.22 |
+| Strict RAG, Top-3 | 6.7% | 99.6% | 93.3% | 0.85 |
+| Strict RAG, Top-5 | 6.7% | 99.6% | 95.0% | 0.85 |
+| Loose RAG, Top-3 | 35.0% | 71.2% | 68.3% | 0.62 |
+
+The token F1 values changed when I fixed repeated-token counting, so the table above now matches the current `results/summary.json` exactly.
 
 These numbers should be read as a reproducible test of the benchmark software. A fair LLM evaluation needs multiple live models, repeated runs, better test questions, confidence intervals, and independently reviewed labels.
 
-![Hallucination comparison](results/plots/hallucination_reduction.png)
+---
+
+## Results and Visualizations
+
+All four charts below were regenerated from the current `results/results.csv` on the deterministic local simulator run.
+
+### Setup comparison
+
+![Hallucination, faithfulness, and accuracy by setup](results/plots/hallucination_reduction.png)
+
+### Results by question category
+
+![Hallucination and faithfulness proxy by question category](results/plots/faithfulness_by_category.png)
+
+The baseline has no retrieved context, so its faithfulness column is only a ground-truth-overlap proxy. It is not a direct context-support measurement.
+
+### Top-K and prompt ablations
+
+![Strict versus loose RAG setup comparison](results/plots/top_k_ablation.png)
+
+### TruthScope claim audit
+
+![TruthScope claim verdicts and evidence coverage](results/plots/truthscope_claim_audit.png)
+
+This chart uses the strict Top-3 answers. TruthScope reports 17 abstentions, 9 supported answers, 22 uncertain answers, and 12 answers with an unsupported claim. These counts are stricter than the benchmark's answer-level hallucination flag because TruthScope checks individual claims and can flag a partly supported answer as uncertain.
 
 ---
 

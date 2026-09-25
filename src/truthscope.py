@@ -166,7 +166,11 @@ def analyze_claims(
             "unsupported_claims": counts["unsupported"],
             "abstained": bool(refusal),
             "citation_coverage_pct": round(
-                100 * sum(claim["support"] >= 0.4 for claim in analyzed) / len(analyzed), 1
+                100 * sum(
+                    claim["evidence"] is not None and claim["support"] >= 0.4
+                    for claim in analyzed
+                ) / len(analyzed),
+                1
             ) if analyzed else 0.0,
         },
     }
